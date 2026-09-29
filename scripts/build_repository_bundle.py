@@ -9,12 +9,14 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import io
 import json
 import os
 from pathlib import Path
 import re
 import stat
 import zipfile
+import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE_DIRS = ("saia", "scripts", "tools", "config", "migrations", "tests", "infra", ".github")
@@ -43,7 +45,9 @@ EXCLUDED_RESEARCH_FILES = {
     'config/openalex-title-phrase-pilot-smr-development-v3.json',
 }
 CANONICAL_DOCS = ('README.md', 'ARCHITECTURE.md', 'DEPLOYMENT.md', 'SECURITY.md',
-                  'LICENSE_STATUS.md', 'THIRD_PARTY_NOTICES.md', 'VALIDATION.md')
+                  'LICENSE_STATUS.md', 'THIRD_PARTY_NOTICES.md', 'VALIDATION.md',
+                  'SOURCE_SETUP.md')
+PUBLIC_GUIDE = 'docs/repository/Horizon_User_Guide_v0.4.65.docx'
 REQUIRED = tuple(dict.fromkeys((*REQUIRED, *CANONICAL_DOCS)))
 SECRET_PATTERNS = (
     rb"-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----",
@@ -107,6 +111,12 @@ def collect(root: Path) -> tuple[dict[str, bytes], list[dict]]:
         if path.is_file() and safe_relative(root, path):
             files[name] = path.read_bytes()
             files['docs/repository/' + name] = path.read_bytes()
+    # One explicitly reviewed manual, never arbitrary working Word files.
+    guide = root / PUBLIC_GUIDE
+    if guide.is_file() and safe_relative(root, guide):
+        if guide.stat().st_size > 5_000_000:
+            raise ValueError('Public guide exceeds 5 MB review threshold')
+        files[PUBLIC_GUIDE] = guide.read_bytes()
     missing = sorted(set(REQUIRED) - files.keys())
     if missing:
         raise ValueError('Missing repository files: ' + ', '.join(missing))
@@ -116,9 +126,23 @@ def collect(root: Path) -> tuple[dict[str, bytes], list[dict]]:
 def inspect_files(files: dict[str, bytes], secrets: set[bytes]) -> dict:
     findings, personal_paths = [], []
     for name, raw in files.items():
-        if any(value in raw for value in secrets) or any(re.search(pattern, raw) for pattern in SECRET_PATTERNS):
+        inspected = raw
+        if name.endswith('.docx'):
+            # Credentials in compressed OOXML must not bypass the source scan.
+            with zipfile.ZipFile(io.BytesIO(raw)) as document:
+                if sum(item.file_size for item in document.infolist()) > 20_000_000:
+                    raise ValueError('Public guide uncompressed size exceeds review threshold')
+                if any('vbaProject' in item.filename or '/embeddings/' in item.filename
+                       for item in document.infolist()):
+                    raise ValueError('Public guide contains active or embedded content')
+                parts = [document.read(item) for item in document.namelist()
+                         if item.endswith(('.xml', '.rels'))]
+                # Formatting may split one visible credential across Word runs.
+                visible = [''.join(ET.fromstring(part).itertext()).encode() for part in parts]
+                inspected = b'\n'.join([*parts, *visible])
+        if any(value in inspected for value in secrets) or any(re.search(pattern, inspected) for pattern in SECRET_PATTERNS):
             findings.append({'path': name, 'kind': 'possible_credential'})
-        if re.search(rb'/Users/[^/\s]+/', raw):
+        if re.search(rb'/Users/[^/\s]+/', inspected):
             personal_paths.append(name)
     return {'blocking_findings': findings, 'machine_path_review_files': personal_paths,
             'scan_scope': 'selected current files, known environment credentials and common token formats; not git history or a full security audit'}

@@ -1,0 +1,40 @@
+name: Clean Docker installation
+
+# Explicit acceptance test, separate from the fast tests on each push.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  clean-amd64:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      HORIZON_PROJECT_NAME: horizon-clean-ci
+      HORIZON_PORT: '8085'
+      HORIZON_IMAGE: horizon:clean-ci
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Create isolated configuration
+        run: python scripts/init_repository_env.py
+      - name: Build all dependencies without cached application layers
+        run: docker compose -p horizon-clean-ci --env-file .env build --pull --no-cache app
+      - name: Start with empty database and model volumes
+        run: docker compose -p horizon-clean-ci --env-file .env up -d --no-build --wait --wait-timeout 180
+      - name: Verify HTTP, database, catalog and ML imports
+        run: |
+          docker compose -p horizon-clean-ci --env-file .env exec -T app python -c "import json, urllib.request; r=json.load(urllib.request.urlopen('http://127.0.0.1:8080/health', timeout=10)); assert r['status']=='ok'; print(r)"
+          docker compose -p horizon-clean-ci --env-file .env exec -T app python -c "from saia.db import connect; c=connect(); assert c.execute('SELECT 1').fetchone()[0] == 1; c.close(); print('Database available')"
+          docker compose -p horizon-clean-ci --env-file .env exec -T app python -c "import torch, bertopic, adapters; from saia.public_signals import search; assert search(limit=1)['records']; print('ML imports and bundled catalog available')"
+          docker compose -p horizon-clean-ci --env-file .env exec -T app python -m saia.runtime_constraints --constraints /tmp/horizon-constraints.txt
+      - name: Logs on failure
+        if: failure()
+        run: docker compose -p horizon-clean-ci --env-file .env logs --tail=80 db app worker
+      - name: Remove only this ephemeral CI installation
+        if: always()
+        run: docker compose -p horizon-clean-ci --env-file .env down --volumes

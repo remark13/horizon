@@ -3008,6 +3008,11 @@
       "sha256": "fff59d6b1002c48da31df60329d446231438848a6dd565dfd2725b9dac66a6e6"
     },
     {
+      "path": ".github/workflows/clean-install.yml",
+      "bytes": 2122,
+      "sha256": "f3cd9332222aa84d5575c04cb3611a47f0263bc2ea64d44c7ad6bca6f52ba309"
+    },
+    {
       "path": ".gitignore",
       "bytes": 318,
       "sha256": "7bef6476e0946148f0341f8aa6b403156475b6403e2f6e05576b49a7b904d65f"
@@ -3029,13 +3034,18 @@
     },
     {
       "path": "README.md",
-      "bytes": 8801,
-      "sha256": "e5e4b323f9aaf1e6b640b1183535e9d4d38a8a2d122aa4272500380f0e169e50"
+      "bytes": 19406,
+      "sha256": "7026762222aaf01e61a73205d7e3bafa11f3f63455482ee64379981a2ea27d8f"
     },
     {
       "path": "SECURITY.md",
       "bytes": 3921,
       "sha256": "8c3e631fc03c96354a5133a99bf3ff7a0cfedf15ee50746b9d2dc9bd22353eec"
+    },
+    {
+      "path": "SOURCE_SETUP.md",
+      "bytes": 28995,
+      "sha256": "29f961f15fe62c8d201b72e4b7db21bae08aed423d7da69ee34f7bca8fec8076"
     },
     {
       "path": "THIRD_PARTY_NOTICES.md",
@@ -3044,8 +3054,8 @@
     },
     {
       "path": "VALIDATION.md",
-      "bytes": 6339,
-      "sha256": "647723c695fc8723ca72890dadac52f3c284fb6b94026b3d0520445189d2fab1"
+      "bytes": 10743,
+      "sha256": "7109703d982e91f724277d340ad1e84913097f656d0d46074ae04d337c0ca570"
     },
     {
       "path": "compose.yaml",
@@ -3683,19 +3693,29 @@
       "sha256": "cf15e3ca8354dba2c0f3d9877fdb88a605e4aaac02e01052879ea9a4b04928b5"
     },
     {
+      "path": "docs/repository/Horizon_User_Guide_v0.4.65.docx",
+      "bytes": 172591,
+      "sha256": "ac2df56ba509ec4bfac36671efcca8528cd67f372f9c526e6674cf964aaff403"
+    },
+    {
       "path": "docs/repository/LICENSE_STATUS.md",
       "bytes": 1705,
       "sha256": "699683dec54ef986ccf00a1cdc6a5023294b4dc5ed27e304e94fae436e578fa5"
     },
     {
       "path": "docs/repository/README.md",
-      "bytes": 8801,
-      "sha256": "e5e4b323f9aaf1e6b640b1183535e9d4d38a8a2d122aa4272500380f0e169e50"
+      "bytes": 19406,
+      "sha256": "7026762222aaf01e61a73205d7e3bafa11f3f63455482ee64379981a2ea27d8f"
     },
     {
       "path": "docs/repository/SECURITY.md",
       "bytes": 3921,
       "sha256": "8c3e631fc03c96354a5133a99bf3ff7a0cfedf15ee50746b9d2dc9bd22353eec"
+    },
+    {
+      "path": "docs/repository/SOURCE_SETUP.md",
+      "bytes": 28995,
+      "sha256": "29f961f15fe62c8d201b72e4b7db21bae08aed423d7da69ee34f7bca8fec8076"
     },
     {
       "path": "docs/repository/THIRD_PARTY_NOTICES.md",
@@ -3704,8 +3724,8 @@
     },
     {
       "path": "docs/repository/VALIDATION.md",
-      "bytes": 6339,
-      "sha256": "647723c695fc8723ca72890dadac52f3c284fb6b94026b3d0520445189d2fab1"
+      "bytes": 10743,
+      "sha256": "7109703d982e91f724277d340ad1e84913097f656d0d46074ae04d337c0ca570"
     },
     {
       "path": "infra/Dockerfile",
@@ -5444,8 +5464,8 @@
     },
     {
       "path": "scripts/build_repository_bundle.py",
-      "bytes": 10120,
-      "sha256": "47de3bf622f0769cb4e9a1c568986c44989947e6e43b2283eadc209a317d88df"
+      "bytes": 11604,
+      "sha256": "acd53cae503aa0b2b88a7338cc18942d042a927bd0f4dd14693d3a4eff1117bb"
     },
     {
       "path": "scripts/build_robotic_narrow_line_temporal.py",
@@ -5524,8 +5544,8 @@
     },
     {
       "path": "scripts/check_repository.py",
-      "bytes": 956,
-      "sha256": "ee4c6864b649ccb9b49c574670c51e9ab0818640610488e2d19c5b97cdeac047"
+      "bytes": 1002,
+      "sha256": "9698b4b4a8e2f6ca0850cd29642e7cfc0c62ee021b8095fed61a1d8ddf7f4b03"
     },
     {
       "path": "scripts/check_runtime_constraints.py",
@@ -7179,13 +7199,18 @@
     },
     {
       "path": "tests/test_repository_bundle.py",
-      "bytes": 4490,
-      "sha256": "9540c3b690c2041f668b054b209bf183eba2bb3b9100d6a1fb2a01d309195512"
+      "bytes": 6303,
+      "sha256": "d527dc334232dc14f2b3e38d95070614eb62c4e5b5119e9fe24b5b3455c4e53d"
     },
     {
       "path": "tests/test_repository_compose.py",
       "bytes": 2613,
       "sha256": "dbc7882f2ce7c9ed720a80e1ec58beb5da820c973087531a022cfffabad93920"
+    },
+    {
+      "path": "tests/test_repository_documentation.py",
+      "bytes": 2060,
+      "sha256": "5c7591102886c07ae725b26b095c5793c8629a3b44124c5449c53d175a87492d"
     },
     {
       "path": "tests/test_research_families.py",

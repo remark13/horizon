@@ -1,6 +1,7 @@
 from importlib.util import module_from_spec, spec_from_file_location
 import json
 import hashlib
+import io
 import stat
 from pathlib import Path
 import zipfile
@@ -26,6 +27,8 @@ def test_bundle_selection_does_not_include_private_corpus_or_working_artifacts()
     assert not any(name.endswith(('.pdf', '.xlsx', '.dump', '.zip')) for name in files)
     assert not (set(bundle.EXCLUDED_RESEARCH_FILES) & files.keys())
     assert b'0.4.65' in files['README.md']
+    assert files['SOURCE_SETUP.md'] == files['docs/repository/SOURCE_SETUP.md']
+    assert bundle.PUBLIC_GUIDE in files
 
 
 def test_secret_detection_reports_no_values():
@@ -33,6 +36,43 @@ def test_secret_detection_reports_no_values():
     value = b'not-a-real-credential-12345'
     report = bundle.inspect_files({'saia/example.py': value}, {value})
     assert report['blocking_findings'] == [{'path': 'saia/example.py', 'kind': 'possible_credential'}]
+    assert value.decode() not in json.dumps(report)
+
+
+def test_compressed_word_guide_is_scanned_for_credentials():
+    bundle = module('build_repository_bundle')
+    value = b'synthetic-document-credential'
+    data = io.BytesIO()
+    with zipfile.ZipFile(data, 'w', compression=zipfile.ZIP_DEFLATED) as document:
+        document.writestr('word/document.xml', b'<document>' + value + b'</document>')
+    report = bundle.inspect_files({bundle.PUBLIC_GUIDE: data.getvalue()}, {value})
+    assert report['blocking_findings'] == [
+        {'path': bundle.PUBLIC_GUIDE, 'kind': 'possible_credential'}
+    ]
+    assert value.decode() not in json.dumps(report)
+
+
+def test_word_guide_rejects_embedded_documents():
+    bundle = module('build_repository_bundle')
+    data = io.BytesIO()
+    with zipfile.ZipFile(data, 'w') as document:
+        document.writestr('word/embeddings/object.bin', b'example')
+    with pytest.raises(ValueError, match='embedded content'):
+        bundle.inspect_files({bundle.PUBLIC_GUIDE: data.getvalue()}, set())
+
+
+def test_word_secret_split_across_formatting_runs_is_detected():
+    bundle = module('build_repository_bundle')
+    value = b'synthetic-document-credential'
+    data = io.BytesIO()
+    with zipfile.ZipFile(data, 'w', compression=zipfile.ZIP_DEFLATED) as document:
+        document.writestr('word/document.xml',
+                         '<document><r><t>synthetic-document-</t></r>'
+                         '<r><t>credential</t></r></document>')
+    report = bundle.inspect_files({bundle.PUBLIC_GUIDE: data.getvalue()}, {value})
+    assert report['blocking_findings'] == [
+        {'path': bundle.PUBLIC_GUIDE, 'kind': 'possible_credential'}
+    ]
     assert value.decode() not in json.dumps(report)
 
 

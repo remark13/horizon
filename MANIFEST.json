@@ -4274,8 +4274,8 @@
     },
     {
       "path": "saia/cluster.py",
-      "bytes": 53567,
-      "sha256": "b402d35bad73168079f7bf6a11584f9da4b16c2f6ec0db485c0c1fffe8b07ac0"
+      "bytes": 53675,
+      "sha256": "1bf35d001990cd339c89e70715c4da4cc1cb272b387b26a647c75095188cc09a"
     },
     {
       "path": "saia/coherence_review.py",
@@ -7489,8 +7489,8 @@
     },
     {
       "path": "tests/test_vertical_slice.py",
-      "bytes": 12173,
-      "sha256": "ccd2e9a3fe929ed0a6244d3afb5d7ad66afdc7472f7f1114de0a33d6fc503ee0"
+      "bytes": 13183,
+      "sha256": "567413a1c0895a8de5e207540a1ac1666409128ccf8286e576c7c4232dcf0f2d"
     },
     {
       "path": "tools/build_data_sources_report.py",

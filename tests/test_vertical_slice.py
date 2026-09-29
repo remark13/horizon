@@ -1,8 +1,10 @@
+import builtins
 import importlib.util
 import json
 from pathlib import Path
 
 import numpy as np
+import pytest
 
 from saia.benchmark import (
     benchmark_targets,
@@ -37,7 +39,21 @@ def test_graph_backend_can_leave_noise_unassigned():
     assert labels.tolist()[2] == -1
 
 
-def test_bertopic_small_window_uses_deterministic_similarity_fallback():
+@pytest.fixture
+def without_optional_clustering_dependencies(monkeypatch):
+    original_import = builtins.__import__
+
+    def guarded_import(name, *args, **kwargs):
+        if name.split(".", 1)[0] in {"bertopic", "hdbscan", "sklearn", "umap"}:
+            raise ModuleNotFoundError(f"Optional clustering dependency unavailable: {name}")
+        return original_import(name, *args, **kwargs)
+
+    monkeypatch.setattr(builtins, "__import__", guarded_import)
+
+
+def test_bertopic_small_window_uses_deterministic_similarity_fallback(
+    without_optional_clustering_dependencies,
+):
     labels, _ = cluster_window(
         ["same emerging method", "same emerging method"],
         np.asarray([[1.0, 0.0], [0.99, 0.01]]),
@@ -48,6 +64,23 @@ def test_bertopic_small_window_uses_deterministic_similarity_fallback():
         small_window_similarity_threshold=0.7,
     )
     assert labels.tolist() == [0, 0]
+
+
+@pytest.mark.parametrize("size", [0, 1])
+def test_undersized_window_needs_no_optional_clustering_dependencies(
+    size, without_optional_clustering_dependencies,
+):
+    labels, terms = cluster_window(
+        ["emerging method"] * size,
+        np.ones((size, 2)),
+        min_topic_size=2,
+        seed=42,
+        umap_cfg={},
+        hdbscan_cfg={},
+        small_window_similarity_threshold=0.7,
+    )
+    assert labels.tolist() == [-1] * size
+    assert terms == {}
 
 
 def test_percentile_is_withheld_for_too_few_peer_topics():

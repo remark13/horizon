@@ -98,11 +98,6 @@ def cluster_window(texts: list[str], vectors: np.ndarray, min_topic_size: int,
     отдельный исход. k-means обязан разложить по кластерам всё, включая
     мусор выборки, и тогда мусор становится темой.
     """
-    from bertopic import BERTopic
-    from hdbscan import HDBSCAN
-    from sklearn.feature_extraction.text import CountVectorizer
-    from umap import UMAP
-
     if len(texts) < min_topic_size:
         return np.full(len(texts), -1), {}
     if len(texts) < max(4, min_topic_size + 2):
@@ -112,6 +107,12 @@ def cluster_window(texts: list[str], vectors: np.ndarray, min_topic_size: int,
         return graph_cluster_window(
             texts, vectors, min_topic_size, small_window_similarity_threshold
         )
+
+    # Малые окна обрабатываются без необязательного ML-стека.
+    from bertopic import BERTopic
+    from hdbscan import HDBSCAN
+    from sklearn.feature_extraction.text import CountVectorizer
+    from umap import UMAP
 
     # random_state фиксируется: без него UMAP даёт разное разбиение на тех
     # же данных, и воспроизводимость прогона, которой требует методика,

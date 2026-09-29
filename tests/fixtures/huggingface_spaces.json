@@ -1,0 +1,12 @@
+[
+  {
+    "id": "example/agentic-demo",
+    "author": "example",
+    "createdAt": "2026-04-01T10:00:00.000Z",
+    "lastModified": "2026-07-01T10:00:00.000Z",
+    "likes": 2,
+    "sha": "ghi789",
+    "tags": ["gradio"],
+    "cardData": {"title": "Agentic Demo"}
+  }
+]

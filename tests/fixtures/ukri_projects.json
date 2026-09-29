@@ -1,0 +1,40 @@
+{
+  "headerData": {"lastRefreshDate": "06 Jul 2026"},
+  "facetedSearchResultBean": {
+    "totalResults": 2,
+    "totalPages": 1,
+    "results": [
+      {
+        "projectComposition": {
+          "project": {
+            "id": "project-1",
+            "title": "Agentic artificial intelligence for resilient operations",
+            "grantReference": "EP/AI0001/1",
+            "grantCategory": "Research Grant",
+            "abstractText": "Research on agentic artificial intelligence systems.",
+            "technicalSummary": null,
+            "fund": {
+              "valuePounds": 1250000,
+              "start": 1735689600000,
+              "end": 1798761600000,
+              "funder": {"name": "EPSRC"}
+            }
+          },
+          "leadResearchOrganisation": {"name": "Example University"},
+          "principalInvestigators": [{"fullName": "Ada Researcher"}]
+        }
+      },
+      {
+        "projectComposition": {
+          "project": {
+            "id": "project-old",
+            "title": "Old artificial intelligence project",
+            "grantReference": "EP/OLD/1",
+            "fund": {"start": 1262304000000, "funder": {"name": "EPSRC"}}
+          },
+          "leadResearchOrganisation": {"name": "Old University"}
+        }
+      }
+    ]
+  }
+}

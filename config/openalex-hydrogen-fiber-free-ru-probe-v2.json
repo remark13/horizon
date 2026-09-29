@@ -1,0 +1,20 @@
+{
+  "version": "openalex-russian-search-modes-probe-v2-single-case",
+  "purpose": "Frozen first-page lexical versus semantic retrieval diagnostic after zero-work SAIA request; not weak-signal scoring",
+  "date_from": "2021-09-01",
+  "as_of_date": "2026-09-01",
+  "per_page": 25,
+  "cases": [
+    {
+      "case_id": "outside-hydrogen-pipeline-fiber",
+      "role": "outside_priority_map",
+      "query_ru": "Оптические волокна для обнаружения утечек водорода в трубопроводах"
+    }
+  ],
+  "interpretation": {
+    "terms_fixed_before_query": true,
+    "exact_qualifiers_must_be_reviewed_in_sources": true,
+    "first_page_not_complete_temporal_coverage": true,
+    "no_automatic_user_route_change": true
+  }
+}

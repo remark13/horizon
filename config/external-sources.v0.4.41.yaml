@@ -1,0 +1,39 @@
+version: external-sources-0.4.41
+extends: external-sources.v0.4.40.yaml
+scientific_score_modified: false
+google_news:
+  source: google_news_rss
+  role: news_attention_only
+  url: https://news.google.com/rss/search
+  max_records: 25
+  limitation: Public search RSS from a broad news aggregator, not a supported contractual API or complete corpus. Date is reported by the feed. Links pass through Google News; original publisher article resolution is not performed. Locale is a search setting, not article language or adoption geography. Personal metadata reading only, no article text or images; no unrestricted redistribution assumed.
+company_maps:
+  source: dealroom_marketmaps
+  role: company_landscape_only
+  url: https://dealroom.co/api/marketmaps
+  max_records: 10
+  limitation: Current public thematic market-map metadata only. Reported company counts are not downloaded company records or market size. Publication dates and historical availability are unknown. Search matches are not independent signal validation.
+investment_rounds:
+  source: dealroom_public_rounds
+  role: investment_lead_only
+  url: https://dealroom.co/api/live-signals
+  max_records: 25
+  limitation: Small public global sample, locally filtered by literal query words; not the complete Dealroom funding database. Provider may return stale data, month-only dates and no stable deal IDs or original deal URLs. Amount strings are not summed; absence in sample is not absence of investment. Unverified leads only.
+aggregated_news:
+  source: event_registry
+  role: news_attention_only
+  url: https://eventregistry.org/api/v1/article/getArticles
+  max_records: 25
+  limitation: Credentialed metadata-only query. One capped page; a valid API key and provider quota/access are required. No implicit purchase, no full article bodies, and no complete historical denominator or independently confirmed event is inferred.
+media_archive:
+  source: mediacloud_news
+  role: news_attention_only
+  url: https://search.mediacloud.org/api/search/sample
+  max_records: 25
+  limitation: Credentialed sample within explicitly configured Media Cloud collection IDs. Metadata only, no article bodies. A sample is not a corpus count and language/geographic coverage depends on the configured collections. Empty sample is not zero news activity.
+aggregated_patents:
+  source: lens_patents
+  role: patent_landscape_only
+  url: https://api.lens.org/patent/search
+  max_records: 25
+  limitation: Credentialed metadata-only title/abstract phrase search, publication-date filtered, one capped page. Lens access token and API entitlement are required. Patent publications/families are not product adoption, legal status or investment. Claims and full texts are not retained.

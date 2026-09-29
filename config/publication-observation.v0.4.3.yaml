@@ -1,0 +1,12 @@
+version: publication-observation-0.4.3-experimental
+history_windows: 4
+min_active_windows: 3
+min_document_support: 5
+min_last_window_works: 5
+max_small_topic_share: 0.01
+max_calendar_duration_difference_days: 3
+interpretation: >
+  Описательные признаки в одном сохранённом корпусе, не подтверждённый
+  слабый сигнал. Пороги экспериментальны, не подбираются по числу результатов.
+  Неизвестные первичность, калибровка и покрытие не обнуляют наблюдения;
+  они остаются отдельными ограничениями валидации.

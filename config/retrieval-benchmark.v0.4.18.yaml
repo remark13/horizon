@@ -1,0 +1,23 @@
+version: retrieval-benchmark-config-0.4.18
+mission_id: ml-area-2017
+query_version_id: ml-area-2017/v4
+query_profile_sha256: 5aa6f329292e2101c55deee26561d4585a7e1ffcac1079b37d1897dd60210fa9
+proposal_sha256: be6ec888cda633ca8ffb7e92e6f81779cc9df4bf1cfde0155be0b0cd9545de1d
+catalog_path: evaluation/cases.v0.4.1.yaml
+catalog_sha256: c6be860098f63779fadbc73d98ae394b82b209f85f5382ea3923acded39173a4
+parent_mission_path: missions/ml-area-2017.json
+parent_mission_sha256: b4d44425a442ab61a943b85f56dc34edc9a653d6428d36da38d21e1bc74f7413
+development_as_of_date: '2017-01-01'
+automatic_expansion:
+  base: original_query_only
+  max_added_terms: 3
+  ranking: document_support_desc_phrase_asc
+  suppress_token_containment: true
+  use_target_labels: false
+limits:
+  full_job_default_records: 10000
+  full_job_hard_records: 20000
+interpretation: >-
+  Бенчмарк измеряет только попадание заранее зафиксированных development-ссылок
+  в корпус до кластеризации. Он не измеряет Precision, качество темы, статус
+  слабого сигнала, будущий рост или рынок. Reserved-кейсы не оцениваются.

@@ -1,0 +1,28 @@
+version: external-sources-0.4.38
+extends: external-sources.v0.4.37.yaml
+scientific_score_modified: false
+
+nsf_funding:
+  source: nsf_awards
+  role: research_funding_only
+  search_url: https://api.nsf.gov/services/v1/awards.json
+  max_records: 15
+  source_page_size: 25
+  max_response_bytes: 2000000
+  limitation: One bounded page of NSF awards, filtered by award date and all literal query terms in title/abstract. Future project starts are marked as planned; awards are not private investments, paid amounts or proof of successful research. Related collaborative awards are not independent confirmations.
+datacite_artifacts:
+  source: datacite
+  role: research_artifact_only
+  search_url: https://api.datacite.org/dois
+  max_records: 15
+  source_page_size: 25
+  max_response_bytes: 2000000
+  limitation: Public Findable DOI metadata for datasets and software only. Issued dates and publication years are distinguished from DOI registration dates. Metadata is CC0 but underlying files have separate licences and are not downloaded. Versions and related DOIs are not independent adoption events; missing exact dates and incomplete metadata limit historical interpretation.
+openaire_projects:
+  source: openaire_projects
+  role: research_funding_only
+  search_url: https://api.openaire.eu/graph/v3/projects
+  max_records: 15
+  source_page_size: 25
+  max_response_bytes: 2000000
+  limitation: Bounded OpenAIRE Graph V3 project metadata, filtered by project start and all literal query terms. CC-BY attribution retained. Aggregated records can repeat NSF, NIH, UKRI or CORDIS awards, so this is not independent confirmation. Reported funding is not paid expenditure, private investment or market size. Current metadata is not a historical visibility snapshot.

@@ -1,0 +1,55 @@
+{
+  "version": "ru-compound-multicase-pilot-v1",
+  "purpose": "Frozen developer-authored source retrieval diagnostic after two ordinary Russian UI searches returned zero eligible works; not an automatic translation or accuracy benchmark",
+  "date_from": "2021-09-01",
+  "as_of_date": "2026-09-01",
+  "max_matches_per_case": 300,
+  "cases": [
+    {
+      "case_id": "boundary-pe-enzyme-broad",
+      "role": "cross_domain_boundary_broad_diagnostic",
+      "query_ru": "Ферменты для переработки полиэтилена из упаковок",
+      "concept_groups": [
+        ["polyethylene", "LDPE", "HDPE"],
+        ["enzymatic", "enzyme", "biodegradation"]
+      ],
+      "scope_warning": "Packaging origin is deliberately not enforced in this recall-oriented diagnostic; hits cannot be called direct answers to the original request."
+    },
+    {
+      "case_id": "boundary-pe-enzyme-packaging",
+      "role": "cross_domain_boundary_strict_diagnostic",
+      "query_ru": "Ферменты для переработки полиэтилена из упаковок",
+      "concept_groups": [
+        ["polyethylene", "LDPE", "HDPE"],
+        ["enzymatic", "enzyme", "biodegradation"],
+        ["packaging", "package waste", "packaging waste"]
+      ]
+    },
+    {
+      "case_id": "outside-quantum-archaeology",
+      "role": "outside_priority_map",
+      "query_ru": "Квантовые сенсоры для археологических исследований",
+      "concept_groups": [
+        ["quantum sensing", "quantum sensor", "quantum gravity"],
+        ["archaeology", "archaeological", "archaeometry"]
+      ],
+      "scope_warning": "A proposed application in an abstract is not an archaeological field trial."
+    },
+    {
+      "case_id": "negative-graphene-perpetual-motion",
+      "role": "negative_control",
+      "query_ru": "Вечный двигатель на основе графена",
+      "concept_groups": [
+        ["graphene", "graphene-based"],
+        ["perpetual motion", "perpetual-motion"]
+      ]
+    }
+  ],
+  "limitations": {
+    "developer_authored_terms_not_independent_gold": true,
+    "title_abstract_matches_not_topic_validity": true,
+    "query_scope_must_be_checked_per_case": true,
+    "arxiv_or_openalex_absence_not_science_absence": true,
+    "not_production_auto_expansion": true
+  }
+}

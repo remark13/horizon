@@ -1,0 +1,56 @@
+{
+  "version": "diffusion-alias-ranking-experiment-v1",
+  "production_use": false,
+  "input": "outputs/cross-cluster-diffusion-gcn-2026-09-28-v1/input.json",
+  "input_file_sha256": "51f2e4e9e419bfe53f766ccd1f0c09454dfc3264de199125da7a3b935ebe23bc",
+  "input_payload_sha256": "62df03c3d6a2085f27cad543415bf4f48d53ddbc73932a22f4d7b83c4957f9b7",
+  "controls": "config/diffusion-alias-ranking-controls-v1.json",
+  "max_input_works": 20000,
+  "max_output_bytes": 104857600,
+  "min_free_disk_reserve_bytes": 53687091200,
+  "policy": {
+    "recent_windows": 3,
+    "min_recent_works": 3,
+    "min_docs_per_area": 1,
+    "min_recent_areas": 2,
+    "min_area_gain": 1,
+    "min_share_ratio": 1.5,
+    "max_recent_share": 0.02,
+    "min_phrase_tokens": 2,
+    "max_phrase_tokens": 4,
+    "max_unique_phrases": 1000000,
+    "top_limit": 5000
+  },
+  "alias_policy": {
+    "mode": "source-local-regular-plural-v1",
+    "document_local_acronyms_only": true,
+    "ambiguous_acronyms_not_expanded": true,
+    "derivational_forms_not_merged": true,
+    "semantic_synonyms_not_invented": true
+  },
+  "ranking_policy": {
+    "version": "observed-emergence-priority-v1",
+    "support_cap": 20,
+    "area_gain_cap": 5,
+    "first_observed_recency_power": 2,
+    "score_is_probability": false,
+    "formula": "((recent_share-prior_share)/recent_share) * log1p(min(recent_works,support_cap)) * log1p(min(active_area_gain,area_gain_cap)) * ((first_observed_window_index+1)/number_of_windows)^first_observed_recency_power"
+  },
+  "acceptance": {
+    "evaluate_controls_only_after_all_four_outputs": true,
+    "minimum_control_works_in_proposal": 2,
+    "maximum_review_rank": 15,
+    "independent_precision_required_for_production": true,
+    "synthetic_alias_safety_tests_required": true,
+    "no_parameter_tuning_after_results": true
+  },
+  "limitations": [
+    "New control families have not been inspected in this frozen corpus, but are developer-selected, not independent gold.",
+    "Known GCN is only a regression; moving its rank does not demonstrate accuracy.",
+    "Regular plural merging is a limited lexical heuristic, not proof of equal mechanisms.",
+    "Document-local definitions cannot recover acronym-only works lacking their own definitions.",
+    "First observed within this clipped corpus does not establish real novelty or first discovery.",
+    "A capped relative-growth ranking can promote rare noise; independent Top-15 assessment remains required.",
+    "Thresholds, corpus, inclusion policy and dates remain identical across variants."
+  ]
+}

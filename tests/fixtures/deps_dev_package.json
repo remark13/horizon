@@ -1,0 +1,26 @@
+{
+  "packageKey": {"system": "PYPI", "name": "agentic-fixture"},
+  "versions": [
+    {
+      "versionKey": {"system": "PYPI", "name": "agentic-fixture", "version": "0.1.0"},
+      "publishedAt": "2025-01-10T12:00:00Z",
+      "isDefault": false,
+      "isDeprecated": false,
+      "deprecatedReason": ""
+    },
+    {
+      "versionKey": {"system": "PYPI", "name": "agentic-fixture", "version": "0.2.0"},
+      "publishedAt": "2026-06-15T12:00:00Z",
+      "isDefault": true,
+      "isDeprecated": false,
+      "deprecatedReason": ""
+    },
+    {
+      "versionKey": {"system": "PYPI", "name": "agentic-fixture", "version": "9.0.0"},
+      "publishedAt": "2027-01-01T12:00:00Z",
+      "isDefault": false,
+      "isDeprecated": false,
+      "deprecatedReason": ""
+    }
+  ]
+}

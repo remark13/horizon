@@ -1,0 +1,32 @@
+version: external-sources-0.4.39
+extends: external-sources.v0.4.38.yaml
+scientific_score_modified: false
+
+osti_records:
+  source: osti_gov
+  role: bibliographic_enrichment_only
+  search_url: https://www.osti.gov/api/v1/records
+  max_records: 15
+  source_page_size: 25
+  max_response_bytes: 2000000
+  limitation: One bounded public OSTI metadata page for DOE-related research publications. All literal query terms must appear in the title and the reported publication date must be within the requested interval; entry/update dates are never substituted. Future publication dates, patents and non-publication resources are excluded. Current metadata is not a historical visibility archive, may overlap OpenAlex or other catalogues and does not establish independent research, peer review or market adoption. No abstracts/full texts/contact fields are stored and no metadata is sent to models or used for training/scoring; OSTI asks AI/ML/LLM projects and bulk reuse to coordinate separately.
+nist_news:
+  source: nist_news_rss
+  role: news_attention_only
+  url: https://www.nist.gov/news-events/news/rss.xml
+  max_records: 15
+  max_response_bytes: 2000000
+  topical_feeds:
+    - url: https://www.nist.gov/news-events/materials/rss.xml
+      terms: [materials, material, battery, batteries, polymer, polymers, alloy, alloys, catalyst, catalysts]
+    - url: https://www.nist.gov/news-events/energy/rss.xml
+      terms: [energy, fusion, nuclear, reactor, hydrogen]
+    - url: https://www.nist.gov/news-events/manufacturing/rss.xml
+      terms: [manufacturing, robot, robots, robotic, robotics, automation, additive]
+    - url: https://www.nist.gov/news-events/health/rss.xml
+      terms: [health, medical, biomedical, medicine]
+    - url: https://www.nist.gov/news-events/bioscience/rss.xml
+      terms: [biology, biotechnology, bioengineering, protein, proteins, gene, genes]
+    - url: https://www.nist.gov/news-events/information%20technology/rss.xml
+      terms: [artificial, intelligence, machine, learning, cybersecurity]
+  limitation: Recent official NIST RSS metadata, with bounded topical-feed selection and all literal terms in title/categories. Institutional announcements may describe research, standards, programmes or events, not verified industrial adoption, commercial sales or independent validation. Feed coverage is incomplete and is not a historical archive. Preserve attribution, dates and links; do not store article bodies or images, and do not infer unrestricted rights for third-party copyrighted material.

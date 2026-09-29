@@ -1,0 +1,73 @@
+version: source-adoption-registry-0.4.48
+extends: source-adoption.v0.4.47.yaml
+reviewed_at: '2026-09-28'
+scientific_score_uses_external_attention: false
+sources:
+  - id: osti_gov
+    name: OSTI.GOV DOE research metadata
+    decision: adapt
+    data: Research-publication IDs, titles, reported publication/entry dates, DOI, publication type, authors, reported country of publication and source citation link. No abstracts, article text, files, contacts, contract descriptions or images stored.
+    temporal_coverage: Bounded first page and locally checked publication-date interval; entry/update date is not a publication date. Future, unknown or malformed publication dates are excluded.
+    regional_coverage: DOE-related research with strong US coverage. Reported country is country of publication, not author location or industrial diffusion; not a global scientific census.
+    access: Public documented OSTI.GOV REST GET endpoint, fixed HTTPS host/path, title query, one page of at most 25 records.
+    credentials: none for the tested public metadata endpoint; separate coordination required before bulk or AI/ML/LLM use.
+    cost: No account or fee for the tested endpoint; acceptable-use and request-rate constraints apply.
+    license_status: Limited attributed bibliographic metadata and links for reading/inspection only. Public availability is not a universal public-domain licence; copyrighted documents and third-party content retain rights. Do not redistribute full texts or make a bulk corpus. OSTI FAQ asks AI/ML/LLM projects to contact apis@osti.gov; this adapter is not a model-input/training/scoring permission.
+    reproducibility: Request URL, retrieval time, raw-response checksum, literal-title match basis, original dates and rejected-record counters retained; no source total inferred from page length.
+    retrotest_fit: Current corrected metadata cannot prove historical visibility. No backdating from publication date or record entry date.
+    role: bibliographic_enrichment_only
+    reason: Useful research leads for energy, nuclear technology, chemistry, materials and AI-assisted engineering; stays outside scientific score and model input. Technical reports and conference records are labelled separately from journal articles. Patent/resource records are excluded, not misrepresented as a working patent landscape.
+    evidence_urls:
+      - https://www.osti.gov/api/v1/docs
+      - https://www.osti.gov/faqs
+      - https://www.osti.gov/disclaim
+  - id: nist_news_rss
+    name: NIST official research and technology news
+    decision: adapt
+    data: Official announcement titles, source links, publication dates, authors and RSS categories; no article bodies or images stored.
+    temporal_coverage: Recent current RSS window, not a complete archive; unknown and future publication dates excluded.
+    regional_coverage: NIST institutional announcements, United States; institutional origin is not geography of all researchers, customers or adopters.
+    access: Public official RSS feeds, fixed HTTPS host and allowlisted general/topical feeds from the NIST RSS directory.
+    credentials: none
+    cost: Free public RSS, with bounded requests and existing cache; not a mass download.
+    license_status: NIST public-information reuse policy with attribution, except material specifically marked copyrighted. This adapter only keeps limited metadata and links and does not copy third-party articles, media or logos.
+    reproducibility: Selected feed, matching terms, title/category filtering, retrieval time, publication dates and raw-response checksum retained.
+    retrotest_fit: RSS can disappear or change and cannot prove historical visibility or complete counts.
+    role: news_attention_only
+    reason: Adds primary institutional leads on materials, measurement, manufacturing, AI, quantum/energy and health. Announcements about standards, programmes or events do not prove research success, market adoption or independent validation.
+    evidence_urls:
+      - https://www.nist.gov/coo/nist-rss-feeds
+      - https://www.nist.gov/copyrights-disclaimers
+  - id: aist_press_rss
+    name: AIST research-results RSS
+    decision: defer
+    data: Potential Japanese institutional research-news metadata; no runtime connector or ingestion.
+    temporal_coverage: Recent RSS, not a complete archive.
+    regional_coverage: Japan institutional announcements; not all Asian research.
+    access: Public RSS directory; reuse in a commercial information service is not approved.
+    credentials: Permission or clarified reuse terms needed before commercial system integration.
+    cost: Public reading is free; system reuse permission has not been established.
+    license_status: AIST RSS terms limit posting/redistribution to non-commercial unaltered feeds and request notification for new information services. Public accessibility is not treated as permission for the banking service.
+    reproducibility: Official terms URL retained; no articles, images or feed corpus ingested.
+    retrotest_fit: Not eligible for runtime or retrotests.
+    role: description_only
+    reason: Valuable Japanese research lead; defer execution until commercial reuse requirements are resolved.
+    evidence_urls:
+      - https://www.aist.go.jp/aist_e/terms_of_use/rss/
+  - id: science_japan_rss
+    name: JST Science Japan RSS
+    decision: defer
+    data: Potential Japanese research-news metadata; no runtime connector or ingestion.
+    temporal_coverage: Recent feed, not a complete archive.
+    regional_coverage: Japan research announcements in English.
+    access: Public RSS, but corporate/commercial reuse needs separate permission.
+    credentials: Corporate reuse permission from JST required.
+    cost: Public reading is free; commercial information-service reuse not approved.
+    license_status: RSS terms specify personal use and prohibit commercial use, replication and republication by software. The general JST website policy does not override service-specific RSS restrictions.
+    reproducibility: Official RSS and website policy URLs recorded; no feed corpus ingested.
+    retrotest_fit: Not eligible for runtime or retrotests.
+    role: description_only
+    reason: Do not equate public RSS access with a licence to incorporate it in a bank's AI-analytics product.
+    evidence_urls:
+      - https://sj.jst.go.jp/rss-policy/
+      - https://www.jst.go.jp/EN/copyright.html

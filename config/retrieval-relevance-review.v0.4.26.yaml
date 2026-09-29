@@ -1,0 +1,56 @@
+version: retrieval-relevance-review-policy-0.4.26
+purpose: independent_review_of_expansion_only_retrieval_assignments_not_gold
+source:
+  report_path: reports/generated/jrc-ai-arxiv-ordered-gap-expansion-v0425-r1-2026-09-21.json
+  report_bytes_sha256: 9dfc76a50b8d00c63c5dedaf99037d5194152868ba9c962bf59de65e10303615
+  report_payload_sha256: ab1ac99c1d0c60a6b1bbeb0bbc001791dcd246ee029ae35a0f1a44753f50a336
+selection:
+  algorithm: all-frozen-expansion-only-samples-v1
+  include_all_stored_samples: true
+  expected_assignments: 99
+  expected_unique_documents: 99
+  expected_signals: 23
+  sample_is_uniform_over_documents: false
+  sample_supports_micro_precision: false
+  sample_supports_macro_signal_diagnostic: true
+blinding:
+  hidden_per_item:
+    - source_number
+    - exact_matches
+    - expanded_matches
+    - expansion_only_matches
+    - exact_observed
+    - newly_observed_by_expansion
+    - selection_rank
+  visible_per_item:
+    - target_topic
+    - document_title
+    - first_submission_date
+    - arxiv_categories
+    - arxiv_url
+  abstract_exported: false
+  abstract_reason: reviewer_opens_primary_arxiv_source
+questions:
+  topical_relevance:
+    choices: [relevant, not_relevant, uncertain]
+    meaning: Статья действительно относится к целевой теме, а не только содержит разнесённые слова запроса.
+  evidence_role:
+    choices: [central, supporting, incidental, uncertain]
+    meaning: Целевая тема является центральным предметом, поддерживающим методом или случайным упоминанием.
+submission:
+  rationale_min_length: 20
+  rationale_max_length: 5000
+  max_sources: 5
+  require_independent_review_declaration: true
+  require_hidden_fields_not_seen_declaration: true
+comparison:
+  minimum_distinct_reviewers: 2
+  automatic_consensus: false
+  adjudication_required_for_disagreement: true
+  raw_agreement_is_not_precision: true
+  precision_requires_adjudicated_binary_labels: true
+interpretation:
+  gold_standard: false
+  calibration_allowed: false
+  production_change_allowed: false
+  weak_signal_quality_measured: false

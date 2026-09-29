@@ -1,0 +1,59 @@
+{
+  "version": "free-ru-no-suggestions-developer-labels-v1",
+  "source_report": "outputs/free-ru-no-suggestions-compound-openalex-v1.json",
+  "evidence_limit": "Developer assessment of currently supplied title and abstract only; not independent expert labels or verified full text.",
+  "queries_ru": {
+    "boundary-pe-enzyme-packaging": "Ферменты для переработки полиэтилена из упаковок",
+    "outside-quantum-archaeology": "Квантовые сенсоры для археологических исследований"
+  },
+  "rows": [
+    {
+      "case_id": "boundary-pe-enzyme-packaging",
+      "doi": "10.3390/bioengineering9030098",
+      "judgement": "not_direct",
+      "reason": "PET, not polyethylene PE; review rather than a primary PE experiment."
+    },
+    {
+      "case_id": "boundary-pe-enzyme-packaging",
+      "doi": "10.1016/j.biotechadv.2022.107991",
+      "judgement": "related",
+      "reason": "Review of PE/PS biodegradation and enzyme discovery; does not test packaging-derived PE."
+    },
+    {
+      "case_id": "boundary-pe-enzyme-packaging",
+      "doi": "10.1016/j.resconrec.2022.106444",
+      "judgement": "related",
+      "reason": "Real beverage packaging process, but cellulase hydrolyses cellulose and PE is recovered afterwards; enzyme does not degrade PE."
+    },
+    {
+      "case_id": "boundary-pe-enzyme-packaging",
+      "doi": "10.1002/pen.26406",
+      "judgement": "not_direct",
+      "reason": "PET, not PE; review."
+    },
+    {
+      "case_id": "boundary-pe-enzyme-packaging",
+      "doi": "10.3389/fmicb.2023.1265139",
+      "judgement": "not_direct",
+      "reason": "PET, not PE; review."
+    },
+    {
+      "case_id": "outside-quantum-archaeology",
+      "doi": "10.1088/978-0-7503-3803-5",
+      "judgement": "related",
+      "reason": "Book overview lists archaeology as one of several application areas, not a reported archaeological field study."
+    },
+    {
+      "case_id": "outside-quantum-archaeology",
+      "doi": "10.1038/s41586-021-04315-3",
+      "judgement": "related",
+      "reason": "Primary quantum sensor tunnel demonstration; archaeology is mentioned as a compatible future application, not the demonstrated setting."
+    },
+    {
+      "case_id": "outside-quantum-archaeology",
+      "doi": "10.5194/egusphere-egu25-16898",
+      "judgement": "direct",
+      "reason": "Conference abstract reports a quantum gravimeter archaeological field study in Lisbon and reconstruction of a Roman-era tunnel; full text and independent verification not checked."
+    }
+  ]
+}

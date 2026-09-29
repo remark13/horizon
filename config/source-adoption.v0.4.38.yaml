@@ -1,0 +1,23 @@
+version: source-adoption-registry-0.4.38
+extends: source-adoption.v0.4.31.yaml
+reviewed_at: '2026-09-22'
+scientific_score_uses_external_attention: false
+source_id_replacements:
+  gdelt_doc_2: gdelt_doc_2_0
+sources:
+  - id: epo_ops
+    name: EPO Open Patent Services
+    decision: adapt
+    data: Patent publication bibliographic records returned by CQL search.
+    temporal_coverage: Live published-data service; publication dates are historical but the endpoint is mutable.
+    regional_coverage: EPO worldwide bibliographic coverage with jurisdiction, language and publication-lag differences.
+    access: Official OPS REST service with registered OAuth client credentials and fair-use limits.
+    credentials: EPO OPS consumer key and secret supplied by the system owner.
+    cost: Registration-based service; contractual and fair-use conditions apply.
+    license_status: Official EPO service terms apply; SAIA stores bounded bibliographic metadata and links only.
+    reproducibility: Pin CQL phrase, interval, as-of date, retrieval time, raw response hash and publication identities.
+    retrotest_fit: Limited until family normalization, publication-lag correction and archived-query reproducibility are implemented.
+    role: patent_landscape_only
+    reason: Provides a live patent evidence channel without pretending that publications prove grants, adoption or market success.
+    evidence_urls:
+      - https://www.epo.org/en/searching-for-patents/data/web-services/ops

@@ -1,0 +1,12 @@
+version: hybrid-candidate-0.4.1-disk-experimental
+lexical_policy_file: terminology.v0.4.1.yaml
+max_lexical_candidates: 300
+max_document_support: 30
+recent_birth_windows: 3
+min_title_support: 1
+min_document_support: 2
+max_overlap_links: 3
+interpretation: >
+  Объединение независимых каналов предложений, не автоматическое подтверждение
+  слабого сигнала. Совпадение состава работ объединяется; частичное пересечение
+  только показывается и не переносит статус, новизну или рост между кандидатами.

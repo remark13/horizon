@@ -1,0 +1,14 @@
+{
+  "version": "title-anchor-paper-llm-probe-v1",
+  "purpose": "development_diagnostic_only",
+  "production_use": false,
+  "blind_packet": "evaluation/bas-title-anchor-paper-blind-review-2026-09-27-v2.json",
+  "blind_packet_sha256": "9483d6e4fc5838f879d279ffc4785bdebd8a797741873a57f7a1a89c91ee9fb2",
+  "model": "qwen3.5:9b",
+  "model_digest": "6488c96fa5faab64bb65cbd30d4289e20e6130ef535a93ef9a49f42eda893ea7",
+  "max_cases": 28,
+  "max_run_seconds": 600,
+  "per_case_timeout_seconds": 90,
+  "temperature": 0,
+  "limit_output_tokens": 220
+}

@@ -1,0 +1,24 @@
+version: external-sources-0.4.32
+extends: external-sources.v0.4.31.yaml
+scientific_score_modified: false
+
+clinical_trials:
+  source: clinicaltrials_gov
+  role: clinical_translation_only
+  search_url: https://clinicaltrials.gov/api/v2/studies
+  max_records: 50
+  source_page_size: 100
+  max_response_bytes: 6000000
+  credentials: none
+  evidence_urls:
+    - https://clinicaltrials.gov/data-about-studies/learn-about-api
+    - https://clinicaltrials.gov/data-api/about-api/study-data-structure
+  limitation: >-
+    The registry is US-centred but includes international studies. A listed
+    study is a registered protocol, not evidence of positive clinical results,
+    regulatory approval, adoption or market size. Current registry snapshots
+    cannot be replayed as historical as-of snapshots. Search is capped and
+    relevance-ranked. SAIA only retains records with the query phrase visibly
+    present in the title, intervention, keyword or brief summary; this reduces
+    false positives but can omit genuinely related studies. Zero returned after
+    local filtering is not zero activity.

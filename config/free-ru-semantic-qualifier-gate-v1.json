@@ -1,0 +1,44 @@
+{
+  "version": "free-ru-semantic-qualifier-gate-v1",
+  "purpose": "Developer-authored lexical qualifier check on frozen semantic OpenAlex first pages; not a classifier or production decision",
+  "cases": [
+    {
+      "case_id": "boundary-polymer-enzyme",
+      "query_ru": "Ферменты для переработки полиэтилена из упаковок",
+      "source_report": "outputs/openalex-russian-search-modes-2026-09-25-v1.json",
+      "required_concepts": {
+        "material": ["polyethylene", "LDPE", "HDPE"],
+        "active_method": ["enzyme", "enzymatic"],
+        "origin": ["packaging", "package waste", "packaging waste"]
+      }
+    },
+    {
+      "case_id": "outside-quantum-archaeology",
+      "query_ru": "Квантовые сенсоры для археологических исследований",
+      "source_report": "outputs/openalex-russian-search-modes-2026-09-25-v1.json",
+      "required_concepts": {
+        "sensor": ["quantum sensor", "quantum sensing", "quantum gravimeter", "quantum gradiometer", "quantum gravity"],
+        "application": ["archaeology", "archaeological", "archaeometry"]
+      }
+    },
+    {
+      "case_id": "outside-hydrogen-pipeline-fiber",
+      "query_ru": "Оптические волокна для обнаружения утечек водорода в трубопроводах",
+      "source_report": "outputs/openalex-hydrogen-fiber-free-ru-probe-2026-09-27-v1.json",
+      "required_concepts": {
+        "medium": ["hydrogen", "H2", "dihydrogen"],
+        "instrument": ["optical fiber", "optical fibre", "fiber optic", "fibre optic", "fiber-optic", "fibre-optic"],
+        "event": ["leak", "leakage"],
+        "deployment": ["pipeline", "pipe line", "pipe network"]
+      }
+    }
+  ],
+  "interpretation": {
+    "matches_are_title_or_abstract_mentions_only": true,
+    "missing_abstract_is_not_negative_scientific_evidence": true,
+    "cooccurrence_is_not_direct_research_role": true,
+    "source_page_is_bounded_not_temporal_denominator": true,
+    "developer_authored_terms_not_independent_evaluation": true,
+    "no_production_route_change": true
+  }
+}

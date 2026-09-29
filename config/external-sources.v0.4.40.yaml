@@ -1,0 +1,15 @@
+version: external-sources-0.4.40
+extends: external-sources.v0.4.39.yaml
+scientific_score_modified: false
+
+aist_news:
+  source: aist_press_rss
+  role: news_attention_only
+  url: https://www.aist.go.jp/ctl/module/mid/27/tid/75/rss.php
+  max_records: 15
+  max_response_bytes: 2000000
+  default_language: ja
+  source_country: Japan
+  record_path_prefixes: [/aist_j/press_release/]
+  usage_scope: personal_research
+  limitation: Personal local RSS reading of attributed AIST research-release titles, dates and links, not a public or commercial republishing service. One short current Japanese feed is incomplete; the official English feed was empty on review. Only research-release paths and known publication dates within the interval are kept; events and future dates are excluded. Original titles are not translated or shortened. Small explicit Japanese query aliases are only search matches, not semantic validation. No story bodies, images or model inputs are retained, and no permission for public redistribution, training or bulk reuse is inferred. AIST requests notification for a new information service; that is not performed by this private local reader and must be addressed before any such launch.

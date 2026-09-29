@@ -1,0 +1,53 @@
+version: independent-annotation-policy-0.4.21
+purpose: independent_development_review_not_gold
+selection:
+  algorithm: equal-channel-quota-then-stage-round-robin-v2
+  default_items: 24
+  hard_max_items: 60
+  seed: saia-independent-review-v1
+  visible_works_per_item: 12
+  work_sample_algorithm: evenly-spaced-by-date-v1
+  exclude_all_provisional_catalog_references: true
+  balance_by:
+    - channel
+    - publication_observation_stage
+blinding:
+  hidden_per_item:
+    - candidate_id
+    - composition_sha256
+    - system_status
+    - emergence_score
+    - gates
+    - selection_stratum
+  visible_per_item:
+    - generated_label
+    - cutoff
+    - publication_counts_and_shares
+    - publication_titles_dates_and_links
+    - full_composition_count_and_sample_disclosure
+  article_abstracts_exported: false
+  abstract_reason: article_rights_not_reverified_for_annotation_export
+questions:
+  research_line_coherence:
+    choices: ['yes', 'no', 'uncertain']
+    meaning: Публикации образуют одну достаточно узкую научно-техническую линию.
+  primary_result_evidence:
+    choices: ['yes', 'no', 'uncertain']
+    meaning: Есть хотя бы один первичный технический или экспериментальный результат, а не только обзор.
+  independent_groups_evidence:
+    choices: ['yes', 'no', 'uncertain']
+    meaning: По указанным источникам видны как минимум две независимые исследовательские группы.
+  weak_signal_at_cutoff:
+    choices: ['yes', 'no', 'uncertain', 'not_assessable']
+    meaning: На дату среза это обоснованный кандидат слабого сигнала по публикациям, но не прогноз рынка.
+submission:
+  rationale_min_length: 20
+  rationale_max_length: 5000
+  max_sources: 10
+  require_independent_review_declaration: true
+  require_system_status_not_seen_declaration: true
+consensus:
+  minimum_distinct_reviewers: 2
+  automatic_consensus: false
+  adjudication_required_for_disagreement: true
+  complete_individual_reviews_are_not_gold: true

@@ -1,0 +1,22 @@
+version: source-adoption-registry-0.4.41
+extends: source-adoption.v0.4.40.yaml
+reviewed_at: '2026-09-23'
+scientific_score_uses_external_attention: false
+sources:
+  - id: nasa_ntrs
+    name: NASA Scientific and Technical Information Repository (NTRS)
+    decision: adapt
+    data: Public NASA technical reports, manuscripts and conference-paper metadata with citation IDs.
+    temporal_coverage: Historical document and distribution dates in a mutable current index.
+    regional_coverage: NASA-created or NASA-funded research, strong US aerospace and space bias.
+    access: Official public OpenAPI, bounded anonymous search.
+    credentials: none
+    cost: Free public API subject to NASA fair-use and availability terms.
+    license_status: Public metadata accessible; document-level copyright varies and full texts are not copied.
+    reproducibility: Pin query, date range, retrieval time, response hash and NTRS citation IDs.
+    retrotest_fit: Not safe as an as-of historical corpus without archived index and availability dates.
+    role: bibliographic_enrichment_only
+    reason: Adds aerospace and space technical-report coverage; overlaps with OpenAlex and is not an independent scientific count.
+    evidence_urls:
+      - https://ntrs.nasa.gov/api/openapi/
+      - https://www.sti.nasa.gov/harvesting-data-from-ntrs/

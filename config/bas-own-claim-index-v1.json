@@ -1,0 +1,19 @@
+{
+  "version": "bas-own-claim-index-pilot-v1",
+  "purpose": "contribution_first_candidate_retrieval_diagnostic",
+  "production_use": false,
+  "parent_plan": "config/broad-title-phrase-pilot-bas-v1.json",
+  "parent_plan_sha256": "ff016ce5cb280f86d36258aeed01d909003fc7c1954fb1a5601afd8d60ef3960",
+  "index": "data/processed/arxiv-trigram-index-full-v4",
+  "index_manifest_sha256": "0a1f8f7801bdbd8d1db19400628cb7f32b02ca90b1ed9848096a915ec6684178",
+  "max_parent_works": 25000,
+  "max_claim_sentences": 150000,
+  "max_output_bytes": 157286400,
+  "min_free_disk_reserve_bytes": 53687091200,
+  "limitations": [
+    "Explicit own-work linguistic cues can appear in reviews or background and can miss implicit contributions.",
+    "Current arXiv metadata may reflect later revisions; this is not a historical first-version index.",
+    "A sentence about a paper's own work does not alone identify one coherent technology line.",
+    "No publication-growth numerator, denominator, or weak-signal status is inferred from this index."
+  ]
+}

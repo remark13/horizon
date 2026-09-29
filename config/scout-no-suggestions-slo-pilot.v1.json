@@ -1,0 +1,19 @@
+{
+  "version": "scout-no-suggestions-slo-pilot-v1",
+  "purpose": "Frozen UI-equivalent baseline for two free Russian requests outside the approved branch profiles",
+  "date_from": "2021-09-01",
+  "as_of_date": "2026-09-01",
+  "limit_per_source": 25,
+  "max_results": 300,
+  "openalex_collection_mode": "cache_year_spread",
+  "cases": [
+    {"case_id": "boundary-polymer-enzyme", "role": "cross_domain_boundary", "query_ru": "Ферменты для переработки полиэтилена из упаковок"},
+    {"case_id": "outside-quantum-archaeology", "role": "outside_priority_map", "query_ru": "Квантовые сенсоры для археологических исследований"}
+  ],
+  "limits": {
+    "ui_empty_suggestions_route_only": true,
+    "no_manual_english_translation": true,
+    "two_cases_not_p50_or_p95": true,
+    "zero_works_not_absence_of_science": true
+  }
+}

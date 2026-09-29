@@ -1,0 +1,243 @@
+version: source-adoption-registry-0.4.13
+reviewed_at: '2026-09-20'
+scientific_score_uses_external_attention: false
+sources:
+  - id: openalex
+    name: OpenAlex
+    decision: accept_now
+    data: Scientific works, authors, institutions, concepts/topics, citations and locations.
+    temporal_coverage: Broad historical coverage; field completeness varies by work and period.
+    regional_coverage: Global, with source- and language-dependent bias.
+    access: REST API and downloadable snapshot; bounded API connector already used by SAIA.
+    credentials: Basic API access can operate without a key; a free key increases budget.
+    cost: Free allowance; higher-volume access may require payment.
+    license_status: OpenAlex data CC0; linked full texts retain their own rights.
+    reproducibility: Pin request, cursor history, retrieval time, raw hash and snapshot identity.
+    retrotest_fit: Useful only with as-of controls; current metadata can contain later citations and updates.
+    role: scientific_corpus
+    reason: Primary MVP source, already guarded by provenance and coverage contracts.
+    evidence_urls:
+      - https://docs.openalex.org/
+      - https://help.openalex.org/access/pricing/
+  - id: local_arxiv_mirror
+    name: Local arXiv metadata mirror
+    decision: accept_now
+    data: Titles, abstracts, categories, versions, DOI and journal references.
+    temporal_coverage: Historical submissions present in the pinned mirror; text fields reflect the current snapshot.
+    regional_coverage: Global arXiv contributors; disciplinary and regional participation bias remains.
+    access: Pinned local Hugging Face parquet snapshot.
+    credentials: None after local download.
+    cost: No access fee; local storage and compute costs.
+    license_status: Mirror metadata reported as CC0; article rights are separate.
+    reproducibility: Exact revision, shard inventory, hashes, mission and coverage passport are pinned.
+    retrotest_fit: Good for first-submission dates; current abstracts are not historically reconstructed versions.
+    role: scientific_corpus
+    reason: Primary MVP source and denominator for the current bounded pilot.
+    evidence_urls:
+      - https://huggingface.co/datasets/librarian-bots/arxiv-metadata-snapshot
+  - id: claude_hf_subset_2010_2017
+    name: Claude HF arXiv subset
+    decision: adapt
+    data: 2010-2017 cs.LG/stat.ML records with current snapshot metadata.
+    temporal_coverage: First submissions 2010-2017; updated fields may include later revisions.
+    regional_coverage: Same participation limits as arXiv.
+    access: Local JSONL supplied by the parallel Claude project.
+    credentials: None.
+    cost: None beyond local compute.
+    license_status: Derived from the local arXiv metadata mirror; metadata terms retained, article rights separate.
+    reproducibility: File hash and extraction metadata must be pinned before comparison.
+    retrotest_fit: Coverage comparator only until overlap, revisions and extraction rules are audited.
+    role: scientific_corpus
+    reason: Compare coverage; do not import if the same IDs already exist in the pinned full mirror.
+    evidence_urls: []
+  - id: jrc_weak_signals_2024
+    name: JRC Weak Signals in Science and Technologies 2024
+    decision: adapt
+    data: Named weak signals grouped into technology clusters.
+    temporal_coverage: Report edition 2024; underlying observation intervals must be read from the report.
+    regional_coverage: Global bibliographic and patent inputs with database coverage biases.
+    access: Public report and supplied derived workbook.
+    credentials: None.
+    cost: Free report access.
+    license_status: Public EU report; supplied translations and extracted table require provenance, not assumed training rights.
+    reproducibility: Preserve report URL, workbook bytes hash, rows, omissions and duplicate titles.
+    retrotest_fit: Silver retrieval reference, not outcome truth and not a blind holdout.
+    role: silver_reference
+    reason: Independent catalogue for thematic recall and coverage checks only.
+    evidence_urls:
+      - https://publications.jrc.ec.europa.eu/repository/handle/JRC140959
+  - id: wikimedia_pageviews
+    name: Wikimedia Pageviews
+    decision: accept_now
+    data: Daily views of explicitly mapped Wikipedia articles.
+    temporal_coverage: From 2015-07-01.
+    regional_coverage: Per Wikimedia project/language; readership and article availability bias.
+    access: Public REST API.
+    credentials: None; descriptive User-Agent required.
+    cost: Free subject to responsible use.
+    license_status: Aggregated pageview data governed by Wikimedia API terms; no article text is copied.
+    reproducibility: Store explicit topic-to-page mapping, request interval, retrieval time and raw response hash.
+    retrotest_fit: Valid after 2015-07-01 if mapping existed and later redirects/renames are disclosed.
+    role: external_attention
+    reason: Small testable external-attention vertical slice, kept outside scientific scoring.
+    evidence_urls:
+      - https://doc.wikimedia.org/generated-data-platform/aqs/analytics-api/reference/page-views.html
+  - id: gdelt_doc_2
+    name: GDELT DOC 2.0 API
+    decision: adapt
+    data: Recent news article counts and metadata for search terms.
+    temporal_coverage: Rolling recent window; not a 2010-2017 historical API.
+    regional_coverage: Global multilingual news with source and translation biases.
+    access: Public API; separate bulk archives/BigQuery require another adapter and cost review.
+    credentials: DOC API none; BigQuery environment may require cloud credentials and billing.
+    cost: DOC API free; archive processing and BigQuery can incur compute/network costs.
+    license_status: Metadata/links only until downstream content rights are separately established.
+    reproducibility: Pin term, mode, time interval, response hash and explicit source-window status.
+    retrotest_fit: DOC API is unsuitable for old retrospective windows; historical archive path is deferred.
+    role: external_attention
+    reason: Keep a guarded recent-window interface and an explicit blocked status for old dates.
+    evidence_urls:
+      - https://blog.gdeltproject.org/gdelt-doc-2-0-api-debuts/
+  - id: epo_patstat
+    name: EPO PATSTAT
+    decision: defer
+    data: Global patent bibliographic, family, applicant and citation data.
+    temporal_coverage: Historical patent data by licensed release.
+    regional_coverage: Multiple patent offices with jurisdiction and publication-lag differences.
+    access: Licensed bulk/database products.
+    credentials: Contract and account required.
+    cost: Paid/licensed.
+    license_status: Rights and redistribution require contract review.
+    reproducibility: Pin release, tables, query and family policy.
+    retrotest_fit: Potentially strong after publication-lag and family controls.
+    role: future_patent_corpus
+    reason: High strategic value but outside the open-source 10-hour vertical slice.
+    evidence_urls:
+      - https://www.epo.org/en/searching-for-patents/business/patstat
+  - id: google_patents_public_datasets
+    name: Google Patents Public Datasets
+    decision: defer
+    data: Patent publications, families, classifications and citations via BigQuery datasets.
+    temporal_coverage: Historical patent records; refresh and table coverage must be pinned.
+    regional_coverage: Multi-office with source-dependent coverage.
+    access: BigQuery public datasets.
+    credentials: Google Cloud project; query billing may apply.
+    cost: Storage/query allowance and possible paid usage.
+    license_status: Dataset and underlying patent-document terms require field-level review.
+    reproducibility: Pin table snapshot/date, SQL, billed bytes and family rules.
+    retrotest_fit: Useful after leakage and patent publication-delay controls.
+    role: future_patent_corpus
+    reason: Defer until the publication pipeline has measured quality and a cost envelope.
+    evidence_urls:
+      - https://console.cloud.google.com/marketplace/product/google_patents_public_datasets/google-patents-public-data
+  - id: rospatent_fips
+    name: Rospatent and FIPS open services
+    decision: defer
+    data: Russian patent documents, registers and classifications.
+    temporal_coverage: Depends on register/API/export selected.
+    regional_coverage: Russian Federation.
+    access: Public search plus service-specific interfaces; stable bulk/API path not yet verified.
+    credentials: Unknown for intended bulk use; verification required.
+    cost: Unknown for intended volume; verification required.
+    license_status: unknown
+    reproducibility: No connector until stable lawful access and versioning are documented.
+    retrotest_fit: Potential regional value; unavailable until coverage and publication-delay audit.
+    role: future_patent_corpus
+    reason: Preserve in backlog; do not scrape or assume reuse rights.
+    evidence_urls:
+      - https://www1.fips.ru/
+  - id: cnki
+    name: CNKI
+    decision: defer
+    data: Chinese academic publications and related indexes.
+    temporal_coverage: Broad but product-dependent.
+    regional_coverage: Strong China coverage.
+    access: Commercial platform; no approved bulk connector for this project.
+    credentials: Subscription/institutional access required for many functions.
+    cost: Paid/licensed.
+    license_status: unknown
+    reproducibility: Requires a licensed export/API agreement and documented query snapshot.
+    retrotest_fit: Potentially valuable for regional blind spots, but unavailable under current rights.
+    role: scientific_corpus
+    reason: Do not connect or scrape without explicit rights.
+    evidence_urls:
+      - https://www.cnki.net/
+  - id: kisti_scienceon
+    name: KISTI ScienceON
+    decision: defer
+    data: Korean science and technology publications, reports and related metadata.
+    temporal_coverage: Service-dependent; not yet audited.
+    regional_coverage: Strong South Korea coverage.
+    access: Portal and service-specific APIs/agreements; bulk suitability unverified.
+    credentials: Unverified for intended volume.
+    cost: Unverified for intended volume.
+    license_status: unknown
+    reproducibility: Requires official API/export contract and versioned field mapping.
+    retrotest_fit: Potentially useful after language, coverage and date audit.
+    role: scientific_corpus
+    reason: Regional gap candidate; research and rights gate precede implementation.
+    evidence_urls:
+      - https://scienceon.kisti.re.kr/
+  - id: jstage
+    name: J-STAGE
+    decision: defer
+    data: Japanese scholarly journal metadata and articles from participating societies.
+    temporal_coverage: Journal-dependent.
+    regional_coverage: Strong Japan coverage with collection bias.
+    access: Public portal and official interfaces; bulk route not yet validated for SAIA.
+    credentials: To verify for intended API volume.
+    cost: To verify.
+    license_status: Article-level rights vary; metadata reuse needs verification.
+    reproducibility: Requires connector contract, field mapping and coverage passport.
+    retrotest_fit: Potentially useful after language and coverage audit.
+    role: scientific_corpus
+    reason: Defer until a licensed, stable and testable access path is confirmed.
+    evidence_urls:
+      - https://www.jstage.jst.go.jp/
+  - id: google_trends
+    name: Google Trends
+    decision: defer
+    data: Normalized search-interest indices for selected terms.
+    temporal_coverage: Historical normalized samples; values depend on query, geography and sampling.
+    regional_coverage: Selected geographies with platform-user bias.
+    access: Web product; no approved stable public bulk API for this project.
+    credentials: Product-dependent.
+    cost: No approved production path established.
+    license_status: unknown
+    reproducibility: Sampling and term mapping make exact replay uncertain without an approved export workflow.
+    retrotest_fit: External attention only; not suitable until sampling stability is measured.
+    role: external_attention
+    reason: Valuable conceptually but not reproducible enough for the first connector.
+    evidence_urls:
+      - https://trends.google.com/trends/
+  - id: github
+    name: GitHub public activity
+    decision: defer
+    data: Repository creation, releases, commits, stars and contributor activity.
+    temporal_coverage: API/event coverage depends on endpoint and retention.
+    regional_coverage: Global developer activity with platform and open-source bias.
+    access: Public API and event datasets with authentication/rate limits.
+    credentials: Token normally required for useful API limits.
+    cost: API generally free within limits; archive analytics can incur compute costs.
+    license_status: Repository licences and personal data require field-specific handling.
+    reproducibility: Pin repository mapping, API query, event window and response hashes.
+    retrotest_fit: Useful for software diffusion, not scientific emergence by itself.
+    role: future_software_signal
+    reason: Defer until entity resolution and source-specific privacy/licence rules are ready.
+    evidence_urls:
+      - https://docs.github.com/en/rest
+  - id: industry_media_catalog
+    name: Supplied industry and media domain catalogue
+    decision: adapt
+    data: Domains and example links associated with the supplied 100-signal set.
+    temporal_coverage: Example-specific and not a continuous archive.
+    regional_coverage: Mixed, with strong selection bias from the source dataset.
+    access: Heterogeneous; many sites have no stable bulk/API access.
+    credentials: Varies by domain.
+    cost: Varies by domain.
+    license_status: unknown
+    reproducibility: Preserve as a discovery queue; verify each domain before collection.
+    retrotest_fit: Not valid as a time series or credibility label in its present form.
+    role: description_only
+    reason: Useful for channel discovery and case descriptions, not as approved evidence corpus.
+    evidence_urls: []

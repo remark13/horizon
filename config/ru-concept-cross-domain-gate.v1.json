@@ -1,0 +1,22 @@
+{
+  "version": "ru-concept-cross-domain-gate-v1",
+  "registered_before_model_run": true,
+  "source_cases": "config/goal-cross-domain-compound-pilot.v1.json",
+  "source_cases_sha256": "a9eff3e3a0aa5bf9eb97fae5b0717d3baf2ddb8533861d5b3bf43e960f182263",
+  "arxiv_index_manifest_sha256": "0a1f8f7801bdbd8d1db19400628cb7f32b02ca90b1ed9848096a915ec6684178",
+  "source_period": {"date_from": "2021-09-01", "as_of_date_exclusive": "2026-09-01"},
+  "model": "qwen3.5:9b",
+  "prompt_version": "v2",
+  "case_count": 22,
+  "decision_gate_for_optional_product_suggestion": {
+    "parsed_minimum": 20,
+    "source_span_exact_minimum": 20,
+    "structurally_index_executable_minimum": 16,
+    "negative_controls_with_nonzero_arxiv_matches_maximum": 0,
+    "critical_semantic_errors_maximum": 0,
+    "critical_semantic_error_definition": "A mandatory technology, material, application or qualifier from the Russian request is omitted, reversed, or replaced by a different claim in all proposed groups.",
+    "semantic_review_required_for_all_cases": true,
+    "independent_accuracy_claim_allowed": false
+  },
+  "interpretation": "This checks whether local-model English concept suggestions merit a separate opt-in user trial. Structural validity or literal retrieval counts alone cannot prove relevance or weak-signal detection. No proposal is executed in the working scout flow by this test."
+}

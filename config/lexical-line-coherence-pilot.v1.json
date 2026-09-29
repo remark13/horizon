@@ -1,0 +1,32 @@
+{
+  "version": "lexical-line-coherence-pilot-v1",
+  "annotation": "evaluation/current-triage-composition.v0.4.10.json",
+  "annotation_sha256": "b535e1197c81185abf271d38fc7133fad8670b4119e82cf3545a00a0f789f07b",
+  "evidence": "reports/generated/ai-data-selection-current-p1-v0410-primary-unknown-triage-evidence-r1-2026-09-20.json",
+  "evidence_sha256": "222b6ad114c5dd59b9aa1552195fab9ed16c479dfcc14ea29b3570a2aea6471a",
+  "bas_composition": "outputs/scout-composition-review-bas-full-arxiv-2026-09-26-v1.json",
+  "bas_composition_sha256": "5eadfb9154deac9d69dedbafa6ff29540bb885e9e045caf551b51807201d6fe3",
+  "representation": {
+    "method": "tfidf_title_x3_abstract_x1",
+    "ngram_range": [1, 2],
+    "stop_words": "english",
+    "sublinear_tf": true,
+    "idf_corpus": "all_15_annotated_compositions_without_labels"
+  },
+  "target": "keep_after_outlier_removal_versus_split_or_reject",
+  "development_partition": "development",
+  "holdout_partition": "internal_holdout",
+  "candidate_features": ["mean_pairwise", "pairwise_q10", "nearest_neighbor_q10"],
+  "selection": "maximize_development_balanced_accuracy_then_fewest_errors_then_feature_name",
+  "acceptance": {
+    "minimum_internal_holdout_balanced_accuracy": 0.8,
+    "maximum_false_coherent_on_reject": 0,
+    "minimum_development_class_size": 4
+  },
+  "production_use": false,
+  "limitations": [
+    "Single developer annotator, not independent expert gold",
+    "The same saved AI corpus provided the earlier composition exploration",
+    "BAS cases are qualitative cross-domain probes, not labeled accuracy"
+  ]
+}

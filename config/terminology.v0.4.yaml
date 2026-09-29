@@ -1,0 +1,101 @@
+version: "lexical-0.4-experimental"
+ngram_lengths: [2, 3]
+min_document_support: 2
+max_candidates: 100
+max_singletons: 25
+max_contexts_per_phrase: 3
+context_radius_chars: 120
+max_token_chars: 40
+max_corpus_works: 20000
+max_document_chars: 100000
+stopwords:
+  - a
+  - an
+  - the
+  - of
+  - in
+  - "on"
+  - for
+  - to
+  - by
+  - with
+  - from
+  - and
+  - or
+  - is
+  - are
+  - was
+  - were
+  - be
+  - we
+  - our
+  - this
+  - these
+  - that
+  - those
+  - it
+  - its
+  - which
+  - using
+  - used
+  - use
+  - propose
+  - proposed
+  - paper
+  - study
+  - results
+  - demonstrate
+  - as
+  - such
+  - has
+  - have
+  - been
+  - do
+  - does
+  - not
+  - can
+  - could
+  - also
+  - only
+  - well
+  - based
+  - focus
+  - experiments
+  - than
+  - more
+  - most
+  - both
+  - through
+  - about
+  - each
+  - all
+  - any
+  - their
+  - they
+  - them
+  - into
+  - between
+  - over
+  - under
+  - via
+  - show
+  - approach
+  - method
+  - methods
+  - и
+  - в
+  - на
+  - для
+  - по
+  - с
+  - из
+  - мы
+  - это
+  - статьи
+  - статья
+  - метод
+  - результаты
+interpretation: >
+  Повторяющиеся буквальные сочетания, не автоматически выделенные понятия
+  и не детектор слабых сигналов. Нет скрытого целевого словаря, объединения
+  синонимов, лемматизации или доказательства новизны вне загруженного корпуса.

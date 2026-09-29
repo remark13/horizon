@@ -1,0 +1,22 @@
+version: external-sources-0.4.33
+extends: external-sources.v0.4.32.yaml
+scientific_score_modified: false
+
+europe_pmc:
+  source: europe_pmc
+  role: bibliographic_enrichment_only
+  search_url: https://www.ebi.ac.uk/europepmc/webservices/rest/search
+  max_records: 50
+  source_page_size: 100
+  max_response_bytes: 6000000
+  credentials: none
+  evidence_urls:
+    - https://europepmc.org/RestfulWebService
+    - https://europepmc.org/help
+  limitation: >-
+    Europe PMC overlaps with OpenAlex, PubMed and preprint sources, so a returned
+    record is not an independent publication until DOI/PMID/PMCID and version
+    identity are reconciled. The capped relevance-ranked page is not an exhaustive
+    topic corpus. Current indexed metadata cannot be used as a historical snapshot;
+    article dates do not prove when the record became searchable. Patents and books
+    are excluded, but topic relevance still requires review.

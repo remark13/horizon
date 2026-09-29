@@ -1,0 +1,49 @@
+# Exact dependency versions were captured on Linux arm64 / Python 3.12.
+# A fresh amd64 build remains a separate portability check; no emulation forced.
+ARG HORIZON_BASE_IMAGE=python:3.12-slim@sha256:78387bc3881b8273120a12ebe6c1ab22b018ccc2c9adf565ae1ac9b536e184ea
+FROM ${HORIZON_BASE_IMAGE}
+
+ARG HORIZON_INSTALL_DEPENDENCIES=1
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PIP_DISABLE_PIP_VERSION_CHECK=1 \
+    HF_HOME=/models
+
+# Distinct from the development image's /app, including when its dependency
+# layers are reused for a documented offline source/empty-database smoke test.
+WORKDIR /opt/horizon
+COPY infra/constraints.docker-arm64-py312.txt /tmp/horizon-constraints.txt
+COPY pyproject.toml ./
+COPY saia/__init__.py ./saia/
+
+# Normal builds install all dependencies. Setting the flag to 0 is only for
+# reusing an already verified dependency image, never a fresh-install claim.
+RUN if [ "$HORIZON_INSTALL_DEPENDENCIES" = "1" ]; then \
+      apt-get update \
+      && apt-get install -y --no-install-recommends build-essential \
+      && rm -rf /var/lib/apt/lists/* \
+      && pip install --no-cache-dir --index-url https://download.pytorch.org/whl/cpu \
+           -c /tmp/horizon-constraints.txt torch==2.14.0+cpu \
+      && pip install --no-cache-dir -c /tmp/horizon-constraints.txt -e '.[dev,db,web,bulk,ml]'; \
+    elif [ "$HORIZON_INSTALL_DEPENDENCIES" = "0" ]; then \
+      pip install --no-deps --no-build-isolation -e .; \
+    else \
+      printf '%s\n' 'HORIZON_INSTALL_DEPENDENCIES must be 0 or 1' >&2; exit 2; \
+    fi
+
+COPY saia ./saia
+COPY config ./config
+COPY migrations ./migrations
+COPY scripts ./scripts
+COPY tests ./tests
+COPY infra ./infra
+COPY data/reference ./data/reference
+COPY docs/repository ./docs/repository
+COPY README.md compose.yaml .env.repository.example .env.example .gitignore .dockerignore ./
+
+RUN mkdir -p data/raw data/processed reports/generated \
+    && cp docs/repository/*.md ./ \
+    && python -m saia.runtime_constraints --constraints /tmp/horizon-constraints.txt \
+    && python -c "from saia.public_signals import search; assert search(limit=1)['records']"
+
+CMD ["python", "-m", "saia.server"]

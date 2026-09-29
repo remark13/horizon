@@ -1,0 +1,39 @@
+{
+  "version": "free-ru-query-bridge-pilot-v1",
+  "frozen_before_run": true,
+  "purpose": "Diagnostic comparison of local translation candidates, not automatic execution or relevance validation",
+  "date_from": "2021-09-01",
+  "as_of_date": "2026-09-01",
+  "cases": [
+    {
+      "role": "inside",
+      "query_ru": "малые модульные реакторы",
+      "reference_en": "small modular reactors"
+    },
+    {
+      "role": "boundary",
+      "query_ru": "нейроморфные чипы для периферийных устройств",
+      "reference_en": "neuromorphic chips for edge devices"
+    },
+    {
+      "role": "outside",
+      "query_ru": "акустическая левитация лекарственных микрокапсул",
+      "reference_en": "acoustic levitation of drug microcapsules"
+    },
+    {
+      "role": "outside",
+      "query_ru": "ферментативная переработка литий-ионных аккумуляторов",
+      "reference_en": "enzymatic recycling of lithium-ion batteries"
+    },
+    {
+      "role": "outside",
+      "query_ru": "фотонные нейросети для медицинской визуализации",
+      "reference_en": "photonic neural networks for medical imaging"
+    },
+    {
+      "role": "negative_control",
+      "query_ru": "вечный двигатель на основе графена",
+      "reference_en": "graphene-based perpetual motion machine"
+    }
+  ]
+}

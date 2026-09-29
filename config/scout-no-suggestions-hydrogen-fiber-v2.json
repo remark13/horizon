@@ -1,0 +1,23 @@
+{
+  "version": "scout-no-suggestions-slo-pilot-v2",
+  "purpose": "Frozen third free Russian query outside exact branch profiles; retrieval and latency diagnostic",
+  "date_from": "2021-09-01",
+  "as_of_date": "2026-09-01",
+  "limit_per_source": 25,
+  "max_results": 300,
+  "openalex_collection_mode": "live_with_cache_fallback",
+  "cases": [
+    {
+      "case_id": "outside-hydrogen-pipeline-fiber",
+      "role": "outside_priority_map",
+      "query_ru": "Оптические волокна для обнаружения утечек водорода в трубопроводах"
+    }
+  ],
+  "limits": {
+    "ui_empty_suggestions_route_only": true,
+    "no_manual_english_translation": true,
+    "one_case_not_p50_or_p95": true,
+    "zero_works_not_absence_of_science": true,
+    "never_treat_bounded_openalex_page_as_full_time_series": true
+  }
+}

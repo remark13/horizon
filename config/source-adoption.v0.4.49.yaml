@@ -1,0 +1,26 @@
+version: source-adoption-registry-0.4.49
+extends: source-adoption.v0.4.48.yaml
+reviewed_at: '2026-09-28'
+scientific_score_uses_external_attention: false
+sources: []
+source_overrides:
+  aist_press_rss:
+    decision: adapt
+    role: news_attention_only
+    data: Original Japanese research-release titles, official links and reported publication dates from one current AIST RSS feed. No article bodies, summaries, images, downloads or model input.
+    temporal_coverage: Short current RSS window, not a complete history. Research-release paths only; events, missing dates and future publication dates excluded. An empty English feed is not zero research.
+    regional_coverage: Japanese institutional research announcements from AIST; publisher origin is not author location, adoption or all Asian research.
+    access: Official public Japanese RSS URL discovered on the AIST homepage. Single bounded HTTPS GET, no account or key; local personal reading only.
+    credentials: None for the tested feed. No public or commercial deployment permission or notification is claimed.
+    cost: Free public RSS reading. Small local metadata cache only, not a bulk corpus or paid service.
+    license_status: Adapted for the user's explicitly personal non-commercial local research reader. Preserve original titles, dates, links and attribution; do not republish the feed or copy articles/images. AIST permits non-commercial unaltered RSS display and requests notification for a new information service. Public launch, redistribution, model use, training and bulk reuse are not authorized by this adapter.
+    reproducibility: Fixed official feed URL, SHA of response, publication dates, explicit literal/Japanese alias matches and retrieval time retained. No story bodies stored.
+    retrotest_fit: Current RSS cannot prove availability in the past or complete publication counts; not historical ground truth.
+    reason: Commercial suitability no longer excludes this source under the user's personal-use instruction. A working Japanese feed provides primary materials/chemistry/health research leads; the English feed answered empty. This is a local reader, not a commercial information service or independent signal confirmation.
+    usage_scope: personal_research
+    public_republication_allowed: false
+    model_input_allowed: false
+    evidence_urls:
+      - https://www.aist.go.jp/
+      - https://www.aist.go.jp/ctl/module/mid/27/tid/75/rss.php
+      - https://www.aist.go.jp/aist_e/terms_of_use/rss/

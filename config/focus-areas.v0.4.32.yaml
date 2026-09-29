@@ -1,0 +1,203 @@
+version: focus-areas-0.4.32
+status: draft_controlled_profiles
+updated_at: '2026-09-21'
+policy:
+  scientific_sources: [openalex, arxiv]
+  ui_exposed_as_fixed_choices: false
+  user_query_may_be_narrowed_automatically: false
+  internal_uses: [query_vocabulary, source_routing, cross_domain_evaluation]
+  profile_is_gold_label: false
+  profile_is_ready_query: false
+  manual_query_approval_required: true
+  exclusions_are_suggestions_only: true
+  external_evidence_modifies_scientific_score: false
+
+profiles:
+  - id: artificial-intelligence
+    name_ru: Искусственный интеллект
+    short_name_ru: ИИ
+    role: primary_and_cross_cutting
+    mission_ru: Развитие технологий искусственного интеллекта как самостоятельного направления и как сквозного инструмента для остальных приоритетных отраслей.
+    starter_query_en: artificial intelligence
+    aliases_ru: [искусственный интеллект, машинное обучение, интеллектуальные системы]
+    aliases_en: [artificial intelligence, machine learning, intelligent systems]
+    exclusions_en: [artificial insemination]
+    enrichment_sources: [huggingface_hub, deps_dev, epo_ops, ukri_gtr, eu_funding_tenders, gdelt_doc_2_0]
+    source_note_ru: arXiv хорошо покрывает быстро меняющиеся направления ИИ; OpenAlex нужен для более широкого публикационного и цитатного контекста.
+    subareas:
+      - {id: foundation-models, name_ru: Фундаментальные и большие языковые модели, query_en: foundation models large language models}
+      - {id: ai-agents, name_ru: ИИ-агенты и многоагентные системы, query_en: agentic artificial intelligence multi-agent systems}
+      - {id: multimodal-ai, name_ru: Мультимодальный ИИ, query_en: multimodal artificial intelligence vision language models}
+      - {id: edge-ai, name_ru: Периферийный и встроенный ИИ, query_en: edge AI embedded machine learning tinyML}
+      - {id: trustworthy-ai, name_ru: 'Надёжный, объяснимый и безопасный ИИ', query_en: trustworthy explainable safe artificial intelligence}
+      - {id: privacy-preserving-ai, name_ru: Конфиденциальное и федеративное обучение, query_en: privacy preserving machine learning federated learning}
+      - {id: neuro-symbolic-ai, name_ru: Нейросимволический ИИ и рассуждение, query_en: neuro-symbolic artificial intelligence machine reasoning}
+      - {id: ai-compute, name_ru: Вычислительные архитектуры для ИИ, query_en: AI accelerators neuromorphic computing}
+
+  - id: new-materials-and-chemistry
+    name_ru: Новые материалы и химия
+    short_name_ru: Материалы и химия
+    role: primary
+    mission_ru: Достижение технологической независимости в производстве химической и биотехнологической продукции, новых материалов, редких и редкоземельных металлов.
+    starter_query_en: advanced materials chemistry industrial biotechnology
+    aliases_ru: [новые материалы, специальная химия, промышленная биотехнология, редкоземельные металлы]
+    aliases_en: [advanced materials, specialty chemicals, industrial biotechnology, rare earth elements]
+    exclusions_en: [teaching materials, educational materials]
+    enrichment_sources: [epo_ops, ukri_gtr, eu_funding_tenders, gdelt_doc_2_0]
+    source_note_ru: OpenAlex является основным широким источником; arXiv полезен для физики материалов и вычислительного материаловедения, но не покрывает всю химию.
+    subareas:
+      - {id: computational-materials, name_ru: Вычислительное материаловедение и ИИ для материалов, query_en: computational materials science materials informatics}
+      - {id: composite-materials, name_ru: Композиционные и сверхпрочные материалы, query_en: advanced composite high strength materials}
+      - {id: two-dimensional-materials, name_ru: Двумерные материалы и наноструктуры, query_en: two-dimensional materials nanostructures}
+      - {id: metamaterials, name_ru: Метаматериалы и программируемые материалы, query_en: metamaterials programmable materials}
+      - {id: catalysts, name_ru: Катализаторы и химические процессы, query_en: advanced catalysts chemical process intensification}
+      - {id: rare-earth-processing, name_ru: 'Извлечение, разделение и переработка редкоземельных металлов', query_en: rare earth extraction separation recycling}
+      - {id: biobased-materials, name_ru: Биополимеры и биотехнологические материалы, query_en: bio-based polymers industrial biotechnology materials}
+      - {id: specialty-chemicals, name_ru: Малотоннажная и специальная химия, query_en: specialty chemicals fine chemical manufacturing}
+
+  - id: production-and-automation
+    name_ru: Средства производства и автоматизации
+    short_name_ru: Производство и автоматизация
+    role: primary
+    mission_ru: Обеспечение технологической независимости в сфере высокотехнологичного оборудования и промышленной роботизации.
+    starter_query_en: advanced manufacturing industrial automation robotics
+    aliases_ru: [средства производства, промышленная автоматизация, промышленная роботизация, высокотехнологичное оборудование]
+    aliases_en: [advanced manufacturing, industrial automation, industrial robotics, production equipment]
+    exclusions_en: [office automation, marketing automation]
+    enrichment_sources: [epo_ops, deps_dev, ukri_gtr, eu_funding_tenders, gdelt_doc_2_0]
+    source_note_ru: OpenAlex даёт основной междисциплинарный контур; arXiv полезен для робототехники, управления, машинного зрения и цифровых двойников.
+    subareas:
+      - {id: industrial-robotics, name_ru: Промышленные роботы и робототехнические комплексы, query_en: industrial robotics robotic manufacturing systems}
+      - {id: collaborative-robots, name_ru: Коллаборативная робототехника, query_en: collaborative robots human robot collaboration manufacturing}
+      - {id: machine-tools, name_ru: Станкостроение и прецизионная обработка, query_en: advanced machine tools precision machining}
+      - {id: additive-manufacturing, name_ru: Аддитивное производство, query_en: additive manufacturing industrial 3D printing}
+      - {id: digital-twins, name_ru: Промышленные цифровые двойники, query_en: industrial digital twins manufacturing}
+      - {id: predictive-maintenance, name_ru: Предиктивное обслуживание оборудования, query_en: predictive maintenance industrial equipment}
+      - {id: industrial-machine-vision, name_ru: Машинное зрение для производства, query_en: industrial machine vision quality inspection}
+      - {id: industrial-control, name_ru: Промышленные системы управления и приводная техника, query_en: industrial control systems motion control drives}
+
+  - id: nuclear-and-energy
+    name_ru: Новые атомные и энергетические технологии
+    short_name_ru: Атомные и энергетические технологии
+    role: primary
+    mission_ru: Обеспечение мирового лидерства в атомных технологиях и технологического суверенитета в новых энергетических технологиях.
+    starter_query_en: advanced nuclear energy technologies
+    aliases_ru: [атомные технологии, новая энергетика, энергетические технологии]
+    aliases_en: [advanced nuclear technology, new energy technologies, advanced energy systems]
+    exclusions_en: [human energy, organizational energy]
+    enrichment_sources: [epo_ops, ukri_gtr, eu_funding_tenders, gdelt_doc_2_0]
+    source_note_ru: OpenAlex обеспечивает широкий охват; arXiv особенно полезен для физики реакторов, плазмы, материалов, накопителей и энергетических систем.
+    subareas:
+      - {id: small-modular-reactors, name_ru: Малые модульные реакторы, query_en: small modular nuclear reactors microreactors}
+      - {id: advanced-reactors, name_ru: Реакторы нового поколения, query_en: generation IV advanced nuclear reactors}
+      - {id: nuclear-fuel-cycle, name_ru: Замкнутый ядерный топливный цикл, query_en: closed nuclear fuel cycle reprocessing}
+      - {id: fusion-energy, name_ru: Управляемый термоядерный синтез, query_en: fusion energy plasma confinement}
+      - {id: hydrogen, name_ru: Водородные технологии, query_en: low carbon hydrogen production storage}
+      - {id: long-duration-storage, name_ru: Долговременное накопление энергии, query_en: long duration energy storage}
+      - {id: power-electronics, name_ru: Силовая электроника и преобразователи, query_en: wide bandgap power electronics energy conversion}
+      - {id: smart-grids, name_ru: Интеллектуальные и устойчивые энергосистемы, query_en: smart grids resilient energy systems}
+
+  - id: transport-mobility
+    name_ru: Промышленное обеспечение транспортной мобильности
+    short_name_ru: Транспортная мобильность
+    role: primary
+    mission_ru: Кратный рост объёмов производства основной гражданской авиатехники, судов и морской техники, электромобилей.
+    starter_query_en: advanced aircraft shipbuilding electric vehicles manufacturing
+    aliases_ru: [гражданская авиатехника, судостроение, морская техника, электромобили]
+    aliases_en: [civil aviation technology, shipbuilding, marine engineering, electric vehicles]
+    exclusions_en: [social mobility, human mobility prediction]
+    enrichment_sources: [epo_ops, ukri_gtr, eu_funding_tenders, gdelt_doc_2_0]
+    source_note_ru: Направление нужно анализировать по отдельным транспортным сегментам; один широкий запрос создаёт смешение авиации, флота и автомобилей.
+    subareas:
+      - {id: aircraft-propulsion, name_ru: Авиационные двигатели и гибридная тяга, query_en: civil aircraft propulsion hybrid electric aviation}
+      - {id: aircraft-structures, name_ru: Конструкции и материалы гражданских самолётов, query_en: civil aircraft structures aerospace composites}
+      - {id: avionics, name_ru: Авионика и бортовые системы, query_en: civil aircraft avionics onboard systems}
+      - {id: shipbuilding, name_ru: Цифровое и модульное судостроение, query_en: digital modular shipbuilding}
+      - {id: marine-propulsion, name_ru: Судовые энергетические установки, query_en: marine propulsion low emission ship power}
+      - {id: autonomous-vessels, name_ru: Автономные и дистанционно управляемые суда, query_en: autonomous ships remotely operated vessels}
+      - {id: electric-vehicle-platforms, name_ru: Платформы и силовые установки электромобилей, query_en: electric vehicle platforms electric powertrain}
+      - {id: charging-infrastructure, name_ru: Зарядная инфраструктура и управление энергией транспорта, query_en: electric vehicle charging infrastructure energy management}
+
+  - id: unmanned-aircraft-systems
+    name_ru: Беспилотные авиационные системы
+    short_name_ru: БАС
+    role: primary
+    mission_ru: Обеспечение технологической независимости и формирование новых рынков в сфере беспилотных авиационных систем.
+    starter_query_en: unmanned aircraft systems autonomous aerial vehicles
+    aliases_ru: [беспилотные авиационные системы, беспилотные летательные аппараты, дроны]
+    aliases_en: [unmanned aircraft systems, unmanned aerial vehicles, autonomous drones]
+    exclusions_en: [underwater vehicles, ground vehicles]
+    enrichment_sources: [epo_ops, ukri_gtr, eu_funding_tenders, gdelt_doc_2_0]
+    source_note_ru: arXiv хорошо покрывает навигацию, управление, восприятие и рои; OpenAlex нужен для авиационной техники, связи, регулирования и отраслевых применений.
+    subareas:
+      - {id: uas-airframes, name_ru: Конструкции и материалы БАС, query_en: unmanned aircraft airframe design materials}
+      - {id: uas-propulsion, name_ru: Двигатели и энергетика БАС, query_en: unmanned aircraft propulsion energy systems}
+      - {id: autonomous-flight-control, name_ru: Автономное управление полётом, query_en: autonomous flight control unmanned aircraft}
+      - {id: gnss-denied-navigation, name_ru: Навигация без спутникового сигнала, query_en: GNSS denied navigation unmanned aerial vehicles}
+      - {id: detect-and-avoid, name_ru: Обнаружение препятствий и предотвращение столкновений, query_en: detect and avoid unmanned aircraft}
+      - {id: drone-swarms, name_ru: Рои беспилотных аппаратов, query_en: cooperative drone swarms multi-UAV systems}
+      - {id: uas-communications, name_ru: Связь и управление БАС, query_en: unmanned aircraft communication command control}
+      - {id: uas-certification, name_ru: Безопасность и сертификация БАС, query_en: unmanned aircraft safety certification airspace integration}
+
+  - id: food-security
+    name_ru: Технологическое обеспечение продовольственной безопасности
+    short_name_ru: Продовольственная безопасность
+    role: primary
+    mission_ru: Технологическое переоснащение аграрного сектора, развитие генетики и селекции, увеличение выпуска ветеринарных вакцин, препаратов, ферментов, пищевых и кормовых добавок.
+    starter_query_en: agricultural technology food security biotechnology
+    aliases_ru: [агротехнологии, сельскохозяйственная генетика, ветеринарная биотехнология, пищевые технологии]
+    aliases_en: [agricultural technology, agricultural genetics, veterinary biotechnology, food technology]
+    exclusions_en: [food insecurity survey, household food security questionnaire]
+    enrichment_sources: [epo_ops, nih_reporter, ukri_gtr, eu_funding_tenders, gdelt_doc_2_0]
+    source_note_ru: OpenAlex является основным источником; arXiv преимущественно покрывает вычислительные методы, роботизацию и машинное зрение в агросекторе.
+    subareas:
+      - {id: precision-agriculture, name_ru: Точное земледелие и агророботизация, query_en: precision agriculture agricultural robotics}
+      - {id: crop-genomics, name_ru: Геномика и селекция сельскохозяйственных культур, query_en: crop genomics molecular breeding}
+      - {id: gene-editing-agriculture, name_ru: Редактирование генома в сельском хозяйстве, query_en: genome editing crops livestock agriculture}
+      - {id: animal-breeding, name_ru: Генетика и селекция сельскохозяйственных животных, query_en: livestock genomics animal breeding}
+      - {id: veterinary-vaccines, name_ru: Ветеринарные вакцины и препараты, query_en: veterinary vaccines biopharmaceuticals}
+      - {id: feed-additives, name_ru: Кормовые ферменты и добавки, query_en: feed enzymes animal nutrition additives}
+      - {id: alternative-proteins, name_ru: Альтернативные белки и клеточное сельское хозяйство, query_en: alternative proteins cellular agriculture precision fermentation}
+      - {id: food-biopreservation, name_ru: Биоконсервация и безопасность пищевых продуктов, query_en: food biopreservation food safety biotechnology}
+
+  - id: health-preservation
+    name_ru: Новые технологии сбережения здоровья
+    short_name_ru: Сбережение здоровья
+    role: primary
+    mission_ru: Повышение эффективности медицинских исследований и разработок, развитие превентивной медицины и технологий долголетия, обеспечение технологического суверенитета в производстве лекарств, клеточных продуктов, тканевой инженерии и медицинских изделий.
+    starter_query_en: preventive medicine longevity biomedical technologies
+    aliases_ru: [сбережение здоровья, превентивная медицина, технологии долголетия, биомедицинские технологии]
+    aliases_en: [health preservation, preventive medicine, longevity technology, biomedical technology]
+    exclusions_en: [healthcare policy survey, wellness marketing]
+    enrichment_sources: [nih_reporter, epo_ops, ukri_gtr, eu_funding_tenders, gdelt_doc_2_0]
+    source_note_ru: OpenAlex и NIH RePORTER особенно важны; arXiv хорошо покрывает медицинский ИИ и вычислительную биологию, но не заменяет биомедицинские индексы.
+    subareas:
+      - {id: drug-discovery, name_ru: Поиск и проектирование лекарств, query_en: drug discovery molecular design}
+      - {id: biopharmaceutical-manufacturing, name_ru: Биофармацевтическое производство, query_en: biopharmaceutical manufacturing bioprocessing}
+      - {id: cell-gene-therapy, name_ru: Клеточная и генная терапия, query_en: cell therapy gene therapy manufacturing}
+      - {id: tissue-engineering, name_ru: Тканевая инженерия и биопечать, query_en: tissue engineering bioprinting regenerative medicine}
+      - {id: medical-devices, name_ru: Новые медицинские изделия и имплантаты, query_en: advanced medical devices smart implants}
+      - {id: biomarkers, name_ru: Биомаркеры и ранняя диагностика, query_en: biomarkers early diagnosis liquid biopsy}
+      - {id: preventive-medicine, name_ru: Персонализированная превентивная медицина, query_en: personalized preventive medicine risk prediction}
+      - {id: longevity, name_ru: Биология старения и технологии долголетия, query_en: aging biology longevity interventions}
+
+  - id: multi-satellite-constellations
+    name_ru: Развитие многоспутниковой орбитальной группировки
+    short_name_ru: Многоспутниковые группировки
+    role: primary
+    mission_ru: Модернизация космической отрасли путём создания многоспутниковой орбитальной группировки.
+    starter_query_en: multi-satellite orbital constellations
+    aliases_ru: [многоспутниковая группировка, спутниковые созвездия, малые космические аппараты]
+    aliases_en: [satellite constellations, multi-satellite systems, small satellite constellations]
+    exclusions_en: [molecular orbital, electron orbital]
+    enrichment_sources: [epo_ops, ukri_gtr, eu_funding_tenders, gdelt_doc_2_0]
+    source_note_ru: arXiv полезен для связи, управления, навигации и бортовой обработки; OpenAlex расширяет покрытие космической техники и дистанционного зондирования.
+    subareas:
+      - {id: smallsat-platforms, name_ru: Платформы малых спутников, query_en: small satellite platforms CubeSat technology}
+      - {id: intersatellite-links, name_ru: Межспутниковая лазерная и радиосвязь, query_en: inter-satellite links optical satellite communication}
+      - {id: formation-flying, name_ru: Групповое управление и формационный полёт, query_en: satellite formation flying constellation control}
+      - {id: onboard-processing, name_ru: Бортовая обработка данных и ИИ, query_en: onboard satellite processing artificial intelligence}
+      - {id: distributed-earth-observation, name_ru: Распределённое дистанционное зондирование, query_en: distributed earth observation satellite constellation}
+      - {id: satellite-propulsion, name_ru: Двигательные установки малых аппаратов, query_en: small satellite propulsion electric propulsion}
+      - {id: space-situational-awareness, name_ru: Мониторинг орбитальной обстановки, query_en: space situational awareness satellite constellation}
+      - {id: constellation-ground-segment, name_ru: Наземный сегмент и управление группировкой, query_en: satellite constellation ground segment operations}

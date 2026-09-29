@@ -1,0 +1,10 @@
+{
+  "version": "card-title-subline-pilot-v1",
+  "source": "outputs/scout-composition-review-bas-full-arxiv-2026-09-26-v1.json",
+  "source_sha256": "5eadfb9154deac9d69dedbafa6ff29540bb885e9e045caf551b51807201d6fe3",
+  "cards_to_process": 15,
+  "min_title_anchored_works": 3,
+  "max_proposals_per_card": 3,
+  "production_use": false,
+  "interpretation": "Title-grounded subline proposals, not validated weak signals"
+}

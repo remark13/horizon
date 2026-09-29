@@ -1,0 +1,40 @@
+{
+  "meta": {
+    "search_id": "fixture-search",
+    "total": 12,
+    "offset": 0,
+    "limit": 2
+  },
+  "results": [
+    {
+      "appl_id": 10000001,
+      "project_num": "1R01AI000001-01",
+      "core_project_num": "R01AI000001",
+      "project_title": "Agentic artificial intelligence for clinical coordination",
+      "abstract_text": "A bounded synthetic fixture abstract.",
+      "project_start_date": "2026-06-01T00:00:00",
+      "project_end_date": "2029-05-31T00:00:00",
+      "award_notice_date": "2026-05-15T00:00:00",
+      "award_amount": 450000,
+      "organization": {"org_name": "Example University", "org_country": "UNITED STATES"},
+      "project_detail_url": "https://reporter.nih.gov/project-details/10000001",
+      "agency_ic_admin": {"abbreviation": "NIAID", "name": "Example Institute"},
+      "principal_investigators": [{"full_name": "Ada Example"}]
+    },
+    {
+      "appl_id": 10000002,
+      "project_num": "5R01AI000001-02",
+      "core_project_num": "R01AI000001",
+      "project_title": "Agentic artificial intelligence continuation",
+      "abstract_text": "A second project-year record from the same core project.",
+      "project_start_date": "2026-07-01T00:00:00",
+      "project_end_date": "2029-06-30T00:00:00",
+      "award_notice_date": "2026-06-15T00:00:00",
+      "award_amount": 500000,
+      "organization": {"org_name": "Example University", "org_country": "UNITED STATES"},
+      "project_detail_url": "https://reporter.nih.gov/project-details/10000002",
+      "agency_ic_admin": {"abbreviation": "NIAID", "name": "Example Institute"},
+      "principal_investigators": [{"full_name": "Ada Example"}]
+    }
+  ]
+}

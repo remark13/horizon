@@ -1,0 +1,14 @@
+[
+  {
+    "id": "example/agentic-dataset",
+    "author": "example",
+    "createdAt": "2026-03-01T10:00:00.000Z",
+    "lastModified": "2026-08-01T10:00:00.000Z",
+    "downloads": 300,
+    "likes": 4,
+    "gated": false,
+    "sha": "def456",
+    "tags": ["agents"],
+    "cardData": {"pretty_name": "Agentic Dataset"}
+  }
+]

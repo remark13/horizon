@@ -1,0 +1,41 @@
+{
+  "version": "grounded-task-facets-pilot-v1",
+  "bas_source": "outputs/scout-composition-review-bas-full-arxiv-2026-09-26-v1.json",
+  "bas_source_sha256": "5eadfb9154deac9d69dedbafa6ff29540bb885e9e045caf551b51807201d6fe3",
+  "cross_source": "evaluation/goal-cross-domain-relevance-v2.packet.json",
+  "cross_source_sha256": "25135d75e21d3827b4403b58ba4d65b9f698f2d9a6cf18228b89b24df26de66f",
+  "model": "qwen3.5:9b",
+  "model_role": "development_diagnostic_only",
+  "allowed_task_families": [
+    "uav_self_localization", "aerial_object_localization",
+    "uav_mission_search_planning", "uav_navigation_path_planning",
+    "robotic_art_navigation", "llm_compression",
+    "agent_identity_access_control", "composite_material_design",
+    "breath_biometrics", "other_or_unclear"
+  ],
+  "rows": [
+    {"source": "bas", "id": "195891", "developer_task_family": "uav_self_localization"},
+    {"source": "bas", "id": "195866", "developer_task_family": "aerial_object_localization"},
+    {"source": "bas", "id": "195682", "developer_task_family": "uav_self_localization"},
+    {"source": "bas", "id": "195509", "developer_task_family": "uav_self_localization"},
+    {"source": "bas", "id": "195733", "developer_task_family": "uav_mission_search_planning"},
+    {"source": "bas", "id": "195653", "developer_task_family": "uav_mission_search_planning"},
+    {"source": "bas", "id": "195644", "developer_task_family": "uav_navigation_path_planning"},
+    {"source": "bas", "id": "195572", "developer_task_family": "robotic_art_navigation"},
+    {"source": "cross", "id": "review-4c43edb3f4e021e9b21d2ae7", "developer_task_family": "llm_compression"},
+    {"source": "cross", "id": "review-7cd669cdb0141eb825ae9e35", "developer_task_family": "agent_identity_access_control"},
+    {"source": "cross", "id": "review-faecfb0364424ecb960cef7d", "developer_task_family": "composite_material_design"},
+    {"source": "cross", "id": "review-0706e304ead95201ba3356de", "developer_task_family": "breath_biometrics"}
+  ],
+  "gate": {
+    "valid_grounded_json_min": 11,
+    "task_family_agreement_min": 10,
+    "critical_errors_max": 0,
+    "critical_error_definition": "aerial_object_localization_as_uav_self_localization_or_robotic_art_navigation_as_uav_mission_search_planning"
+  },
+  "limitations": [
+    "Task families and labels were written by one developer after reading titles and abstracts",
+    "Closed-set categories make this easier than an arbitrary new user query",
+    "No result may enter production automatically from this pilot"
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "version": "robotic-narrow-line-temporal-plan-v1",
+  "purpose": "Measure three post-discovery technical-line phrase families against one complete pinned arXiv robotic-manipulation parent; diagnostic, not independent detection",
+  "source": {
+    "index_manifest": "data/processed/arxiv-trigram-index-full-v4/manifest.json",
+    "index_manifest_sha256": "0a1f8f7801bdbd8d1db19400628cb7f32b02ca90b1ed9848096a915ec6684178",
+    "prior_parent_plan": "config/broad-title-phrase-pilot-robotic-manipulation-v1.json",
+    "prior_parent_plan_sha256": "fe4a059fb85a0754329a5382c03de3e82fcaec91236290064133ea3d9e30f78e",
+    "prior_parent_report": "outputs/broad-title-phrase-robotic-manipulation-2026-09-26-v3.json",
+    "prior_parent_report_sha256": "3a0f0d6d8111a6eff5ddb48bffbf209d951e23a47edb25fe58c762e27a7cef04"
+  },
+  "period": {"date_from": "2016-09-01", "as_of_date": "2026-09-01", "window": "september_to_august"},
+  "matching_version": "orthographic-separators-v1",
+  "alternative_background_category": "cs.RO",
+  "parent_terms": [
+    "robotic manipulation", "robot manipulation", "robotic grasping",
+    "robot grasping", "robot arm", "robot arms", "robotic arm",
+    "robotic arms", "robot manipulator", "robotic manipulator"
+  ],
+  "lines": [
+    {
+      "id": "world-action-models-in-robotic-manipulation",
+      "name_ru": "World-action models в роботизированных манипуляциях",
+      "role": "rapid-growth-retrospective-control-not-confirmed-current-weak-signal",
+      "terms": ["world action model", "world action models", "world-action model", "world-action models", "world action modeling", "world-action modeling"]
+    },
+    {
+      "id": "diffusion-policies-in-robotic-manipulation",
+      "name_ru": "Диффузионные политики для манипуляций робота",
+      "role": "established-method-comparison-not-confirmed-current-weak-signal",
+      "terms": ["diffusion policy", "diffusion policies", "diffusion-based policy", "diffusion based policy"]
+    },
+    {
+      "id": "tactile-sensing-in-robotic-manipulation",
+      "name_ru": "Тактильное восприятие при манипуляциях робота",
+      "role": "broader-mature-comparison-not-confirmed-current-weak-signal",
+      "terms": ["tactile sensing", "tactile sensor", "tactile sensors", "tactile perception", "tactile feedback"]
+    }
+  ],
+  "limitations": [
+    "The line families were selected after reviewing prior robotic-manipulation proposals, so this is not an independent detection or precision test.",
+    "Literal title/abstract matches are mentions, not confirmed primary results or one coherent mechanism.",
+    "A phrase in the current title is a stronger retrieval anchor than an abstract-only mention but does not verify primary-result status or historical v1 wording.",
+    "The pinned current metadata may contain phrases added in later preprint versions; first-submission dates do not prove historic text presence.",
+    "arXiv metadata does not establish independent organisations, commercial adoption or a full worldwide scientific denominator.",
+    "A zero or small count in this arXiv parent cannot prove the absence of a line elsewhere."
+  ]
+}

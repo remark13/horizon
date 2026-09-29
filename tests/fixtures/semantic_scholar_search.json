@@ -1,0 +1,31 @@
+{
+  "total": 250,
+  "offset": 0,
+  "next": 2,
+  "data": [
+    {
+      "paperId": "fixture-paper-1",
+      "externalIds": {"ArXiv": "2601.00001", "DOI": "10.0000/fixture.1"},
+      "title": "Agentic artificial intelligence systems",
+      "year": 2026,
+      "publicationDate": "2026-03-10",
+      "authors": [{"authorId": "1", "name": "Ada Example"}],
+      "citationCount": 7,
+      "referenceCount": 42,
+      "fieldsOfStudy": ["Computer Science"],
+      "url": "https://www.semanticscholar.org/paper/fixture-paper-1"
+    },
+    {
+      "paperId": "fixture-paper-outside",
+      "externalIds": {},
+      "title": "Earlier unrelated boundary record",
+      "year": 2024,
+      "publicationDate": "2024-12-31",
+      "authors": [],
+      "citationCount": 0,
+      "referenceCount": 0,
+      "fieldsOfStudy": [],
+      "url": "https://www.semanticscholar.org/paper/fixture-paper-outside"
+    }
+  ]
+}

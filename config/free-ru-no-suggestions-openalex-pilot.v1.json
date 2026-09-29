@@ -1,0 +1,25 @@
+{
+  "version": "ru-compound-openalex-live-pilot-v1",
+  "frozen_compound_plan_sha256": "d5af1921ce46f95504187bfe6b5c6757e872164df7f8bba8634608ca514783b9",
+  "date_from": "2021-09-01",
+  "as_of_date": "2026-09-01",
+  "limit_per_query": 25,
+  "cases": [
+    {
+      "case_id": "boundary-pe-enzyme-broad",
+      "live_query_en": "polyethylene enzymatic degradation"
+    },
+    {
+      "case_id": "boundary-pe-enzyme-packaging",
+      "live_query_en": "polyethylene enzymatic recycling packaging"
+    },
+    {
+      "case_id": "outside-quantum-archaeology",
+      "live_query_en": "quantum sensing archaeology"
+    },
+    {
+      "case_id": "negative-graphene-perpetual-motion",
+      "live_query_en": "graphene perpetual motion"
+    }
+  ]
+}

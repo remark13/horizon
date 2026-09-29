@@ -1,0 +1,23 @@
+{
+  "version": "canonical-text-audit-protocol-v1",
+  "mission_id": "ml-area-2017",
+  "normalize_run_id": 79,
+  "expected_works": 13830,
+  "expected_work_versions": 26331,
+  "historical_cutoff_exclusive": "2017-01-01",
+  "current_text_cutoff_exclusive": "2026-09-29",
+  "max_works": 20000,
+  "max_candidates": 40000,
+  "max_input_bytes": 67108864,
+  "min_free_disk_reserve_bytes": 53687091200,
+  "detail_example_work_ids": [5828],
+  "scope": "same_bound_source_records_field_selection_not_new_signal_detection",
+  "rules": {
+    "no_database_writes": true,
+    "no_source_downloads": true,
+    "no_completed_run_rewrites": true,
+    "example_ids_used_only_after_all_work_selections": true,
+    "different_abstracts_not_automatically_corrupt": true,
+    "historical_text_date_and_current_text_quality_are_separate": true
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "version": "bas-task-pair-similarity-v1",
+  "source": "outputs/scout-composition-review-bas-full-arxiv-2026-09-26-v1.json",
+  "source_sha256": "5eadfb9154deac9d69dedbafa6ff29540bb885e9e045caf551b51807201d6fe3",
+  "mission_id": "universal-monthly-full-arxiv-v1-fab72bd5-1b32-4e94-8529-3af45d69aac4",
+  "embedding_model": "specter2/proximity@3447645e+20815596",
+  "target": "same_research_task_family_within_the_parent_card_not_same_proven_technology",
+  "annotation_role": "single_developer_diagnostic_not_independent_gold",
+  "features": ["specter_cosine", "title_abstract_tfidf_cosine"],
+  "acceptance": {
+    "minimum_development_class_size": 5,
+    "minimum_holdout_balanced_accuracy": 0.8,
+    "maximum_false_same_on_different_holdout": 1
+  },
+  "pairs": [
+    {"partition":"development","a":195682,"b":195509,"same_task":true,"reason":"UAV self-positioning against cross-view reference imagery"},
+    {"partition":"development","a":195423,"b":195406,"same_task":true,"reason":"Map-anchored UAV 6-DoF self-localization"},
+    {"partition":"development","a":195891,"b":195682,"same_task":true,"reason":"Aerial visual place recognition or self-positioning; dataset versus method"},
+    {"partition":"development","a":195733,"b":195650,"same_task":true,"reason":"Autonomous visual search for target entities by UAV"},
+    {"partition":"development","a":195646,"b":195644,"same_task":true,"reason":"Foundation-model-guided UAV flight-path planning"},
+    {"partition":"development","a":195866,"b":195682,"same_task":false,"reason":"Locating another object versus locating the UAV itself"},
+    {"partition":"development","a":195846,"b":195682,"same_task":false,"reason":"Estimating target-object depth versus UAV self-positioning"},
+    {"partition":"development","a":195677,"b":195682,"same_task":false,"reason":"Novel-view synthesis and 3D reconstruction versus self-positioning"},
+    {"partition":"development","a":195572,"b":195733,"same_task":false,"reason":"Robotic artwork navigation versus target-search mission"},
+    {"partition":"development","a":195528,"b":195646,"same_task":false,"reason":"Natural-language swarm control versus flight-path planning"},
+    {"partition":"holdout","a":195682,"b":195423,"same_task":true,"reason":"Cross-view or orthophoto-referenced UAV self-localization"},
+    {"partition":"holdout","a":195509,"b":195406,"same_task":true,"reason":"Map-referenced UAV self-localization"},
+    {"partition":"holdout","a":195891,"b":195423,"same_task":true,"reason":"Aerial visual localization dataset and map-anchored trajectory method"},
+    {"partition":"holdout","a":195650,"b":195653,"same_task":true,"reason":"Agentic UAV mission with visual grounding and target search"},
+    {"partition":"holdout","a":195646,"b":195383,"same_task":true,"reason":"Foundation-model agent for flight-path decisions"},
+    {"partition":"holdout","a":195866,"b":195509,"same_task":false,"reason":"Target-object localization versus UAV self-localization"},
+    {"partition":"holdout","a":195846,"b":195423,"same_task":false,"reason":"Object depth estimation versus UAV self-trajectory estimation"},
+    {"partition":"holdout","a":195633,"b":195406,"same_task":false,"reason":"Safe landing-zone identification versus UAV self-localization"},
+    {"partition":"holdout","a":195572,"b":195646,"same_task":false,"reason":"Art installation navigation versus flight-path planning"},
+    {"partition":"holdout","a":195523,"b":195644,"same_task":false,"reason":"End-to-end language-conditioned navigation versus VLM-guided RRT path planner"}
+  ],
+  "production_use": false,
+  "limitations": [
+    "Pair-level holdout reuses several papers from development and is not an independent external test",
+    "The label is shared research task, a weaker criterion than one technological line",
+    "Developer judgements and pair selection are not independent expert annotations",
+    "A passing diagnostic does not authorize automatic card splitting or weak-signal confirmation"
+  ]
+}

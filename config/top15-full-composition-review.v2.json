@@ -1,0 +1,24 @@
+{
+  "version": "top15-full-composition-review-v2",
+  "seed": "saia-saved-top15-full-composition-2026-09-26",
+  "runs": [
+    {
+      "direction": "Беспилотные авиационные системы",
+      "mission_id": "universal-monthly-5177517d-5c5b-4fb8-b987-a66589771915",
+      "score_run_id": 9509,
+      "expected_cards": 15
+    },
+    {
+      "direction": "Тканевая инженерия",
+      "mission_id": "universal-monthly-15cc14c5-a762-478c-9e35-839538d905ac",
+      "score_run_id": 9312,
+      "expected_cards": 5
+    },
+    {
+      "direction": "Прецизионная ферментация",
+      "mission_id": "openalex-precision-fermentation-2026q3",
+      "score_run_id": 9497,
+      "expected_cards": 15
+    }
+  ]
+}

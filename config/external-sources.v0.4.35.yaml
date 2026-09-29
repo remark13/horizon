@@ -1,0 +1,23 @@
+version: external-sources-0.4.35
+extends: external-sources.v0.4.34.yaml
+scientific_score_modified: false
+
+nasa_ntrs:
+  source: nasa_ntrs
+  role: bibliographic_enrichment_only
+  search_url: https://ntrs.nasa.gov/api/citations/search
+  max_records: 50
+  source_page_size: 100
+  max_response_bytes: 6000000
+  credentials: none
+  evidence_urls:
+    - https://ntrs.nasa.gov/api/openapi/
+    - https://www.sti.nasa.gov/harvesting-data-from-ntrs/
+  limitation: >-
+    NASA STI repository is a domain-specific public collection, not a complete
+    aerospace or space-science corpus. A capped relevance-ranked page is not a
+    topic denominator. Records can overlap with OpenAlex and other bibliographies;
+    deduplicate by DOI and citation identity before any independent count.
+    Current metadata are not an as-of historical snapshot. Search requires the
+    phrase in a title or keyword and may miss synonyms and abstract-only matches.
+    Full text is not copied.

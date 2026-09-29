@@ -1,0 +1,23 @@
+version: jrc-arxiv-expansion-config-0.4.25
+baseline:
+  report_path: reports/generated/jrc-ai-arxiv-lexical-observability-v0424-r4-2026-09-21.json
+  report_bytes_sha256: b4b5586a165a73cc77c6c9473f1e65d410e5a50af172322d21bcf864cb1a2d5b
+  report_payload_sha256: 0ee08976b258afd82eab5a04ba0fcf496accb0aad0dddfa9549a57bea09d6f6b
+  config_path: config/jrc-arxiv-observability.v0.4.24-r4.yaml
+  config_bytes_sha256: 6ac1de4a05092809cfff8c29ba506468114fdb911825f330f90fededb3e79691
+expansion:
+  strategy: ordered_token_gap
+  max_intervening_tokens_per_pair: 3
+  source: deterministic_transformation_of_original_jrc_title
+  manual_aliases: []
+  corpus_outcome_tuning_used: false
+  sample_per_signal: 5
+interpretation:
+  partition: post_hoc_development_diagnostic
+  true_retrieval_recall_claimed: false
+  precision_measured: false
+  quality_improved_claimed: false
+  production_adoption_allowed: false
+  production_score_modified: false
+  production_thresholds_modified: false
+  holdout_used: false

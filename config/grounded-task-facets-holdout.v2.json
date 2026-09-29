@@ -1,0 +1,42 @@
+{
+  "version": "grounded-task-facets-holdout-v2",
+  "bas_source": "outputs/scout-composition-review-bas-full-arxiv-2026-09-26-v1.json",
+  "bas_source_sha256": "5eadfb9154deac9d69dedbafa6ff29540bb885e9e045caf551b51807201d6fe3",
+  "cross_source": "evaluation/goal-cross-domain-relevance-v2.packet.json",
+  "cross_source_sha256": "25135d75e21d3827b4403b58ba4d65b9f698f2d9a6cf18228b89b24df26de66f",
+  "model": "qwen3.5:9b",
+  "model_role": "development_diagnostic_only",
+  "allowed_task_families": [
+    "uav_self_localization", "aerial_object_localization",
+    "uav_mission_search_planning", "uav_navigation_path_planning",
+    "robotic_art_navigation", "llm_compression",
+    "agent_identity_access_control", "composite_material_design",
+    "breath_biometrics", "other_or_unclear"
+  ],
+  "rows": [
+    {"source": "bas", "id": "195406", "developer_task_family": "uav_self_localization"},
+    {"source": "bas", "id": "195423", "developer_task_family": "uav_self_localization"},
+    {"source": "bas", "id": "195475", "developer_task_family": "uav_self_localization"},
+    {"source": "bas", "id": "195650", "developer_task_family": "uav_mission_search_planning"},
+    {"source": "bas", "id": "195646", "developer_task_family": "uav_navigation_path_planning"},
+    {"source": "bas", "id": "195528", "developer_task_family": "other_or_unclear"},
+    {"source": "bas", "id": "195523", "developer_task_family": "other_or_unclear"},
+    {"source": "bas", "id": "195404", "developer_task_family": "other_or_unclear"},
+    {"source": "cross", "id": "review-b463be625de14ff379f77408", "developer_task_family": "agent_identity_access_control"},
+    {"source": "cross", "id": "review-48aa41edd5946343a76bc81a", "developer_task_family": "other_or_unclear"},
+    {"source": "cross", "id": "review-5d16edd83f9106490489dc7a", "developer_task_family": "other_or_unclear"},
+    {"source": "cross", "id": "review-c0647abcf989fa6d5f25e156", "developer_task_family": "other_or_unclear"}
+  ],
+  "gate": {
+    "valid_grounded_json_min": 11,
+    "task_family_agreement_min": 10,
+    "critical_errors_max": 0,
+    "critical_error_definition": "bidirectional_confusion_between_aerial_object_localization_and_uav_self_localization"
+  },
+  "holdout_policy": "These twelve rows were not sent to the local model in the v1 diagnostic; labels and gate are frozen before v2 inference.",
+  "limitations": [
+    "Single developer annotator and a closed task taxonomy, not independent open-world accuracy",
+    "Many negative controls are expected other_or_unclear and should not be forced into the closest named task",
+    "No result may enter production automatically from this pilot"
+  ]
+}

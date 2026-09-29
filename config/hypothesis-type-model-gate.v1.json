@@ -1,0 +1,10 @@
+{
+  "version": "hypothesis-type-model-gate-v1",
+  "fixed_pilot_count": 16,
+  "minimum_parsed": 16,
+  "minimum_exact_primary_agreement": 13,
+  "forbid_customer_market_to_scientific_method_confusion": true,
+  "passing_gate_only_authorizes_unreviewed_draft_for_189": true,
+  "failing_gate_requires_non_model_or_revised_method_before_189_draft": true,
+  "not_a_measure_of_weak_signal_accuracy": true
+}

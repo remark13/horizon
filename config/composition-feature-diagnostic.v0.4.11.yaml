@@ -1,0 +1,40 @@
+version: composition-feature-diagnostic-0.4.11
+scope: development_only
+embedding_basis: saved_unit_normalized_specter2_proximity_vectors
+family_handling: compare_raw_works_with_declared_research_family_centroids
+features:
+  mean_pairwise:
+    orientation: higher_supports_coherent_line
+  pairwise_q10:
+    orientation: higher_supports_coherent_line
+  centroid_q10:
+    orientation: higher_supports_coherent_line
+  centroid_min:
+    orientation: higher_supports_coherent_line
+  nearest_neighbor_q10:
+    orientation: higher_supports_coherent_line
+  two_cluster_gain:
+    orientation: lower_supports_coherent_line
+  two_cluster_gap:
+    orientation: lower_supports_coherent_line
+  robust_centroid_outlier_fraction:
+    orientation: lower_supports_coherent_line
+evaluation:
+  method: univariate_cutpoints_plus_leave_one_out
+  minimum_class_size: 4
+  threshold_tie_break: maximum_balanced_accuracy_then_fewer_errors_then_smallest_absolute_threshold
+  feature_combinations_allowed: false
+  production_threshold_allowed: false
+  reason: >
+    Ten single-annotator development compositions are sufficient only for a
+    diagnostic comparison. No production calibration is allowed before
+    independent labels with at least 30 examples per class.
+holdout_policy:
+  load_vectors: false
+  calculate_features: false
+  inspect_results: false
+  unlock_condition: frozen_rule_and_independent_annotation_protocol
+interpretation: >
+  These metrics describe the geometry of one saved embedding composition.
+  They do not establish novelty, future growth, scientific validity, market
+  demand or a weak signal.

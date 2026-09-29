@@ -1,0 +1,16 @@
+{
+  "version": "prepared-openalex-search-benchmark-v1",
+  "cohort_dir": "data/processed/priority-openalex-complete-cohorts-v5",
+  "date_from": "2024-09-01",
+  "as_of_date": "2026-09-01",
+  "limit_per_branch": 25,
+  "repetitions": 7,
+  "branch_specs": [
+    {"branch_id": "smr", "included_phrases": ["small modular reactor", "small modular reactors"], "excluded_phrases": []},
+    {"branch_id": "battery", "included_phrases": ["battery materials"], "excluded_phrases": []},
+    {"branch_id": "precision", "included_phrases": ["precision fermentation"], "excluded_phrases": []},
+    {"branch_id": "bone", "included_phrases": ["bone tissue engineering"], "excluded_phrases": []},
+    {"branch_id": "outside", "included_phrases": ["quantum error correction"], "excluded_phrases": []}
+  ],
+  "interpretation": "Fixed English post-compilation exact search; not a free Russian query, not weak-signal accuracy, and not end-to-end latency."
+}

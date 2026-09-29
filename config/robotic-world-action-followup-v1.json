@@ -1,0 +1,20 @@
+{
+  "version": "post-discovery-world-action-followup-v1",
+  "purpose": "Check whether the apparent 2026 world-action-model phrase cluster predates the robotic-manipulation title cohort elsewhere in the complete pinned arXiv; not an independent discovery benchmark",
+  "discovery_report_sha256": "3a0f0d6d8111a6eff5ddb48bffbf209d951e23a47edb25fe58c762e27a7cef04",
+  "index_manifest_sha256": "0a1f8f7801bdbd8d1db19400628cb7f32b02ca90b1ed9848096a915ec6684178",
+  "date_from": "2016-09-01",
+  "as_of_date_exclusive": "2026-09-01",
+  "matching_version": "orthographic-separators-v1",
+  "max_matches_per_branch": 5000,
+  "branches": [
+    {"id": "full_world_action_model_phrase", "role": "name_family_not_proven_technology", "kind": "or_phrase", "included_terms": ["world action model", "world action models", "world-action model", "world-action models", "world action modeling", "world-action modeling"]},
+    {"id": "robot_manipulation_world_model_predecessor", "role": "broader_predecessor_not_same_method", "kind": "concept_groups", "concept_groups": [["world model", "world models"], ["robotic manipulation", "robot manipulation", "robot arm"]], "exclusions": []}
+  ],
+  "limitations": [
+    "Branches were designed after viewing the machine proposal; this is not an independent detection test.",
+    "Current title/abstract metadata cannot prove when a phrase entered the first manuscript version.",
+    "The predecessor query is a broader family and does not establish technological identity.",
+    "Literal matches include background mentions and require primary-result review."
+  ]
+}

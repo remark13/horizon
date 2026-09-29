@@ -1,0 +1,46 @@
+version: external-sources-0.4.37
+extends: external-sources.v0.4.36.yaml
+scientific_score_modified: false
+
+mit_news:
+  source: mit_news_rss
+  role: news_attention_only
+  url: https://news.mit.edu/rss/feed
+  max_records: 15
+  topical_feeds:
+    - url: https://news.mit.edu/topic/mitrobotics-rss.xml
+      terms: [robot, robots, robotics, robotic, drone, drones, uav, flight, manipulation]
+    - url: https://news.mit.edu/topic/mitartificial-intelligence2-rss.xml
+      terms: [artificial, intelligence, neural, transformer, transformers, reinforcement, llm, generative]
+    - url: https://news.mit.edu/rss/topic/materials-science-and-engineering
+      terms: [material, materials, alloy, alloys, composite, composites, nanomaterial]
+    - url: https://news.mit.edu/rss/topic/chemistry
+      terms: [chemistry, chemical, catalyst, catalysts, catalysis]
+    - url: https://news.mit.edu/rss/topic/energy
+      terms: [energy, battery, batteries, hydrogen, solar, electrolysis]
+    - url: https://news.mit.edu/rss/topic/nuclear-engineering
+      terms: [nuclear, reactor, reactors, fusion, fission]
+    - url: https://news.mit.edu/rss/topic/health-sciences-and-technology
+      terms: [health, medicine, medical, vaccine, vaccines, longevity]
+    - url: https://news.mit.edu/rss/topic/biological-engineering-and-biotechnology
+      terms: [biotechnology, genetic, genetics, rna, protein, proteins, enzyme, enzymes]
+    - url: https://news.mit.edu/rss/topic/food-and-water-security
+      terms: [food, agriculture, farming, crop, crops, water]
+    - url: https://news.mit.edu/topic/mitspace-rss.xml
+      terms: [satellite, satellites, orbital, spacecraft, space]
+  limitation: Recent MIT press-office headlines only; not an exhaustive archive or independent research validation. Store title, link, date and author, not article text or images.
+nasa_news:
+  source: nasa_news_rss
+  role: news_attention_only
+  url: https://www.nasa.gov/technology/feed/
+  max_records: 15
+  topical_feeds:
+    - url: https://www.nasa.gov/aeronautics/feed/
+      terms: [aircraft, aviation, aeronautics, flight, drone, drones, uav]
+  limitation: Recent NASA technology headlines only; institutional announcements are not independent commercial confirmation. No article text, images or NASA endorsement.
+jpl_news:
+  source: jpl_news_rss
+  role: news_attention_only
+  url: https://www.jpl.nasa.gov/feeds/news/
+  max_records: 15
+  limitation: Recent JPL headlines; an HTTP error is unknown coverage, not absence. JPL and NASA are not counted as independent organisations. Metadata and links only.

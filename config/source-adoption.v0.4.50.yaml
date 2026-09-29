@@ -1,0 +1,95 @@
+version: source-adoption-registry-0.4.50
+extends: source-adoption.v0.4.49.yaml
+reviewed_at: '2026-09-29'
+scientific_score_uses_external_attention: false
+sources:
+  - id: google_news_rss
+    name: Google News search RSS
+    decision: adapt
+    role: news_attention_only
+    data: Original RSS titles, feed dates, publisher names and Google News links; no article bodies or images.
+    temporal_coverage: Small capped current search feed; not a complete archive or historical denominator.
+    regional_coverage: Broad international media; configured locale is not article language or adoption geography.
+    access: Public search RSS endpoint, live tested HTTP 200. Not a guaranteed contractual API; no bypass or publisher scraping.
+    credentials: No key required for the tested feed.
+    cost: Public metadata reading; no paid subscription activated.
+    license_status: Personal attributed title/link reading; unrestricted redistribution and full-text/model reuse not established.
+    reproducibility: Exact search/date window, feed response SHA, retrieval date and original Google News IDs/links retained.
+    retrotest_fit: Current RSS search does not prove availability in the past or total publication counts.
+    reason: A working broad news discovery feed while GDELT is intermittently unavailable. Google links are explicitly not resolved original publisher article URLs.
+    evidence_urls: ['https://news.google.com/rss/search?q=robotics', https://support.google.com/googlenews/]
+  - id: dealroom_marketmaps
+    name: Dealroom public market maps
+    decision: adapt
+    role: company_landscape_only
+    data: Titles, map identifiers, original map links and reported company counts. No company database is downloaded.
+    temporal_coverage: Current public catalogue only; publication date and past availability unknown.
+    regional_coverage: International technology ecosystems, uneven curated coverage.
+    access: Public bounded JSON GET, documented by Dealroom for agents.
+    credentials: None for this public subset; not access to the full commercial API.
+    cost: Public endpoint; no paid subscription activated.
+    license_status: Personal attributed metadata and links only; unrestricted redistribution and model training not established.
+    reproducibility: Exact query, response SHA, retrieval date and original map IDs retained.
+    retrotest_fit: Not historical ground truth; map creation dates are not provided.
+    reason: Broad company-landscape context without pretending that catalogue counts are investment deals or scientific evidence.
+    evidence_urls: [https://dealroom.co/for-agents/]
+  - id: dealroom_public_rounds
+    name: Dealroom public live funding sample
+    decision: adapt
+    role: investment_lead_only
+    data: Unverified public funding leads with reported month and amount text. Missing original deal URLs and stable deal IDs remain explicit.
+    temporal_coverage: Small current sample; provider stale-cache status and fetchedAt retained.
+    regional_coverage: International service, but returned sample is not geographically representative.
+    access: Public documented JSON endpoint; local literal filtering, no undocumented thematic API.
+    credentials: None for the sample; full Dealroom funding access is separate.
+    cost: Public sample; no paid subscription activated.
+    license_status: Personal attributed metadata only; redistribution and model training not established.
+    reproducibility: Response SHA, month precision, original reported strings and synthetic sample identity retained.
+    retrotest_fit: Not historical deal coverage or validated funding labels.
+    reason: First investment-lead channel, explicitly separated from grants and contracts and not represented as a complete deal database.
+    evidence_urls: [https://dealroom.co/for-agents/]
+  - id: event_registry
+    name: Event Registry / NewsAPI.ai
+    decision: adapt
+    role: news_attention_only
+    data: News titles, original URLs, source, reported publication date, language and event identifier.
+    temporal_coverage: Configured capped current-window search; historical access depends on the account.
+    regional_coverage: International multilingual news aggregator; coverage is not exhaustive.
+    access: Official credentialed JSON API, metadata-only first page.
+    credentials: EVENT_REGISTRY_API_KEY supplied privately by the user.
+    cost: Account quota or subscription; no purchase or unlimited archive search activated.
+    license_status: Account/provider and publisher conditions apply; no article bodies or unrestricted republication assumed.
+    reproducibility: Query interval, event IDs, retrieval time and response SHA retained; key never persisted.
+    retrotest_fit: Current search is not proof of historical data availability.
+    reason: Broad news connector, configuration-required until credentials and access are verified live.
+    evidence_urls: [https://newsapi.ai/plans, https://github.com/EventRegistry/event-registry-python]
+  - id: mediacloud_news
+    name: Media Cloud Search
+    decision: adapt
+    role: news_attention_only
+    data: Capped news sample with title, URL, media, language, publish_date and indexed_date.
+    temporal_coverage: Explicit date interval within configured collections; sample is not total count.
+    regional_coverage: Depends on MEDIACLOUD_COLLECTION_IDS; no global coverage claim.
+    access: Official Search sample API; metadata only, bounded single request.
+    credentials: MEDIACLOUD_API_KEY and one to ten explicit collection IDs required.
+    cost: Account access/quota; no paid services activated.
+    license_status: Media Cloud and original publisher conditions apply; no article bodies or unrestricted republication assumed.
+    reproducibility: Selected collections, interval, metadata and response SHA retained; token never persisted.
+    retrotest_fit: Requires a defined collection history and coverage; current sample is not historical ground truth.
+    reason: Broad multilingual media search with explicit coverage instead of isolated portal feeds.
+    evidence_urls: [https://www.mediacloud.org/documentation/search-api-guide, https://github.com/mediacloud/api-client]
+  - id: lens_patents
+    name: Lens Patent API
+    decision: adapt
+    role: patent_landscape_only
+    data: Publication title, Lens ID, date, language, jurisdiction, applicants, CPC and family metadata.
+    temporal_coverage: Publication-date interval; record freshness and account access depend on provider.
+    regional_coverage: International patent aggregator; not all offices or legal statuses guaranteed.
+    access: Official authenticated patent search, restricted metadata projection, single capped page.
+    credentials: LENS_API_TOKEN and enabled patent API access required.
+    cost: Access approval/trial/subscription per provider; no purchase activated.
+    license_status: Lens API entitlement and usage conditions apply; no claims, full texts or bulk redistribution assumed.
+    reproducibility: Query/date range, Lens publication IDs, response SHA and retrieval date retained; token never persisted.
+    retrotest_fit: Patent publication is public event date, not priority-date availability; full historical snapshot not established.
+    reason: Second broad patent aggregator alongside EPO OPS; prepared connector is not live verified without token.
+    evidence_urls: [https://docs.api.lens.org/request-patent.html, https://docs.api.lens.org/response-patent.html]

@@ -1,0 +1,16 @@
+{
+  "version": "bas-article-facets-pilot-v1",
+  "purpose": "development_diagnostic_only",
+  "source": "outputs/scout-composition-review-bas-full-arxiv-2026-09-26-v1.json",
+  "source_sha256": "5eadfb9154deac9d69dedbafa6ff29540bb885e9e045caf551b51807201d6fe3",
+  "model": "qwen3.5:9b",
+  "work_ids": [195926, 195843, 195810, 195722, 195905, 195764, 195719, 195431, 195838, 195786, 195670, 195627, 195809, 195862, 195731],
+  "pre_run_developer_core_uav_labels": {
+    "195926": true, "195843": true, "195810": false, "195722": true,
+    "195905": true, "195764": true, "195719": true, "195431": false,
+    "195838": true, "195786": false, "195670": true, "195627": true,
+    "195809": true, "195862": true, "195731": true
+  },
+  "label_note": "Labels by one developer from abstracts, before either model run; 195810 is a general observer tested on drone data, 195431 lists UAVs among edge applications, 195786 studies pilot EEG. Not independent expert gold.",
+  "production_use": false
+}

@@ -1,0 +1,13 @@
+[
+  {
+    "id": "example/agentic-model",
+    "author": "example",
+    "createdAt": "2026-02-01T10:00:00.000Z",
+    "lastModified": "2026-09-01T10:00:00.000Z",
+    "downloads": 1200,
+    "likes": 12,
+    "gated": false,
+    "sha": "abc123",
+    "tags": ["agents", "transformers"]
+  }
+]

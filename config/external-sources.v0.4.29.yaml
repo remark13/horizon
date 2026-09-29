@@ -1,0 +1,38 @@
+version: external-sources-0.4.29
+scientific_score_modified: false
+
+news:
+  source: gdelt_doc_2_0
+  role: news_attention_only
+  base_url: https://api.gdeltproject.org/api/v2/doc/doc
+  max_lookback_days: 93
+  max_records: 50
+  stores_article_text: false
+  credentials: none
+  evidence_urls:
+    - https://blog.gdeltproject.org/gdelt-doc-2-0-api-debuts/
+    - https://blog.gdeltproject.org/doc-2-0-updates-1-5-year-searching-and-updated-mobile-interface/
+  limitation: >-
+    ArticleList is used only for a bounded recent window. Results are capped,
+    source coverage is unequal, and zero returned articles does not prove that
+    no event occurred outside GDELT coverage.
+
+patents:
+  source: epo_ops
+  role: patent_landscape_only
+  token_url: https://ops.epo.org/3.2/auth/accesstoken
+  search_url: https://ops.epo.org/3.2/rest-services/published-data/search/biblio
+  max_records: 25
+  stores_full_text: false
+  credentials:
+    kind: oauth_client_credentials
+    key_env: EPO_OPS_CONSUMER_KEY
+    secret_env: EPO_OPS_CONSUMER_SECRET
+  free_allowance: Up to 4 GB per week for registered non-paying users.
+  evidence_urls:
+    - https://www.epo.org/en/searching-for-patents/data/web-services/ops
+    - https://ops.epo.org/wsdl/ops.yaml
+  limitation: >-
+    OPS search is not available without EPO registration and OAuth credentials.
+    Patent publications are lagged, family duplicates are possible, and a
+    keyword hit is not evidence of grant, commercialisation or market success.

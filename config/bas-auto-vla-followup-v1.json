@@ -1,0 +1,30 @@
+{
+  "version": "bas-auto-vla-full-arxiv-followup-v1",
+  "purpose": "After candidate discovery, test completeness and scope of the VLA publication numerator on the frozen full arXiv index; not an independent discovery or weak-signal confirmation",
+  "index_manifest_sha256": "0a1f8f7801bdbd8d1db19400628cb7f32b02ca90b1ed9848096a915ec6684178",
+  "discovery_report": "outputs/broad-title-phrase-bas-2026-09-26-v1.json",
+  "discovery_report_sha256": "7fa8934712a6941a3e45019f2d1c9397b56a6e220c366567e30ce49d1b8b9871",
+  "candidate_packet": "outputs/bas-auto-vla-papers-2026-09-26-v1.json",
+  "candidate_packet_sha256": "cc51c18a8a5ee154bff463649f71ea93f69f80287176106f000ec6ea3d57b710",
+  "broad_parent_config": "config/broad-title-phrase-pilot-bas-v1.json",
+  "broad_parent_config_sha256": "ff016ce5cb280f86d36258aeed01d909003fc7c1954fb1a5601afd8d60ef3960",
+  "period": {"date_from": "2016-09-01", "as_of_date_exclusive": "2026-09-01", "window": "September-August complete years"},
+  "matching_version": "orthographic-separators-v1",
+  "max_matches_per_branch": 5000,
+  "branches": [
+    {"id": "full-phrase-aerial-family", "role": "new_phrase_family", "concept_groups": [["vision language action", "vision-language-action"], ["UAV", "drone", "aerial"]], "exclusions": []},
+    {"id": "full-phrase-quadcopter-family", "role": "new_phrase_family", "concept_groups": [["vision language action", "vision-language-action"], ["quadcopter", "quadrotor"]], "exclusions": []},
+    {"id": "full-phrase-navigation", "role": "narrow_navigation_candidate", "concept_groups": [["vision language action", "vision-language-action"], ["UAV", "drone", "aerial"], ["navigation", "flight control", "aerial guidance"]], "exclusions": []},
+    {"id": "full-phrase-quadcopter-navigation", "role": "narrow_navigation_candidate", "concept_groups": [["vision language action", "vision-language-action"], ["quadcopter", "quadrotor"], ["navigation", "flight control", "aerial guidance"]], "exclusions": []},
+    {"id": "acronym-navigation", "role": "sensitivity_for_abbreviated_VLA", "concept_groups": [["VLA"], ["UAV", "drone", "aerial"], ["navigation", "flight control", "aerial guidance"]], "exclusions": []},
+    {"id": "acronym-quadcopter-navigation", "role": "sensitivity_for_abbreviated_VLA", "concept_groups": [["VLA"], ["quadcopter", "quadrotor"], ["navigation", "flight control", "aerial guidance"]], "exclusions": []},
+    {"id": "vision-language-navigation-predecessor", "role": "predecessor_not_new_VLA", "concept_groups": [["vision language navigation", "vision-and-language navigation"], ["UAV", "drone", "aerial"]], "exclusions": []}
+  ],
+  "interpretation_limits": [
+    "All branches are post-discovery developer search strategies, not independent recovery of the weak signal.",
+    "The acronym VLA may be ambiguous and requires article-level review.",
+    "Current title and abstract can differ from first-submission text; a historical first mention is not proven.",
+    "The broad BAS title/abstract parent is a lexical arXiv denominator, not world science or all BAS research.",
+    "More matches or a rising exact phrase do not prove primary results, one technology, diffusion or commercial uptake."
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "version": "cross-domain-structured-line-transfer-v1",
+  "production_use": false,
+  "packet": "evaluation/cross-domain-composition-pairs-2026-09-27-v2.json",
+  "packet_sha256": "2e92379a93aa81da98131fe5a818ba2b17241fd7b4fd13820cbb5cc4c2198fdc",
+  "developer_review": "evaluation/cross-domain-composition-developer-review-2026-09-27-v1.json",
+  "developer_review_sha256": "ea50161d3a2f5926a0c41559bb992d2b3de91f2a779ce741666ed36a52361b24",
+  "bas_facet_result": "outputs/bas-structured-line-facets-2026-09-27-v1.json",
+  "bas_facet_result_sha256": "044260d8631b4132d7b73ecab983db03cf135649608a3d1474b1087bf4b849f3",
+  "frozen_threshold": 0.482647,
+  "api_root": "http://127.0.0.1:11434",
+  "extractor_model": "qwen3.5:9b",
+  "extractor_digest": "6488c96fa5faab64bb65cbd30d4289e20e6130ef535a93ef9a49f42eda893ea7",
+  "similarity_model": "bge-m3:latest",
+  "similarity_digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+  "primary_gate": "both papers primary_result, all three facet similarities present and minimum >= frozen BAS threshold",
+  "acceptance": {"min_true_narrow_line_retained": 1, "min_different_lines_separated": 10},
+  "limitations": [
+    "Only twelve cross-domain pairs have preliminary labels from one developer; eleven are negative and one is positive.",
+    "The BAS threshold was fitted to same-task rather than same-narrow-line labels and is not calibrated for these domains.",
+    "The twenty cross-domain holdout pairs remain unlabelled and are not sent to the model or scored; they reside in the same frozen packet file.",
+    "A passing diagnostic does not establish scientific quality, independent accuracy, or production readiness."
+  ]
+}

@@ -1,0 +1,14 @@
+version: local-arxiv-fallback-0.4.15
+dataset: librarian-bots/arxiv-metadata-snapshot
+revision: aec69ea34085e34808157a0a9c8adeaef91caceb
+expected_files: 10
+expected_rows: 3164528
+matching:
+  fields: [title, abstract]
+  mode: any_exact_included_phrase_and_no_exact_excluded_phrase
+  normalization: casefold_collapsed_whitespace_with_word_boundaries
+result_order: latest_v1_first_then_arxiv_id
+limitations:
+  - The snapshot stores current title and abstract, not the exact text visible at the historical cutoff.
+  - Local availability does not prove complete arXiv coverage or comparability with OpenAlex.
+  - A matching publication is a corpus candidate, not a weak signal.

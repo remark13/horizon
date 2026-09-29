@@ -1,0 +1,19 @@
+{
+  "version": "scout-no-suggestions-slo-pilot-v2",
+  "purpose": "Frozen unchanged-scout baseline for the Russian broad direction robotic manipulation; no manual English translation or seeded narrow signal name",
+  "date_from": "2021-09-01",
+  "as_of_date": "2026-09-01",
+  "limit_per_source": 25,
+  "max_results": 300,
+  "openalex_collection_mode": "live_with_cache_fallback",
+  "cases": [
+    {"case_id": "robotic-manipulation-ru-broad", "role": "broad_direction_outside_preapproved_query_profiles", "query_ru": "Роботизированные манипуляции"}
+  ],
+  "limits": {
+    "preview_must_have_no_suggestions": true,
+    "no_manual_english_translation": true,
+    "one_case_not_latency_distribution": true,
+    "zero_works_not_absence_of_science": true,
+    "new_jobs_are_real_project_jobs": true
+  }
+}

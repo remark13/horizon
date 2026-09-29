@@ -1,0 +1,26 @@
+{
+  "version": "role-verifier-dev12b-developer-labels-v1",
+  "packet": "evaluation/goal-cross-domain-relevance-v2.packet.json",
+  "packet_sha256": "25135d75e21d3827b4403b58ba4d65b9f698f2d9a6cf18228b89b24df26de66f",
+  "selection": "Frozen packet items 13-24 in their existing deterministic order. Labels written from title and abstract before running the numbered-passage method on these items.",
+  "label_scope": "One developer's title/abstract assessment; neither independent expert truth nor full-text verification.",
+  "gate_before_model_run": {
+    "min_valid_of_12": 10,
+    "min_exact_agreement_with_developer_of_12": 9,
+    "max_false_direct_on_developer_nondirect": 0
+  },
+  "rows": [
+    {"item_id": "review-42f47c16fb36a8d84c63a7f1", "judgement": "related", "reason": "General surrogate-based generative optimization, without physics surrogate, CAD-native part design or manufacturability."},
+    {"item_id": "review-1e84fd7bada3ac57b7c41e5c", "judgement": "related", "reason": "Primary on-premise edge data-sovereignty architecture, but not a sovereign cloud platform."},
+    {"item_id": "review-d337b888ac14cae5d5d44a8a", "judgement": "related", "reason": "Energy-monitoring instrument is validated on a three-axis CNC machine, not a new multi-axis machine technology."},
+    {"item_id": "review-5b9d6560ad8027022200cec6", "judgement": "not_direct", "reason": "Kagome-metal electronic structure, not extraction or separation of rare-earth elements."},
+    {"item_id": "review-171aa977aed537363aca2640", "judgement": "related", "reason": "Primary mineralization modelling; extraction and separation are motivation, not the reported result."},
+    {"item_id": "review-cf6e39da1426d01b24bed670", "judgement": "related", "reason": "Primary quantum gravity-sensor field result; archaeology is listed as a possible application, not the studied site."},
+    {"item_id": "review-0c91997d804b33ced7debd48", "judgement": "related", "reason": "A review of genomic breeding tools, not a primary marker-assisted selection result."},
+    {"item_id": "review-a94f939bc89cd01f7eced349", "judgement": "not_direct", "reason": "Nickelate electronic-state physics, not rare-earth extraction or separation."},
+    {"item_id": "review-21f712135576776d78d5bcf9", "judgement": "related", "reason": "Overview of small modular reactors and passive safety features, not a primary technical safety result."},
+    {"item_id": "review-871c1ca87bf56ececd8c269b", "judgement": "related", "reason": "Primary overcharge characterization of a complete cell; effects on the anode are studied, but no new anode is developed."},
+    {"item_id": "review-e61a1376b2e06b1bd15caf92", "judgement": "not_direct", "reason": "Rare-earth-doped optical fiber laser, not separation of rare-earth elements."},
+    {"item_id": "review-977f749a45b8064e085a2bc6", "judgement": "direct", "reason": "Primary computational method for genomic selection in rice and wheat, within the broad crop-selection search area."}
+  ]
+}

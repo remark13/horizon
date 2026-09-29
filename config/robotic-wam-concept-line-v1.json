@@ -1,0 +1,26 @@
+{
+  "version": "concept-line-evidence-plan-v1",
+  "line_id": "world-action-models-robotic-manipulation",
+  "title_ru": "World-action models для манипуляций робота",
+  "source": {
+    "index_manifest": "data/processed/arxiv-trigram-index-full-v4/manifest.json",
+    "index_manifest_sha256": "0a1f8f7801bdbd8d1db19400628cb7f32b02ca90b1ed9848096a915ec6684178"
+  },
+  "date_from": "2016-09-01",
+  "as_of_date": "2026-09-01",
+  "background_category": "cs.RO",
+  "matching_version": "orthographic-separators-v1",
+  "concept_groups": [
+    ["world action model", "world action models", "world action modeling"],
+    ["robot manipulation", "robotic manipulation", "non-prehensile manipulation"]
+  ],
+  "exclusions": [],
+  "max_matches": 500,
+  "selection_note": "Mechanism and task selected after inspecting broad robotic-manipulation search; diagnostic, not independent discovery",
+  "limitations": [
+    "Current arXiv title and abstract, not original-version full text, are searched.",
+    "An exact two-concept hit is not automatically a primary result or one coherent mechanism.",
+    "cs.RO is a broad comparison background, not a complete worldwide robotics denominator.",
+    "This line was chosen after viewing a broad result and cannot evaluate automatic recall."
+  ]
+}

@@ -1,0 +1,16 @@
+version: "controlled-query-0.4.1-experimental"
+max_suggestions: 20
+min_document_support: 2
+max_selected_terms: 4
+max_exclusions: 10
+max_literal_chars: 80
+max_encoded_expression_bytes: 2500
+relation: literal_cooccurrence_not_verified_synonym
+non_technical_tokens: [many, several, some, various, other]
+source_documentation:
+  openalex: https://help.openalex.org/api/searching/
+  arxiv: https://info.arxiv.org/help/api/user-manual.html
+interpretation: >
+  Совместная встречаемость в публикациях не доказывает синонимию, перевод,
+  технологическую новизну или истинность слабого сигнала. Все включения
+  выбираются пользователем. Предложение не меняет исходный корпус.

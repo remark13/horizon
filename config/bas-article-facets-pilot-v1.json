@@ -1,0 +1,10 @@
+{
+  "version": "bas-article-facets-pilot-v1",
+  "purpose": "development_diagnostic_only",
+  "source": "outputs/scout-composition-review-bas-full-arxiv-2026-09-26-v1.json",
+  "source_sha256": "5eadfb9154deac9d69dedbafa6ff29540bb885e9e045caf551b51807201d6fe3",
+  "model": "qwen3.5:9b",
+  "work_ids": [195749, 195805, 195849, 195767, 195912, 195911, 195899, 195915, 195874, 195624, 195813, 195753, 195738],
+  "selection_note": "Before model run: deliberately includes paired PACNav and jamming papers, plus visibly mixed card members and UAV-context outliers from ranks 6, 12, 13 and 14. Developer diagnostic, not an independent test.",
+  "production_use": false
+}

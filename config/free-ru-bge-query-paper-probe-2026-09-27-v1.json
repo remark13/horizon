@@ -1,0 +1,22 @@
+{
+  "version": "free-ru-bge-query-paper-probe-v1",
+  "packet": "outputs/free-ru-short-application-first15-review-packet-2026-09-27-v1.json",
+  "packet_sha256": "b5fa23b1e9c1d186007a0e1d19048a58c37db9d1e77822297d760d1b98f7788b",
+  "developer_review": "config/free-ru-short-application-metadata-review-2026-09-27-v1.json",
+  "developer_review_sha256": "9129fc3e5d9142ff82ddc1ed357759ff7de44b8dc9fc71a4ea5444e95e6431b4",
+  "model_repo": "BAAI/bge-reranker-v2-m3",
+  "model_revision": "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e",
+  "local_model_dir": "data/models/bge-reranker-v2-m3-953dc6f",
+  "input_policy": "original_RU_query_vs_OpenAlex_title_plus_abstract",
+  "max_length": 320,
+  "batch_size": 4,
+  "max_pairs": 45,
+  "predeclared_gate": "UAV_land_vehicle_relation_collision_W4212992056_must_score_below_UAV_GPS_denied_review_W4387166575",
+  "production_use": false,
+  "limitations": [
+    "Developer metadata labels were made after reading this packet; not independent gold or weak-signal precision.",
+    "BGE reranker estimates topic relevance, not primary-result role, growth or diffusion.",
+    "The first 320 tokens may omit a decisive passage and a missing abstract stays unknown.",
+    "One RU query against 15 papers per case is a bounded diagnostic, not a full-route before-after comparison."
+  ]
+}

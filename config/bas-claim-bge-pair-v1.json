@@ -1,0 +1,20 @@
+{
+  "version": "bas-claim-bge-pair-v1",
+  "production_use": false,
+  "pair_config": "config/bas-task-pair-similarity.v1.json",
+  "pair_config_sha256": "bf70fb8c3d837dada043ad08f3a7f105f19c9738c805addbfc98636156d1ed6a",
+  "claim_index": "data/processed/bas-own-claim-index-v1",
+  "claim_index_manifest_sha256": "a006f5171ec8b749e54fc59dface02b48f55e54aafe5165d66e5a1921bd45350",
+  "baseline_result": "outputs/bas-task-pair-similarity-2026-09-26-v1.json",
+  "baseline_result_sha256": "0f214b65ff581b4efa5ec9defa13ca92ff8ffd8d3df590835baedc69d5d1bf8f",
+  "model": "bge-m3:latest",
+  "model_digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+  "api_root": "http://127.0.0.1:11434",
+  "features": ["claim_bge_cosine", "title_plus_claim_bge_cosine"],
+  "production_gate": "none; developer labels already inspected, diagnostic only",
+  "limitations": [
+    "The twenty pairs were marked by one developer and their holdout partition has been inspected before.",
+    "BGE-M3 measures textual similarity, not shared technical method or weak-signal status.",
+    "Two of the twenty-six saved BAS works are outside the claim-index broad parent and have no claim text."
+  ]
+}

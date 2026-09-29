@@ -1,0 +1,46 @@
+{
+  "version": "cross-cluster-diffusion-regression-protocol-v1",
+  "production_use": false,
+  "mission_id": "ml-area-2017",
+  "normalize_run_id": 79,
+  "cluster_run_id": 106,
+  "quality_policy_version": "publication-quality-v1",
+  "date_from": "2010-01-01",
+  "as_of_date_exclusive": "2017-01-01",
+  "expected_quality_include_works": 12605,
+  "expected_eligible_works": 12599,
+  "expected_quality_include_outside_period": 6,
+  "expected_topics": 436,
+  "max_input_works": 20000,
+  "max_output_bytes": 52428800,
+  "min_free_disk_reserve_bytes": 53687091200,
+  "coverage_comparable": false,
+  "policy": {
+    "recent_windows": 3,
+    "min_recent_works": 3,
+    "min_docs_per_area": 1,
+    "min_recent_areas": 2,
+    "min_area_gain": 1,
+    "min_share_ratio": 1.5,
+    "max_recent_share": 0.02,
+    "min_phrase_tokens": 2,
+    "max_phrase_tokens": 4,
+    "max_unique_phrases": 1000000,
+    "top_limit": 200
+  },
+  "acceptance": {
+    "control_evaluation_only_after_generation": true,
+    "minimum_eligible_controls_in_one_proposal": 2,
+    "minimum_eligible_control_fraction": 0.5,
+    "maximum_review_rank": 15,
+    "require_deterministic_repeat": true,
+    "no_product_acceptance_without_new_cases_and_noise_review": true
+  },
+  "limitations": [
+    "This known failure is a development regression, not a hidden or independent benchmark.",
+    "Legacy quality-v1 history is checked by expected counts and archived input hash, not reinterpreted with the current policy.",
+    "Source coverage is not independently certified comparable; growth is observed within this fixed corpus.",
+    "Topic-lineage family collapse is a conservative diagnostic, not proven independent-domain identity.",
+    "No GCN term or control ID is passed to the candidate generator."
+  ]
+}

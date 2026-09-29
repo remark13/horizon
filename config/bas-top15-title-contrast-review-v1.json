@@ -1,0 +1,29 @@
+{
+  "version": "bas-top15-title-contrast-review-v1",
+  "source": "outputs/scout-composition-review-bas-full-arxiv-2026-09-26-v1.json",
+  "source_sha256": "5eadfb9154deac9d69dedbafa6ff29540bb885e9e045caf551b51807201d6fe3",
+  "annotation_role": "single_developer_title_diagnostic_not_expert_gold",
+  "question": "Do titles in this displayed card visibly describe more than one narrow research task or technical mechanism?",
+  "decisions": [
+    {"rank": 1, "candidate_id": 7260, "decision": "visible_mixture", "contrast_work_ids": [195682, 195866], "reason": "UAV self-positioning and localization of another object are different research tasks."},
+    {"rank": 2, "candidate_id": 7268, "decision": "visible_mixture", "contrast_work_ids": [195653, 195572], "reason": "UAV mission planning and an autonomous art installation do not establish one narrow technology."},
+    {"rank": 3, "candidate_id": 7264, "decision": "visible_mixture", "contrast_work_ids": [195434, 195852], "reason": "Reinforcement learning for UAV pursuit and estimation of low-altitude airspace capacity have different objects and outcomes."},
+    {"rank": 4, "candidate_id": 7267, "decision": "visible_mixture", "contrast_work_ids": [195904, 195652], "reason": "Drone-racing visual attention and monocular autonomous landing solve different tasks."},
+    {"rank": 5, "candidate_id": 7271, "decision": "visible_mixture", "contrast_work_ids": [195689, 195469], "reason": "Remote-ID separation and trajectory optimization for medical delivery are not one narrow planning method."},
+    {"rank": 6, "candidate_id": 7270, "decision": "visible_mixture", "contrast_work_ids": [195849, 195749], "reason": "Collective UAV navigation and compartmentalization of binary mixtures have different research objects."},
+    {"rank": 7, "candidate_id": 7272, "decision": "visible_mixture", "contrast_work_ids": [195926, 195722], "reason": "Inertial self-navigation and Kalman-filter object tracking are different estimation tasks."},
+    {"rank": 8, "candidate_id": 7283, "decision": "visible_mixture", "contrast_work_ids": [195905, 195764], "reason": "Distributed convolution for airborne computing and federated-learning transmission scheduling are different computational methods."},
+    {"rank": 9, "candidate_id": 7275, "decision": "visible_mixture", "contrast_work_ids": [195670, 195712], "reason": "Neuromorphic attitude control and EEG-based pilot-fatigue decoding have different technical aims."},
+    {"rank": 10, "candidate_id": 7257, "decision": "visible_mixture", "contrast_work_ids": [195878, 195492], "reason": "Quadrotor trajectory planning and morphing-airframe aerodynamic design are different technical mechanisms."},
+    {"rank": 11, "candidate_id": 7259, "decision": "visible_mixture", "contrast_work_ids": [195913, 195609], "reason": "Radio jamming detection and zero-knowledge authentication solve different security problems."},
+    {"rank": 12, "candidate_id": 7273, "decision": "not_rejected_by_titles", "contrast_work_ids": [195912, 195879], "reason": "Titles share the IRS/RIS-assisted UAV communication family; the exact mechanism and article roles still require abstract and source review."},
+    {"rank": 13, "candidate_id": 7278, "decision": "visible_mixture", "contrast_work_ids": [195874, 195624], "reason": "Photovoltaic-plant inspection and wilderness search are different applications and do not form one narrow line."},
+    {"rank": 14, "candidate_id": 7280, "decision": "visible_mixture", "contrast_work_ids": [195813, 195420], "reason": "Human-pose benchmark and wildlife re-identification have different targets and research tasks."},
+    {"rank": 15, "candidate_id": 7279, "decision": "visible_mixture", "contrast_work_ids": [195809, 195580], "reason": "Forest-canopy semantic SLAM and rooftop photogrammetric reconstruction are different mapping methods and settings."}
+  ],
+  "limitations": [
+    "Single-developer title-based rejection evidence, not independent expert annotation.",
+    "An explicit contrast can reject a narrow-line interpretation but absence of a contrast cannot confirm coherence.",
+    "No manual article-role classification, full-text review, independent-team verification, or signal Precision@15 is claimed."
+  ]
+}

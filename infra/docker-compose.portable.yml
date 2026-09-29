@@ -1,0 +1,6 @@
+# Relocation profile: do not silently bind a nonexistent path from this Mac.
+# Merge after docker-compose.yml; this replaces the same container mount target.
+services:
+  worker:
+    volumes:
+      - ${SAIA_ARXIV_DATASET_ROOT:?Set SAIA_ARXIV_DATASET_ROOT to the downloaded dataset ROOT including blobs and snapshots}:/arxiv-dataset:ro

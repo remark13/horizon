@@ -1,0 +1,20 @@
+{
+  "articles": [
+    {
+      "url": "https://example.org/news/agentic-ai-a",
+      "title": "Agentic AI enters a new research phase",
+      "seendate": "20260920T101500Z",
+      "domain": "example.org",
+      "language": "English",
+      "sourcecountry": "United States"
+    },
+    {
+      "url": "https://example.net/news/agentic-ai-b",
+      "title": "New safety methods for AI agents",
+      "seendate": "20260919T080000Z",
+      "domain": "example.net",
+      "language": "English",
+      "sourcecountry": "United Kingdom"
+    }
+  ]
+}

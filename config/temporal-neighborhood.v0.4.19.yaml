@@ -1,0 +1,37 @@
+version: temporal-neighborhood-diagnostic-0.4.19
+status: development_only
+purpose: >
+  Проверить, содержит ли SPECTER2-сходство достаточно информации для связи
+  ранних публикаций одной линии, прежде чем менять production-кластеризацию.
+
+input:
+  quality_decision: include
+  strict_before_as_of: true
+  embedding_model_must_match_cluster: true
+
+neighbors:
+  direction: prior_only
+  same_day_tie_break: work_id
+  max_prior_neighbors: 20
+  max_gap_days: 1826
+  block_size: 256
+  k_values: [5, 10, 20]
+  absolute_cosine_thresholds: [0.80, 0.85, 0.90, 0.95]
+  background_edge_quantiles: [0.90, 0.95, 0.99]
+
+evaluation:
+  split: development
+  kinds: [research_line_positive_proposal, ambiguous_line]
+  minimum_references_for_recovery: 2
+  giant_component_warning_share: 0.10
+  precision_measured: false
+  weak_signal_detection_measured: false
+
+guardrails:
+  catalog_loaded_after_graph_construction: true
+  reserved_evaluated: false
+  result_changes_production: false
+  current_metadata_reconstruction: true
+  note: >
+    Порог, который выглядит лучше на development-кейсах, не становится
+    production-порогом. Эксперимент диагностирует доступный сигнал и шум.

@@ -1,0 +1,39 @@
+version: source-adoption-registry-0.4.45
+extends: source-adoption.v0.4.43.yaml
+reviewed_at: '2026-09-23'
+scientific_score_uses_external_attention: false
+sources:
+  - id: usaspending
+    name: USAspending federal contract awards
+    decision: adapt
+    data: Public US federal contract awards with descriptions, recipients, agencies, dates, and reported amounts.
+    temporal_coverage: Search endpoint from 2007-10-01; current responses are not archived as-of snapshots.
+    regional_coverage: United States federal procurement only.
+    access: Public POST search API; bounded to one page of 50 records and an exact phrase visible in award description.
+    credentials: none
+    cost: No API fee or key required in official documentation.
+    license_status: Public API metadata used as record-level evidence; rights to republish full third-party descriptions have not been separately audited.
+    reproducibility: Preserve exact request payload, raw-response checksum, retrieval time, award ID and URL; saved observations are append-only.
+    retrotest_fit: No defensible historical-as-of use without archived snapshots and reporting-lag controls.
+    role: public_procurement_only
+    reason: Adds procurement evidence distinct from papers and patents; not private investment, market size or a scientific score input.
+    evidence_urls:
+      - https://api.usaspending.gov/docs/endpoints
+      - https://github.com/fedspendingtransparency/usaspending-api/blob/master/usaspending_api/api_contracts/contracts/v2/search/spending_by_award.md
+  - id: sbir_sttr_awards
+    name: SBIR/STTR awards and technology topics
+    decision: defer
+    data: Public small-business research awards, recipients, topics, dates, and optional abstracts.
+    temporal_coverage: Awards since programme inception; snapshot timestamps and publication lags require audit.
+    regional_coverage: United States federal SBIR/STTR programme.
+    access: Official API page currently announces maintenance; bounded live API request returned HTTP 403 on 2026-09-23. Bulk files are listed at about 65 MB without abstracts or 290 MB with abstracts.
+    credentials: none documented, but live API unavailable in current test
+    cost: Downloads listed as public; local disk and parsing costs remain.
+    license_status: Reuse terms for full descriptions and abstracts not independently audited; no bulk copy in SAIA yet.
+    reproducibility: Record official download URL, revision date, file checksum and field dictionary before ingestion.
+    retrotest_fit: Dates may enable reconstruction only after checking update and reporting lag; current download is not itself an as-of snapshot.
+    role: research_funding_only
+    reason: Potentially valuable translation channel, but not represented as a working API while official maintenance and HTTP 403 persist.
+    evidence_urls:
+      - https://www.sbir.gov/api
+      - https://www.sbir.gov/data-resources

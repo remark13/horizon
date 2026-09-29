@@ -1,0 +1,40 @@
+version: jrc-arxiv-observability-config-0.4.24
+reference_catalog:
+  path: reports/generated/jrc-silver-reference-v0413-2026-09-20.json
+  bytes_sha256: 6d8eb24763a8e13179d543168acec04b43b46157d6ed6e381d55817b3a9c0c26
+  payload_sha256: 2c0996af16b36887d661d747adb7ceee59945386fec3748f66bc6599f0d6a8af
+  role: silver_reference_not_outcome_truth
+official_report:
+  path: data/reference/jrc/JRC140959-weak-signals-2024.pdf
+  bytes_sha256: 1e4572af8d004764237bb0732b0846f8bc294ac845dd5df9249ecac0f9b2e0da
+  landing_url: https://publications.jrc.ec.europa.eu/repository/handle/JRC140959
+  download_url: https://op.europa.eu/o/opportal-service/download-handler?identifier=4cff5301-ece2-11ef-b5e9-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=
+  doi: 10.2760/6571994
+  released_at: '2025-02-17'
+  licence: CC-BY-4.0
+  official_signal_count: 221
+  official_cluster_count: 12
+methodology:
+  scientific_source: Scopus
+  scientific_window_start: '1996-01-01'
+  scientific_window_end_inclusive: '2023-12-31'
+  patent_source: PATSTAT Winter edition 2023
+  raw_signal_indicator: activeness
+  activeness_recent_window: '2021-01-01/2023-12-31'
+  activeness_definition: documents_in_recent_window_divided_by_documents_1996_2023
+  selection_filters:
+    - document_set_size
+    - human_assessment
+    - semantic_compactness
+  reconstruction: manually_optimised_queries_in_TIM_Technology
+benchmark:
+  target_cluster: Artificial Intelligence & Machine Learning
+  expected_target_signals: 25
+  period_start: '1996-01-01'
+  as_of_exclusive: '2024-01-01'
+  strategy: normalized_contiguous_original_title_in_current_arxiv_title_or_abstract
+  current_text_historical_reconstruction: true
+  true_retrieval_recall_claimed: false
+  production_score_modified: false
+  holdout_used: false
+  descriptions_generated: false

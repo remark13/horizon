@@ -1,0 +1,9 @@
+{
+  "version": "canonical-identity-0.4.5",
+  "mode": "conservative_doi_assertions",
+  "collision_rules": ["distinct_arxiv_ids", "conflicting_titles_and_author_sets", "inconsistent_arxiv_doi"],
+  "lookup_priority": ["arxiv", "openalex", "doi"],
+  "ambiguous_doi": "withhold_for_all_claimants",
+  "ambiguous_record_fallback": "source_identity_only",
+  "canonical_unit": "conservative_source_identity_not_adjudicated_research"
+}

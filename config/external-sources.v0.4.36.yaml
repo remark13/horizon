@@ -1,0 +1,23 @@
+version: external-sources-0.4.36
+extends: external-sources.v0.4.35.yaml
+scientific_score_modified: false
+
+usaspending:
+  source: usaspending
+  role: public_procurement_only
+  search_url: https://api.usaspending.gov/api/v2/search/spending_by_award/
+  max_records: 20
+  source_page_size: 50
+  max_response_bytes: 2000000
+  earliest_search_date: '2007-10-01'
+  credentials: none
+  evidence_urls:
+    - https://api.usaspending.gov/docs/endpoints
+    - https://github.com/fedspendingtransparency/usaspending-api/blob/master/usaspending_api/api_contracts/contracts/v2/search/spending_by_award.md
+  limitation: >-
+    US federal contract awards are public procurement observations, not private
+    investment deals or evidence of commercial success. The search returns one
+    bounded, sorted page; an absent visible description match is excluded. Award
+    amounts are reported award values, not market size. Current records are not
+    a historical as-of snapshot. No public-procurement count changes scientific
+    score or confidence automatically.

@@ -1,0 +1,76 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "saia"
+version = "0.4.65"
+description = "Система выявления слабых научно-технологических сигналов"
+requires-python = ">=3.10"
+dependencies = [
+    "numpy>=1.26",
+    "openpyxl>=3.1",
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+db = [
+    "psycopg[binary]>=3.1",
+]
+dev = [
+    "pytest>=8.0",
+]
+web = [
+    "fastapi>=0.115",
+    "httpx>=0.28",
+    "uvicorn>=0.30",
+]
+bulk = [
+    "pyarrow>=18",
+]
+# Тянет torch. На arm64 (Apple Silicon) это CPU-сборка, порядка 300 МБ;
+# нужна только для SPECTER. Провайдер ollama работает без этого extra.
+ml = [
+    "sentence-transformers>=3.0,<6",
+    "adapters>=1.3,<2",
+    # BERTopic тянет umap-learn и hdbscan. Плотностная кластеризация нужна
+    # не ради моды: она даёт класс «шум» как отдельный исход, тогда как
+    # k-means обязан разложить по кластерам всё, включая мусор выборки.
+    "bertopic>=0.16",
+]
+probabilistic = [
+    # Вероятностная модель для сравнения. Внешнее исследование даёт ей F1
+    # 80.6% против 56.6% у BERTopic именно на обнаружении зарождения тем —
+    # разрыв слишком велик, чтобы принять выбор из методики без проверки.
+    "gensim>=4.3",
+]
+
+[project.scripts]
+saia-methodology = "saia.methodology:main"
+saia-db = "saia.db:main"
+saia-dataset = "saia.dataset:main"
+saia-api = "saia.api:main"
+saia-quality = "saia.quality:main"
+saia-candidates = "saia.candidates:main"
+saia-benchmark = "saia.benchmark:main"
+saia-runtime-constraints = "saia.runtime_constraints:main"
+saia-specter2-smoke = "saia.specter2_smoke:main"
+saia-file-embeddings = "saia.file_embeddings:main"
+saia-arxiv-parent-corpus = "saia.arxiv_parent_corpus:main"
+saia-openalex-sample-audit = "saia.openalex_sample_audit:main"
+saia-import-file-embeddings = "saia.file_embedding_import:main"
+saia-register-coverage-passport = "saia.coverage_passport:main"
+saia-worker = "saia.jobs:main"
+saia-controlled-collection = "saia.controlled_collection:main"
+saia-historical-background = "saia.historical_background:main"
+saia-historical-novelty-diagnostic = "saia.historical_novelty_diagnostic:main"
+saia-historical-novelty-sensitivity = "saia.historical_novelty_sensitivity:main"
+
+[tool.setuptools.packages.find]
+include = ["saia*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+    "local_data: checks requiring unbundled local corpora, raw collection packages, or source PDFs",
+]

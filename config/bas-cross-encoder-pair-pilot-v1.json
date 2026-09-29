@@ -1,0 +1,23 @@
+{
+  "version": "bas-cross-encoder-pair-pilot-v1",
+  "source": "outputs/scout-composition-review-bas-full-arxiv-2026-09-26-v1.json",
+  "source_sha256": "5eadfb9154deac9d69dedbafa6ff29540bb885e9e045caf551b51807201d6fe3",
+  "task_pairs": "config/bas-task-pair-similarity.v1.json",
+  "task_pairs_sha256": "bf70fb8c3d837dada043ad08f3a7f105f19c9738c805addbfc98636156d1ed6a",
+  "contrast_report": "outputs/bas-top15-abstract-contrast-review-2026-09-26-v1.json",
+  "contrast_report_sha256": "3aac84aa7fe9c2f4cf69ea24272abbf2358b32c9d7b6366d98f6a8717e116d0d",
+  "model_repo": "BAAI/bge-reranker-v2-m3",
+  "model_revision": "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e",
+  "local_model_dir": "data/models/bge-reranker-v2-m3-953dc6f",
+  "license": "Apache-2.0 per official model card",
+  "input_policy": "symmetric_mean_logit_of_title_query_against_other_title_plus_abstract",
+  "max_length": 320,
+  "batch_size": 4,
+  "threshold_policy": "fit_on_five_positive_and_five_negative_development_pairs_only; maximize_balanced_accuracy_then_choose_highest_threshold",
+  "production_use": false,
+  "limitations": [
+    "The reranker is trained for query-document relevance, not sameness of research task or technical mechanism.",
+    "Task-pair labels come from one developer and the ten holdout pairs overlap development articles; contrast pairs were inspected before this model trial.",
+    "A passing pair diagnostic does not prove narrow-card or weak-signal precision and cannot authorize automatic group changes."
+  ]
+}

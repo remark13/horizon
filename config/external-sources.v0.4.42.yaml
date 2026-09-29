@@ -1,0 +1,4 @@
+version: external-sources-0.4.42
+extends: external-sources.v0.4.41.yaml
+scientific_score_modified: false
+news_publisher_manifest: news-publishers.v1.json

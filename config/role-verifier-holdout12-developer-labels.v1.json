@@ -1,0 +1,27 @@
+{
+  "version": "role-verifier-holdout12-developer-labels-v1",
+  "packet": "evaluation/goal-cross-domain-relevance-v2.packet.json",
+  "packet_sha256": "25135d75e21d3827b4403b58ba4d65b9f698f2d9a6cf18228b89b24df26de66f",
+  "selection": "First 12 items in the packet's pre-existing deterministic shuffled order; selected and developer-labelled before running the unchanged article-role prompt on this packet.",
+  "label_scope": "Developer assessment from saved title and abstract, not independent expert gold or full-text verification.",
+  "decision_policy": {
+    "direct": "Primary empirical or computational research on all essential qualifiers in the target topic; broad area targets permit primary work on a constituent mechanism.",
+    "related": "Topically adjacent, review, enabling method, or partial qualifiers; not direct evidence for the full target.",
+    "not_direct": "Target mechanism or requested application is absent or different.",
+    "uncertain": "Title/abstract do not allow the requested directness and publication role to be judged."
+  },
+  "rows": [
+    {"item_id": "review-781f8df61381f12129dbf72a", "judgement": "uncertain", "evidence_role": "unknown", "reason": "Title fits marker-assisted plant breeding, but no abstract or primary result is supplied."},
+    {"item_id": "review-232ebe30d2f4dc43d2ee3aef", "judgement": "related", "evidence_role": "review", "reason": "CNC feed-system dynamics review; multi-axis machine technology is not specified and this is not a primary result."},
+    {"item_id": "review-834ff2511dccd2e7e3de47a4", "judgement": "direct", "evidence_role": "primary_computational", "reason": "Primary optimization and simulation of communications in a LEO satellite constellation."},
+    {"item_id": "review-faecfb0364424ecb960cef7d", "judgement": "related", "evidence_role": "primary_computational", "reason": "Generative 3D composite design uses a surrogate model, but CAD-native manufacturing constraints are not established."},
+    {"item_id": "review-46986ed13f24f64633c3c086", "judgement": "direct", "evidence_role": "primary_computational", "reason": "Primary control-oriented CAR-T computational study within the broad CAR-T search area; no clinical efficacy is inferred."},
+    {"item_id": "review-39ef6f42cd916f5301e5f797", "judgement": "not_direct", "evidence_role": "review", "reason": "Quantum-sensing systems review does not mention an archaeological study or application in the supplied abstract."},
+    {"item_id": "review-b2327dac5a5d3502b1b9335d", "judgement": "related", "evidence_role": "primary_experimental", "reason": "Primary work on a hybrid electrolyte in a battery using an anode; the target is anode technology, not electrolyte development."},
+    {"item_id": "review-6943ac927500fc5ffa4db5c8", "judgement": "not_direct", "evidence_role": "primary_computational", "reason": "LLM analysis of robot logs does not describe a robot skills or motion marketplace."},
+    {"item_id": "review-09156bfa6557f944f68e7a1b", "judgement": "related", "evidence_role": "primary_computational", "reason": "DePIN versus cloud evaluation mentions data sovereignty but does not establish a sovereign cloud platform."},
+    {"item_id": "review-c17f4ebe94fc3f8d2eaafc1d", "judgement": "direct", "evidence_role": "primary_computational", "reason": "Primary mathematical analysis of CAR-T treatment dynamics within the broad CAR-T search area; not a clinical trial."},
+    {"item_id": "review-449a908f5512e9c69c7d882e", "judgement": "related", "evidence_role": "primary_computational", "reason": "Flow surrogate and generative design, but CAD-native manufacturability of parts is not demonstrated."},
+    {"item_id": "review-0706e304ead95201ba3356de", "judgement": "related", "evidence_role": "primary_experimental", "reason": "Deepfake-resistant liveness is relevant, but NFC anchor, onboarding injection protection and the required two-step mechanism are absent."}
+  ]
+}

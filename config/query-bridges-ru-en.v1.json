@@ -1,0 +1,21 @@
+{
+  "version": "controlled-exact-ru-en-search-bridges-v1",
+  "policy": {
+    "exact_russian_query_only": true,
+    "original_query_preserved": true,
+    "automatic_execution": false,
+    "unknown_query_uses_general_route": true,
+    "bridge_is_not_signal_or_relevance_label": true
+  },
+  "bridges": [
+    {
+      "id": "robotics/robotic-manipulation-broad",
+      "profile_id": "robotics",
+      "label_ru": "Роботизированные манипуляции",
+      "queries_ru": ["Роботизированные манипуляции", "Манипуляции роботами"],
+      "query_en": "robotic manipulation",
+      "phrases_en": ["robotic manipulation", "robot manipulation", "robot arm manipulation"],
+      "scope_note": "Broad scientific retrieval vocabulary; no VLA, WAM or other narrow signal name is seeded"
+    }
+  ]
+}

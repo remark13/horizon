@@ -1,0 +1,28 @@
+{
+  "version": "bas-facet-pair-comparison-v1",
+  "source": "outputs/scout-composition-review-bas-full-arxiv-2026-09-26-v1.json",
+  "source_sha256": "5eadfb9154deac9d69dedbafa6ff29540bb885e9e045caf551b51807201d6fe3",
+  "pair_protocol": "config/bas-task-pair-similarity.v1.json",
+  "pair_protocol_sha256": "bf70fb8c3d837dada043ad08f3a7f105f19c9738c805addbfc98636156d1ed6a",
+  "model": "qwen3.5:9b",
+  "allowed_task_families": [
+    "uav_self_localization", "aerial_object_localization",
+    "uav_mission_search_planning", "uav_navigation_path_planning",
+    "robotic_art_navigation", "other_or_unclear"
+  ],
+  "pair_prediction_rule": "same_non_other_task_family_only; invalid_article_facet_abstains",
+  "acceptance": {
+    "min_article_valid": 24,
+    "min_holdout_pair_coverage": 9,
+    "min_holdout_balanced_accuracy": 0.8,
+    "max_holdout_false_same": 1
+  },
+  "annotation_role": "existing_single_developer_task_pairs_not_independent_gold",
+  "production_use": false,
+  "limitations": [
+    "The 20 pair labels and their partition were inspected in prior diagnostics; the holdout is not independent.",
+    "Same task family is weaker than one technical mechanism or weak signal.",
+    "The taxonomy was built around BAS examples and does not transfer to arbitrary technology directions.",
+    "Sentence IDs prove source provenance but not that a selected sentence supports the chosen category."
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "version": "ru-compound-openalex-live-pilot-v1",
+  "frozen_compound_plan_sha256": "814891b03b1b3e33394c324790ec41c6baf5446f0d96f3718786cd3bcfee37d5",
+  "date_from": "2021-09-01",
+  "as_of_date": "2026-09-01",
+  "limit_per_query": 25,
+  "cases": [
+    {"case_id": "paraphrase-neuromorphic-edge", "live_query_en": "neuromorphic processor edge computing"},
+    {"case_id": "boundary-polymer-enzyme", "live_query_en": "polyethylene enzyme degradation"},
+    {"case_id": "outside-optical-clock", "live_query_en": "optical clock underwater navigation"},
+    {"case_id": "outside-fresco", "live_query_en": "laser cleaning medieval fresco"}
+  ],
+  "disclosure": "The boundary-polymer-enzyme query was previewed once with 25 results before this live batch configuration was saved. This is exploratory, not an independently frozen quality benchmark."
+}

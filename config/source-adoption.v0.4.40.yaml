@@ -1,0 +1,22 @@
+version: source-adoption-registry-0.4.40
+extends: source-adoption.v0.4.39.yaml
+reviewed_at: '2026-09-23'
+scientific_score_uses_external_attention: false
+sources:
+  - id: europe_pmc
+    name: Europe PMC RESTful Web Service
+    decision: adapt
+    data: Biomedical publication and preprint metadata with DOI, PMID and PMCID identities.
+    temporal_coverage: Historical publication dates in a mutable current search index.
+    regional_coverage: International life-sciences coverage with source and language selection effects.
+    access: Official public REST API, bounded anonymous queries.
+    credentials: none
+    cost: Free public API subject to service availability and fair use.
+    license_status: Metadata access is public; article full texts have item-level licenses and are not copied.
+    reproducibility: Pin compiled query, interval, retrieval time, response hash and work identifiers.
+    retrotest_fit: Not safe as an as-of historical corpus without archived index snapshots and indexing-lag control.
+    role: bibliographic_enrichment_only
+    reason: Improves biomedical source coverage but cannot be counted independently of OpenAlex before cross-source deduplication.
+    evidence_urls:
+      - https://europepmc.org/RestfulWebService
+      - https://europepmc.org/help

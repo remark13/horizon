@@ -1,0 +1,26 @@
+{
+  "version": "free-ru-bge-cross-domain-transfer-v1",
+  "packet": "evaluation/goal-cross-domain-relevance-v2.packet.json",
+  "packet_sha256": "25135d75e21d3827b4403b58ba4d65b9f698f2d9a6cf18228b89b24df26de66f",
+  "developer_labels": "config/role-verifier-dev12b-developer-labels.v1.json",
+  "developer_labels_sha256": "34b2ba86fe8a2f8f09fb5762bfe27cd73ef926bb760a46c042afe0732a516980",
+  "selection": "Exactly the 12 pre-existing dev12b labelled items, in stored order; no BGE score was inspected before freezing this protocol",
+  "model_repo": "BAAI/bge-reranker-v2-m3",
+  "model_revision": "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e",
+  "local_model_dir": "data/models/bge-reranker-v2-m3-953dc6f",
+  "input_policy": "original_RU_target_topic_vs_title_plus_abstract",
+  "max_length": 320,
+  "batch_size": 4,
+  "predeclared_same_topic_order_checks": [
+    {"higher": "review-977f749a45b8064e085a2bc6", "lower": "review-0c91997d804b33ced7debd48", "reason": "primary crop genomic selection versus crop breeding review"},
+    {"higher": "review-171aa977aed537363aca2640", "lower": "review-5b9d6560ad8027022200cec6", "reason": "related rare-earth mineralization versus Kagome electronic states"},
+    {"higher": "review-171aa977aed537363aca2640", "lower": "review-a94f939bc89cd01f7eced349", "reason": "related rare-earth mineralization versus nickelate electronic states"},
+    {"higher": "review-171aa977aed537363aca2640", "lower": "review-e61a1376b2e06b1bd15caf92", "reason": "related rare-earth mineralization versus doped optical fiber laser"}
+  ],
+  "production_use": false,
+  "limitations": [
+    "Developer labels were made before a different model test, but are not independent expert truth or full-text verification.",
+    "Twelve item pairs and four same-topic comparisons cannot establish weak-signal precision or a safe threshold.",
+    "Cross-domain relation and primary-result role remain distinct from generic query-document relevance."
+  ]
+}

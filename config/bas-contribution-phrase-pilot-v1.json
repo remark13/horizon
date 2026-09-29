@@ -1,0 +1,24 @@
+{
+  "version": "bas-contribution-phrase-proposals-v1",
+  "production_use": false,
+  "claim_index": "data/processed/bas-own-claim-index-v1",
+  "claim_index_manifest_sha256": "a006f5171ec8b749e54fc59dface02b48f55e54aafe5165d66e5a1921bd45350",
+  "date_from": "2016-09-01",
+  "as_of_date_exclusive": "2026-09-01",
+  "recent_from": "2024-09-01",
+  "prior_from": "2021-09-01",
+  "phrase_lengths": [2, 3, 4],
+  "min_distinct_works": 5,
+  "min_recent_works": 3,
+  "max_parent_share": 0.05,
+  "top_limit": 200,
+  "max_unique_phrases": 500000,
+  "exclude_review_hints": true,
+  "extra_stopwords": ["we", "our", "paper", "work", "study", "article", "this", "that", "these", "those", "propose", "proposes", "present", "presents", "introduce", "introduces", "develop", "develops", "show", "shows", "demonstrate", "demonstrates", "novel", "new", "approach", "method", "system", "framework", "model", "results", "based", "performance", "experiments", "using", "used", "also", "can", "which", "such", "their", "its", "has", "have", "are", "for", "and", "the", "with", "from", "into", "through", "towards", "toward", "while", "than", "other", "both", "each", "first", "second", "finally", "however", "therefore", "thus"],
+  "limitations": [
+    "Candidate phrases are lexical fragments of sentences with own-work cues, not validated technology lines.",
+    "The source snapshot can contain revisions after first arXiv submission, so historical emergence is not established.",
+    "Parent BAS retrieval and cue extraction may have coverage drift across periods; growth ranks are review priorities only.",
+    "No client weak-signal names are used for proposing or ranking phrases."
+  ]
+}

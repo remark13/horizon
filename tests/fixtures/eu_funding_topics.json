@@ -1,0 +1,25 @@
+{
+  "apiVersion": "2.155",
+  "totalResults": 30,
+  "results": [
+    {
+      "summary": "Trustworthy agentic artificial intelligence",
+      "url": "https://ec.europa.eu/info/funding-tenders/opportunities/data/topicDetails/HORIZON-CL4-2026-AI-01.json",
+      "metadata": {
+        "identifier": ["HORIZON-CL4-2026-AI-01"],
+        "callIdentifier": ["HORIZON-CL4-2026"],
+        "callTitle": ["Digital and emerging technologies"],
+        "programmePeriod": ["2021 - 2027"],
+        "startDate": ["2026-01-15T00:00:00.000+0000"],
+        "deadlineDate": ["2026-09-01T00:00:00.000+0000"],
+        "status": ["open"],
+        "keywords": ["agentic AI", "trustworthy AI"]
+      }
+    },
+    {
+      "summary": "FAQ duplicate",
+      "url": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/support/faq/1",
+      "metadata": {"startDate": ["2026-01-15T00:00:00.000+0000"]}
+    }
+  ]
+}

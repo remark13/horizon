@@ -1,0 +1,119 @@
+name: saia-codex
+
+services:
+  db:
+    image: pgvector/pgvector:pg16@sha256:ccc6e83d6e35e931dc7c5def2022729d5a6c370318d099181995567ff1fb4d6b
+    container_name: saia-codex-db
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-saia}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-saia}
+      POSTGRES_DB: ${POSTGRES_DB:-saia}
+    ports:
+      # Наружу — чтобы можно было подключиться psql-ом и посмотреть данные глазами.
+      - "127.0.0.1:${POSTGRES_PORT:-5434}:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-saia} -d ${POSTGRES_DB:-saia}"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  app:
+    build:
+      context: ..
+      dockerfile: infra/Dockerfile
+    container_name: saia-codex-app
+    command: ["python", "-m", "saia.server"]
+    ports:
+      # Экспериментальная v0.4 рядом с прежним локальным интерфейсом 8080.
+      - "127.0.0.1:${SAIA_APP_PORT:-8082}:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      SAIA_DATABASE_URL: postgresql://${POSTGRES_USER:-saia}:${POSTGRES_PASSWORD:-saia}@db:5432/${POSTGRES_DB:-saia}
+      SAIA_MAILTO: ${SAIA_MAILTO:-}
+      OPENALEX_MAILTO: ${OPENALEX_MAILTO:-}
+      OPENALEX_API_KEY: ${OPENALEX_API_KEY:-}
+      EPO_OPS_CONSUMER_KEY: ${EPO_OPS_CONSUMER_KEY:-}
+      EPO_OPS_CONSUMER_SECRET: ${EPO_OPS_CONSUMER_SECRET:-}
+      SEMANTIC_SCHOLAR_API_KEY: ${SEMANTIC_SCHOLAR_API_KEY:-}
+      EVENT_REGISTRY_API_KEY: ${EVENT_REGISTRY_API_KEY:-}
+      MEDIACLOUD_API_KEY: ${MEDIACLOUD_API_KEY:-}
+      MEDIACLOUD_COLLECTION_IDS: ${MEDIACLOUD_COLLECTION_IDS:-}
+      LENS_API_TOKEN: ${LENS_API_TOKEN:-}
+      # Ollama работает на хосте, а не в контейнере: host.docker.internal —
+      # единственный способ до неё достучаться из docker-сети.
+      SAIA_OLLAMA_URL: ${SAIA_OLLAMA_URL:-http://host.docker.internal:11434}
+      # SPECTER2 proximity с закреплёнными ревизиями базы и адаптера.
+      # Модель научной близости, не детектор истинности сигнала.
+      # В Docker работает на CPU; первый ML-запуск скачивает веса в hf_models.
+      # Переключение на локальную
+      # Ollama — одной переменной, без пересборки:
+      #   SAIA_EMBEDDING_PROVIDER=ollama SAIA_EMBEDDING_MODEL=bge-m3
+      SAIA_EMBEDDING_PROVIDER: ${SAIA_EMBEDDING_PROVIDER:-specter2}
+      SAIA_EMBEDDING_MODEL: ${SAIA_EMBEDDING_MODEL:-}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      # Проект примонтирован, а не скопирован: правки кода видны сразу,
+      # а data/ остаётся на диске и переживает пересоздание контейнера.
+      - ..:/app
+      # Веса моделей — в томе: пересборка образа не должна означать
+      # повторную выгрузку сотен мегабайт с Hugging Face.
+      - hf_models:/models
+    working_dir: /app
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8080/health', timeout=3)"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  worker:
+    build:
+      context: ..
+      dockerfile: infra/Dockerfile
+    container_name: saia-codex-worker
+    command: ["python", "-m", "saia.jobs", "worker", "--worker-id", "docker-worker"]
+    restart: unless-stopped
+    cpus: 2.0
+    depends_on:
+      db:
+        condition: service_healthy
+      app:
+        condition: service_healthy
+    environment:
+      SAIA_DATABASE_URL: postgresql://${POSTGRES_USER:-saia}:${POSTGRES_PASSWORD:-saia}@db:5432/${POSTGRES_DB:-saia}
+      SAIA_MAILTO: ${SAIA_MAILTO:-}
+      OPENALEX_MAILTO: ${OPENALEX_MAILTO:-}
+      OPENALEX_API_KEY: ${OPENALEX_API_KEY:-}
+      EPO_OPS_CONSUMER_KEY: ${EPO_OPS_CONSUMER_KEY:-}
+      EPO_OPS_CONSUMER_SECRET: ${EPO_OPS_CONSUMER_SECRET:-}
+      SEMANTIC_SCHOLAR_API_KEY: ${SEMANTIC_SCHOLAR_API_KEY:-}
+      SAIA_ARXIV_MIRROR_DIR: /arxiv-dataset/snapshots/aec69ea34085e34808157a0a9c8adeaef91caceb/data
+      SAIA_ARXIV_TRIGRAM_INDEX_DIR: /app/data/processed/arxiv-trigram-index-full-v4
+      SAIA_ARXIV_PARENT_INDEX_ENABLED: "1"
+      SAIA_FULL_ANALYSIS_ROOT: /app/data/raw/analysis-jobs
+      SAIA_THEMATIC_ARXIV_CACHE_DIR: /app/data/processed/thematic-arxiv-cache-0.4.41-r2-2000-2026-09
+      SAIA_THEMATIC_ARXIV_PACKS_DIR: /app/data/processed/thematic-arxiv-target-packs-0.4.41-r2
+      # Дополнительные запросные выборки; обычный поиск по-прежнему live.
+      SAIA_PREPARED_OPENALEX_DIR: /app/data/processed/priority-openalex-complete-cohorts-v5
+      SAIA_EMBEDDING_PROVIDER: ${SAIA_EMBEDDING_PROVIDER:-specter2}
+      SAIA_EMBEDDING_MODEL: ${SAIA_EMBEDDING_MODEL:-}
+      SAIA_TORCH_DEVICE: ${SAIA_TORCH_DEVICE:-cpu}
+      SAIA_TORCH_NUM_THREADS: ${SAIA_TORCH_NUM_THREADS:-2}
+      SAIA_EMBEDDING_BATCH: ${SAIA_EMBEDDING_BATCH:-8}
+      HF_HUB_OFFLINE: "1"
+      TRANSFORMERS_OFFLINE: "1"
+    volumes:
+      - ..:/app
+      - hf_models:/models
+      # Read-only cached dataset root. Mounting only snapshots/.../data would
+      # break its relative symlinks into blobs/.
+      - ${SAIA_ARXIV_DATASET_ROOT:-/Users/a/.cache/huggingface/hub/datasets--librarian-bots--arxiv-metadata-snapshot}:/arxiv-dataset:ro
+    working_dir: /app
+
+volumes:
+  db_data:
+  hf_models:

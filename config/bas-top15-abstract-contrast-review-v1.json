@@ -1,0 +1,31 @@
+{
+  "version": "bas-top15-abstract-contrast-review-v1",
+  "source": "outputs/scout-composition-review-bas-full-arxiv-2026-09-26-v1.json",
+  "source_sha256": "5eadfb9154deac9d69dedbafa6ff29540bb885e9e045caf551b51807201d6fe3",
+  "title_review": "config/bas-top15-title-contrast-review-v1.json",
+  "title_review_sha256": "bbddfd08959f7e59a080ee1035d28fdd4ffb134ab91edf6895fc413c5582843c",
+  "annotation_role": "single_developer_abstract_contrast_not_independent_gold",
+  "question": "Does this pair of papers inside one displayed card describe different research tasks, objects or mechanisms, so that the whole card cannot be treated as one verified narrow line?",
+  "decisions": [
+    {"rank": 1, "candidate_id": 7260, "work_ids": [195682, 195866], "evidence_ids": [["A3"], ["A3", "A6"]], "contrast_type": "different_task", "reason": "Self-positioning of the UAV versus localizing a target object in aerial images."},
+    {"rank": 2, "candidate_id": 7268, "work_ids": [195653, 195572], "evidence_ids": [["A1", "A2"], ["A2", "A3"]], "contrast_type": "different_task", "reason": "Mission generation from satellite imagery versus semantic navigation and artistic agency of a flying installation."},
+    {"rank": 3, "candidate_id": 7264, "work_ids": [195434, 195852], "evidence_ids": [["A4"], ["A6", "A11"]], "contrast_type": "different_task", "reason": "Safety-filtered UAV pursuit versus RL path planning used to estimate airspace capacity."},
+    {"rank": 4, "candidate_id": 7267, "work_ids": [195904, 195652], "evidence_ids": [["A3", "A6"], ["A1", "A3"]], "contrast_type": "different_task", "reason": "Vision-based racing with human attention prediction versus monocular landing using a lenticular pad."},
+    {"rank": 5, "candidate_id": 7271, "work_ids": [195689, 195469], "evidence_ids": [["A3"], ["A3", "A5"]], "contrast_type": "different_task", "reason": "Remote-ID collision avoidance for multi-drone operations versus single-UAV medical-delivery trajectory optimization with temporal logic."},
+    {"rank": 6, "candidate_id": 7270, "work_ids": [195849, 195749], "evidence_ids": [["A1", "A5"], ["A1", "A2"]], "contrast_type": "off_domain_object", "reason": "Actual UAV swarm navigation versus computational study of Brownian particles; drones are only one possible application of the latter."},
+    {"rank": 7, "candidate_id": 7272, "work_ids": [195926, 195722], "evidence_ids": [["A4"], ["A3", "A5"]], "contrast_type": "different_task", "reason": "Estimate the drone's own position and velocity versus tracking another object when detections are intermittent."},
+    {"rank": 8, "candidate_id": 7283, "work_ids": [195905, 195764], "evidence_ids": [["A4", "A5"], ["A1", "A4"]], "contrast_type": "different_task", "reason": "Coded distributed convolution in airborne computing versus wireless scheduling of federated-learning parameters."},
+    {"rank": 9, "candidate_id": 7275, "work_ids": [195670, 195712], "evidence_ids": [["A4", "A5"], ["A2", "A4"]], "contrast_type": "off_domain_object", "reason": "Spiking-network attitude control of a quadrotor versus EEG-based fatigue classification of human pilots."},
+    {"rank": 10, "candidate_id": 7257, "work_ids": [195878, 195492], "evidence_ids": [["A4", "A5"], ["A1", "A3"]], "contrast_type": "different_task", "reason": "Real-time trajectory planner for a quadrotor versus aerodynamic design and modeling of a morphing airframe."},
+    {"rank": 11, "candidate_id": 7259, "work_ids": [195913, 195609], "evidence_ids": [["A4", "A5"], ["A4", "A5"]], "contrast_type": "different_task", "reason": "Detection of radio jamming versus zero-knowledge flight-path authentication and privacy."},
+    {"rank": 12, "candidate_id": 7273, "work_ids": [195912, 195879], "evidence_ids": [["A1", "A2", "A4"], ["A1", "A2", "A3"]], "contrast_type": "parent_family_only", "reason": "Both belong to RIS-assisted UAV communications, but one optimizes a passive IRS link under jamming and the other a STAR-RIS multi-user sum rate. This pair supports a parent family, not a proven single narrow task/mechanism."},
+    {"rank": 13, "candidate_id": 7278, "work_ids": [195874, 195624], "evidence_ids": [["A8", "A9"], ["A3", "A4"]], "contrast_type": "different_task", "reason": "PV-module inspection and tracking versus wilderness search for human survivors."},
+    {"rank": 14, "candidate_id": 7280, "work_ids": [195813, 195420], "evidence_ids": [["A3"], ["A2", "A3"]], "contrast_type": "different_task", "reason": "Human-detection benchmark with pose metadata versus active image capture for individual wildlife re-identification."},
+    {"rank": 15, "candidate_id": 7279, "work_ids": [195809, 195580], "evidence_ids": [["A3", "A4"], ["A2", "A3"]], "contrast_type": "different_task", "reason": "LiDAR semantic SLAM and autonomous under-canopy flight versus photogrammetric reconstruction parameter study for rooftops."}
+  ],
+  "limitations": [
+    "A contrast pair disproves treating an entire card as one established narrow task, but does not partition every article in that card.",
+    "One developer selected the pairs and interpreted abstracts. This is not independent expert quality or Precision@15.",
+    "The rank-12 RIS/STAR-RIS boundary is especially judgment-sensitive; a broader parent family may still be useful as navigation."
+  ]
+}

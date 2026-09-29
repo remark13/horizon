@@ -1,0 +1,99 @@
+# Independent repository starter. Existing infra/docker-compose.yml is unchanged.
+# All state belongs to this Compose project; no paths from another computer.
+name: ${HORIZON_PROJECT_NAME:-horizon}
+
+x-runtime-environment: &runtime-environment
+  SAIA_DATABASE_URL: postgresql://${POSTGRES_USER:-horizon}:${POSTGRES_PASSWORD:?Create .env with a random password first}@db:5432/${POSTGRES_DB:-horizon}
+  SAIA_MAILTO: ${SAIA_MAILTO:-}
+  OPENALEX_MAILTO: ${OPENALEX_MAILTO:-}
+  OPENALEX_API_KEY: ${OPENALEX_API_KEY:-}
+  EPO_OPS_CONSUMER_KEY: ${EPO_OPS_CONSUMER_KEY:-}
+  EPO_OPS_CONSUMER_SECRET: ${EPO_OPS_CONSUMER_SECRET:-}
+  SEMANTIC_SCHOLAR_API_KEY: ${SEMANTIC_SCHOLAR_API_KEY:-}
+  EVENT_REGISTRY_API_KEY: ${EVENT_REGISTRY_API_KEY:-}
+  MEDIACLOUD_API_KEY: ${MEDIACLOUD_API_KEY:-}
+  MEDIACLOUD_COLLECTION_IDS: ${MEDIACLOUD_COLLECTION_IDS:-}
+  LENS_API_TOKEN: ${LENS_API_TOKEN:-}
+  SAIA_EMBEDDING_PROVIDER: ${SAIA_EMBEDDING_PROVIDER:-specter2}
+  SAIA_EMBEDDING_MODEL: ${SAIA_EMBEDDING_MODEL:-}
+  SAIA_OLLAMA_URL: ${SAIA_OLLAMA_URL:-http://host.docker.internal:11434}
+  SAIA_TORCH_DEVICE: cpu
+  SAIA_TORCH_NUM_THREADS: ${SAIA_TORCH_NUM_THREADS:-2}
+  SAIA_EMBEDDING_BATCH: ${SAIA_EMBEDDING_BATCH:-8}
+  SAIA_FULL_ANALYSIS_ROOT: /opt/horizon/data/raw/analysis-jobs
+  # Explicit bounded API mode; a full arXiv mirror is an optional separate setup.
+  SAIA_ALLOW_LIVE_ARXIV: "1"
+  HF_HOME: /models
+  HF_HUB_OFFLINE: "0"
+  TRANSFORMERS_OFFLINE: "0"
+
+x-runtime-volumes: &runtime-volumes
+  # Keep bundled data/reference visible when persistent state is empty.
+  - raw_data:/opt/horizon/data/raw
+  - processed_data:/opt/horizon/data/processed
+  - generated_reports:/opt/horizon/reports/generated
+  - hf_models:/models
+
+x-runtime: &runtime
+  build:
+    context: .
+    dockerfile: infra/Dockerfile.repository
+    args:
+      HORIZON_BASE_IMAGE: ${HORIZON_BASE_IMAGE:-python:3.12-slim@sha256:78387bc3881b8273120a12ebe6c1ab22b018ccc2c9adf565ae1ac9b536e184ea}
+      HORIZON_INSTALL_DEPENDENCIES: ${HORIZON_INSTALL_DEPENDENCIES:-1}
+  image: ${HORIZON_IMAGE:-horizon:0.4.65-repository}
+  environment: *runtime-environment
+  volumes: *runtime-volumes
+  working_dir: /opt/horizon
+  extra_hosts:
+    - "host.docker.internal:host-gateway"
+  restart: unless-stopped
+
+services:
+  db:
+    image: pgvector/pgvector:pg16@sha256:ccc6e83d6e35e931dc7c5def2022729d5a6c370318d099181995567ff1fb4d6b
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-horizon}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Create .env with a random password first}
+      POSTGRES_DB: ${POSTGRES_DB:-horizon}
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+    restart: unless-stopped
+
+  app:
+    <<: *runtime
+    command: ["python", "-m", "saia.server"]
+    ports:
+      - "127.0.0.1:${HORIZON_PORT:-8085}:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8080/health', timeout=3)"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 20s
+
+  worker:
+    <<: *runtime
+    command: ["python", "-m", "saia.jobs", "worker", "--worker-id", "repository-worker"]
+    cpus: ${HORIZON_WORKER_CPUS:-2.0}
+    mem_limit: ${HORIZON_WORKER_MEMORY:-6g}
+    depends_on:
+      db:
+        condition: service_healthy
+      app:
+        condition: service_healthy
+
+volumes:
+  db_data:
+  raw_data:
+  processed_data:
+  generated_reports:
+  hf_models:

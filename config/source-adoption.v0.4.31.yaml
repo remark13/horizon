@@ -1,0 +1,53 @@
+version: source-adoption-registry-0.4.31
+extends: source-adoption.v0.4.30.yaml
+reviewed_at: '2026-09-21'
+scientific_score_uses_external_attention: false
+sources:
+  - id: ukri_gtr
+    name: UKRI Gateway to Research
+    decision: accept_now
+    data: UK research projects, grant values, funders, organisations, investigators and linked outcomes.
+    temporal_coverage: Historical and current project metadata; the source reports its last refresh date.
+    regional_coverage: United Kingdom funding landscape; not global research funding.
+    access: Official public JSON/XML API with bounded search and pagination.
+    credentials: None for read-only public search.
+    cost: Free under the Open Government Licence with responsible request moderation.
+    license_status: Gateway to Research data are available under the UK Open Government Licence.
+    reproducibility: Pin query, window, retrieval time, raw response hash, project and grant identities.
+    retrotest_fit: Limited because current records can be corrected and relevance search is not a historical index snapshot.
+    role: research_funding_only
+    reason: Adds a non-US funding channel and exposes outcomes beyond publications.
+    evidence_urls:
+      - https://gtr.ukri.org/resources/gtrapi.html
+  - id: eu_funding_tenders
+    name: EU Funding & Tenders Portal
+    decision: adapt
+    data: Calls, topic cards, programme dates, keywords, status codes and links to official topic details.
+    temporal_coverage: Historical, current and forthcoming calls in the live corporate-search index.
+    regional_coverage: European Commission and participating EU programmes.
+    access: Official public multipart REST search using the published SEDIA key.
+    credentials: No personal account; the documented public API key is SEDIA.
+    cost: Free public REST API, bounded by service capacity and large response sizes.
+    license_status: Official public EU metadata; linked documents retain their own reuse terms.
+    reproducibility: Pin query/filter, window, retrieval time, API version, raw hash and topic identifier.
+    retrotest_fit: Limited because the live mixed index is mutable and the first relevance page is not an archived snapshot.
+    role: research_programme_only
+    reason: Calls can precede publication growth and reveal institutional priority, but need mixed-index filtering.
+    evidence_urls:
+      - https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/support/apis
+  - id: huggingface_hub
+    name: Hugging Face Hub
+    decision: accept_now
+    data: Public model, dataset and Space metadata, creation/modification dates, tags and current engagement counters.
+    temporal_coverage: Current mutable inventory with repository creation dates and Git revisions.
+    regional_coverage: Global public AI community with platform, language and open-source participation bias.
+    access: Official open REST endpoints for models, datasets and Spaces.
+    credentials: None for bounded public search; service-wide limits apply.
+    cost: Free within public Hub rate limits.
+    license_status: Repository-level licences vary; SAIA stores metadata and links, not model or dataset contents.
+    reproducibility: Pin three surface queries, retrieval time, response hashes, repo IDs and commit SHA.
+    retrotest_fit: Not strict because repositories can change or disappear and current downloads/likes leak future activity.
+    role: ai_artifact_diffusion_only
+    reason: For AI topics it observes the transition from papers to reusable models, datasets and demonstrations.
+    evidence_urls:
+      - https://huggingface.co/docs/hub/api

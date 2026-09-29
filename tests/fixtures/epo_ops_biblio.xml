@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ops:world-patent-data xmlns:ops="http://ops.epo.org" xmlns="http://www.epo.org/exchange">
+  <ops:biblio-search total-result-count="27">
+    <ops:query syntax="CQL">ta="agentic artificial intelligence"</ops:query>
+    <ops:range begin="1" end="2"/>
+    <ops:search-result>
+      <exchange-documents>
+        <exchange-document system="ops.epo.org" family-id="1001" country="EP" doc-number="4000001" kind="A1">
+          <bibliographic-data>
+            <publication-reference><document-id document-id-type="docdb"><country>EP</country><doc-number>4000001</doc-number><kind>A1</kind><date>20260902</date></document-id></publication-reference>
+            <parties>
+              <applicants><applicant><applicant-name><name>Example Research Ltd</name></applicant-name></applicant></applicants>
+              <inventors><inventor><inventor-name><name>Alice Example</name></inventor-name></inventor></inventors>
+            </parties>
+            <invention-title lang="en">Agentic artificial intelligence control system</invention-title>
+          </bibliographic-data>
+          <abstract lang="en"><p>An example patent abstract for autonomous planning.</p></abstract>
+        </exchange-document>
+        <exchange-document system="ops.epo.org" family-id="1002" country="WO" doc-number="2026000002" kind="A1">
+          <bibliographic-data>
+            <publication-reference><document-id document-id-type="docdb"><country>WO</country><doc-number>2026000002</doc-number><kind>A1</kind><date>20260909</date></document-id></publication-reference>
+            <invention-title lang="en">Safety supervision for autonomous software agents</invention-title>
+          </bibliographic-data>
+        </exchange-document>
+      </exchange-documents>
+    </ops:search-result>
+  </ops:biblio-search>
+</ops:world-patent-data>

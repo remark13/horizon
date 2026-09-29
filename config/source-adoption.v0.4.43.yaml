@@ -1,0 +1,39 @@
+version: source-adoption-registry-0.4.43
+extends: source-adoption.v0.4.42.yaml
+reviewed_at: '2026-09-23'
+scientific_score_uses_external_attention: false
+sources:
+  - id: spri_digital_weak_signals_2025
+    name: SPRi Digital Technology Weak Signals 2025
+    decision: defer
+    data: Korean research report classifying 30 digital-technology concepts as trend, emerging, or weak and describing publication and expert-review stages.
+    temporal_coverage: 2025 report with a comparison to the preceding annual edition.
+    regional_coverage: Korean institutional foresight with international scientific literature.
+    access: Public report page and PDF; link-only in SAIA.
+    credentials: none for reading
+    cost: Free to view; commercial reuse is restricted.
+    license_status: PDF marked KOGL Type 4, requiring attribution and prohibiting commercial use and derivatives.
+    reproducibility: Preserve report URL and access date; do not copy signal titles or descriptions into product data without permission.
+    retrotest_fit: Concept trajectories may inform methodology, but editorial labels are not independent dated gold labels for SAIA.
+    role: description_only
+    reason: Useful Asian comparison for emergence metrics and expert review; bank-product ingestion is blocked by stated reuse terms.
+    evidence_urls:
+      - https://www.spri.kr/posts/view/23813?code=data_all&study_type=issue_reports
+      - https://www.spri.kr/download/23602
+  - id: nistep_kidsashi_horizon_scanning
+    name: NISTEP KIDSASHI horizon scanning
+    decision: defer
+    data: Japanese weak-signal scouting method and historical short reports based on institutional science and technology news.
+    temporal_coverage: KIDSASHI public site operated from 2016 and was closed in March 2020; report published in 2018.
+    regional_coverage: Japan-led collection from roughly 300 research and institutional sources.
+    access: Official NISTEP methodological PDF and archive references; original signal site is closed.
+    credentials: none for reading official documents
+    cost: Free to view; bulk reuse not established.
+    license_status: Reuse permission for historical item texts not established; link-only.
+    reproducibility: Cite the dated NISTEP report and avoid assuming the closed site is a live feed.
+    retrotest_fit: Historical 39 published short reports can inform a case study, but source chronology and rights must be verified before evaluation.
+    role: description_only
+    reason: Valuable non-Western comparison of daily scouting and expert editorial review, not a currently operating open signal API.
+    evidence_urls:
+      - https://www.nistep.go.jp/wp/wp-content/uploads/NISTEP-PS016-AbstractJ.pdf
+      - https://www.nistep.go.jp/archives/32139/

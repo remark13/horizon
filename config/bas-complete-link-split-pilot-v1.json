@@ -1,0 +1,19 @@
+{
+  "version": "bas-complete-link-split-pilot-v1",
+  "source": "outputs/scout-composition-review-bas-full-arxiv-2026-09-26-v1.json",
+  "source_sha256": "5eadfb9154deac9d69dedbafa6ff29540bb885e9e045caf551b51807201d6fe3",
+  "contrast_report": "outputs/bas-top15-abstract-contrast-review-2026-09-26-v1.json",
+  "contrast_report_sha256": "3aac84aa7fe9c2f4cf69ea24272abbf2358b32c9d7b6366d98f6a8717e116d0d",
+  "task_pair_protocol": "config/bas-task-pair-similarity.v1.json",
+  "task_pair_protocol_sha256": "bf70fb8c3d837dada043ad08f3a7f105f19c9738c805addbfc98636156d1ed6a",
+  "threshold_report": "outputs/bas-task-pair-similarity-2026-09-26-v1.json",
+  "threshold_report_sha256": "0f214b65ff581b4efa5ec9defa13ca92ff8ffd8d3df590835baedc69d5d1bf8f",
+  "model": "specter2/proximity@3447645e+20815596",
+  "method": "complete_link_cosine_with_existing_frozen_development_threshold",
+  "production_use": false,
+  "limitations": [
+    "The threshold came from a failed diagnostic on opened developer pairs (holdout balanced accuracy 0.70); this pilot cannot be called independent.",
+    "A complete-link split may remove contrast pairs simply by making singleton groups; retained positive controls and group coverage must be reported.",
+    "No re-ranking, historical novelty, growth or diffusion is recalculated for split groups."
+  ]
+}

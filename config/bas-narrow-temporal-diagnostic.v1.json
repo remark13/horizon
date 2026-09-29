@@ -1,0 +1,43 @@
+{
+  "version": "bas-narrow-temporal-diagnostic-v1",
+  "purpose": "Precommitted diagnostic of two narrow candidate research lines, not weak-signal ground truth",
+  "period": {
+    "date_from": "2016-09-01",
+    "as_of_date": "2026-09-01",
+    "window": "September-August complete years"
+  },
+  "source": {
+    "index_manifest": "data/processed/arxiv-trigram-index-full-v4/manifest.json",
+    "index_manifest_sha256": "0a1f8f7801bdbd8d1db19400628cb7f32b02ca90b1ed9848096a915ec6684178",
+    "bas_parent_mission": "data/raw/analysis-jobs/universal-monthly-full-arxiv-v1-fab72bd5-1b32-4e94-8529-3af45d69aac4-0222bc4f6cc314f0/mission.json",
+    "bas_parent_mission_sha256": "4c22c26be52a03a9f1e42f807a198060e7337987dcbe92fd6a95fee920fc3527"
+  },
+  "matching_version": "orthographic-separators-v1",
+  "denominators": ["all_pinned_arxiv", "frozen_bas_union_predicate"],
+  "lines": [
+    {
+      "line_id": "bas-visual-inertial-odometry",
+      "label_ru": "Визуально-инерциальная одометрия для БПЛА",
+      "concept_groups": [
+        ["visual inertial odometry", "visual-inertial odometry", "visual inertial navigation"],
+        ["UAV", "drone", "unmanned aerial vehicle"]
+      ],
+      "exclusions": []
+    },
+    {
+      "line_id": "bas-multi-uav-task-allocation",
+      "label_ru": "Распределение задач между несколькими БПЛА",
+      "concept_groups": [
+        ["task allocation", "task assignment", "task scheduling"],
+        ["multi-UAV", "UAV swarm", "drone swarm"]
+      ],
+      "exclusions": []
+    }
+  ],
+  "interpretation_limits": [
+    "Frozen literal title/abstract matching identifies candidates, not article relevance or common mechanism.",
+    "Current snapshot title/abstract may have changed after initial submission; retrospective text timing is unproven.",
+    "Full pinned arXiv is not all scientific publishing; the BAS union predicate may omit narrow-line papers.",
+    "Do not tune these phrases after seeing counts and then report the same data as an independent accuracy test."
+  ]
+}

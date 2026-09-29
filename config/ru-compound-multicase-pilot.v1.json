@@ -1,0 +1,53 @@
+{
+  "version": "ru-compound-multicase-pilot-v1",
+  "purpose": "Developer-reviewed source-only retrieval diagnostic, fixed before running the four searches",
+  "source": "complete pinned arXiv metadata index v4",
+  "date_from": "2021-09-01",
+  "as_of_date": "2026-09-01",
+  "cases": [
+    {
+      "case_id": "paraphrase-neuromorphic-edge",
+      "role": "inside_map_paraphrase",
+      "query_ru": "Нейроморфные процессоры для запуска нейросетей прямо на устройстве",
+      "concept_groups": [
+        ["neuromorphic processors", "neuromorphic chips"],
+        ["on-device inference", "edge devices", "edge computing"]
+      ]
+    },
+    {
+      "case_id": "boundary-polymer-enzyme",
+      "role": "cross_domain_boundary",
+      "query_ru": "Ферменты для переработки полиэтилена из пищевых упаковок",
+      "concept_groups": [
+        ["polyethylene", "polyolefin"],
+        ["enzyme", "enzymatic"],
+        ["degradation", "recycling"]
+      ]
+    },
+    {
+      "case_id": "outside-optical-clock",
+      "role": "outside_priority_map",
+      "query_ru": "Оптические часы для подводной навигации",
+      "concept_groups": [
+        ["optical clock", "optical atomic clock"],
+        ["underwater navigation", "subsea navigation"]
+      ]
+    },
+    {
+      "case_id": "outside-fresco",
+      "role": "outside_priority_map",
+      "query_ru": "Реставрация средневековых фресок с помощью лазера",
+      "concept_groups": [
+        ["laser cleaning", "laser ablation"],
+        ["fresco", "mural painting"]
+      ]
+    }
+  ],
+  "limitations": {
+    "groups_are_not_independently_validated_translations": true,
+    "polyethylene_food_packaging_qualifier_not_enforced": true,
+    "medieval_qualifier_not_enforced": true,
+    "arxiv_is_not_full_science_coverage": true,
+    "matches_are_not_weak_signals": true
+  }
+}

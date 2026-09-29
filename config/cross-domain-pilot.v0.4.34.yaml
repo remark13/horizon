@@ -1,0 +1,61 @@
+version: cross-domain-retrieval-pilot-0.4.34
+status: frozen_unlabelled_development_pilot
+created_at: '2026-09-22'
+period:
+  date_from: '2021-09-22'
+  as_of_date: '2026-09-22'
+sampling:
+  local_arxiv: deterministic_min_hash_per_year
+  records_per_case_per_year: 1
+  openalex: separate_bounded_channel_not_yet_comparable
+interpretation:
+  relevance_only: true
+  weak_signal_labels_present: false
+  supports_precision_after_review: false
+  profile_names_exposed_in_main_ui: false
+profiles:
+  - profile_id: artificial-intelligence
+    cases:
+      - {case_id: artificial-intelligence/broad, scope: broad, label_ru: Искусственный интеллект, included_terms: [artificial intelligence, machine learning], exclusions: [artificial insemination]}
+      - {case_id: artificial-intelligence/ai-agents, scope: subarea, label_ru: ИИ-агенты, included_terms: [agentic artificial intelligence, AI agents], exclusions: []}
+      - {case_id: artificial-intelligence/ai-compute, scope: subarea, label_ru: Вычислительные архитектуры для ИИ, included_terms: [neuromorphic computing, AI accelerators], exclusions: []}
+  - profile_id: new-materials-and-chemistry
+    cases:
+      - {case_id: new-materials-and-chemistry/broad, scope: broad, label_ru: Новые материалы и химия, included_terms: [advanced materials, industrial biotechnology, specialty chemicals], exclusions: [teaching materials, educational materials]}
+      - {case_id: new-materials-and-chemistry/computational-materials, scope: subarea, label_ru: Вычислительное материаловедение, included_terms: [materials informatics, computational materials science], exclusions: []}
+      - {case_id: new-materials-and-chemistry/catalysts, scope: subarea, label_ru: Катализаторы и интенсификация процессов, included_terms: [advanced catalysts, chemical process intensification], exclusions: []}
+  - profile_id: production-and-automation
+    cases:
+      - {case_id: production-and-automation/broad, scope: broad, label_ru: Средства производства и автоматизации, included_terms: [advanced manufacturing, industrial automation, industrial robotics], exclusions: [office automation, marketing automation]}
+      - {case_id: production-and-automation/collaborative-robots, scope: subarea, label_ru: Коллаборативная робототехника, included_terms: [collaborative robots, human robot collaboration], exclusions: []}
+      - {case_id: production-and-automation/industrial-control, scope: subarea, label_ru: Промышленные системы управления, included_terms: [industrial control systems, motion control], exclusions: []}
+  - profile_id: nuclear-and-energy
+    cases:
+      - {case_id: nuclear-and-energy/broad, scope: broad, label_ru: Новые атомные и энергетические технологии, included_terms: [advanced nuclear technology, advanced energy systems, new energy technologies], exclusions: [human energy, organizational energy]}
+      - {case_id: nuclear-and-energy/small-modular-reactors, scope: subarea, label_ru: Малые модульные реакторы, included_terms: [small modular reactors, nuclear microreactors], exclusions: []}
+      - {case_id: nuclear-and-energy/long-duration-storage, scope: subarea, label_ru: Долговременное накопление энергии, included_terms: [long duration energy storage], exclusions: []}
+  - profile_id: transport-mobility
+    cases:
+      - {case_id: transport-mobility/broad, scope: broad, label_ru: Промышленное обеспечение транспортной мобильности, included_terms: [civil aviation technology, shipbuilding, electric vehicles], exclusions: [social mobility, human mobility prediction]}
+      - {case_id: transport-mobility/aircraft-propulsion, scope: subarea, label_ru: Авиационные двигатели и гибридная тяга, included_terms: [aircraft propulsion, hybrid electric aviation], exclusions: []}
+      - {case_id: transport-mobility/autonomous-vessels, scope: subarea, label_ru: Автономные суда, included_terms: [autonomous ships, remotely operated vessels], exclusions: []}
+  - profile_id: unmanned-aircraft-systems
+    cases:
+      - {case_id: unmanned-aircraft-systems/broad, scope: broad, label_ru: Беспилотные авиационные системы, included_terms: [unmanned aircraft systems, unmanned aerial vehicles, autonomous drones], exclusions: [underwater vehicles, ground vehicles]}
+      - {case_id: unmanned-aircraft-systems/gnss-denied-navigation, scope: subarea, label_ru: Навигация БАС без спутникового сигнала, included_terms: [GNSS denied navigation, GPS denied navigation], exclusions: []}
+      - {case_id: unmanned-aircraft-systems/drone-swarms, scope: subarea, label_ru: Рои беспилотных аппаратов, included_terms: [drone swarms, multi-UAV systems], exclusions: []}
+  - profile_id: food-security
+    cases:
+      - {case_id: food-security/broad, scope: broad, label_ru: Технологическое обеспечение продовольственной безопасности, included_terms: [agricultural technology, agricultural genetics, veterinary biotechnology, food technology], exclusions: [food insecurity survey, household food security questionnaire]}
+      - {case_id: food-security/crop-genomics, scope: subarea, label_ru: Геномика сельскохозяйственных культур, included_terms: [crop genomics, molecular breeding], exclusions: []}
+      - {case_id: food-security/veterinary-vaccines, scope: subarea, label_ru: Ветеринарные вакцины, included_terms: [veterinary vaccines], exclusions: []}
+  - profile_id: health-preservation
+    cases:
+      - {case_id: health-preservation/broad, scope: broad, label_ru: Новые технологии сбережения здоровья, included_terms: [preventive medicine, longevity technology, biomedical technology], exclusions: [healthcare policy survey, wellness marketing]}
+      - {case_id: health-preservation/tissue-engineering, scope: subarea, label_ru: Тканевая инженерия и биопечать, included_terms: [tissue engineering, bioprinting], exclusions: []}
+      - {case_id: health-preservation/longevity, scope: subarea, label_ru: Биология старения и долголетие, included_terms: [aging biology, longevity interventions], exclusions: []}
+  - profile_id: multi-satellite-constellations
+    cases:
+      - {case_id: multi-satellite-constellations/broad, scope: broad, label_ru: Многоспутниковые орбитальные группировки, included_terms: [satellite constellations, multi-satellite systems, small satellite constellations], exclusions: [molecular orbital, electron orbital]}
+      - {case_id: multi-satellite-constellations/intersatellite-links, scope: subarea, label_ru: Межспутниковая связь, included_terms: [inter-satellite links, optical satellite communication], exclusions: []}
+      - {case_id: multi-satellite-constellations/onboard-processing, scope: subarea, label_ru: Бортовая обработка данных и ИИ, included_terms: [onboard satellite processing, onboard artificial intelligence], exclusions: []}

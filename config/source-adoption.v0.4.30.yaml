@@ -1,0 +1,53 @@
+version: source-adoption-registry-0.4.30
+extends: source-adoption.v0.4.13.yaml
+reviewed_at: '2026-09-21'
+scientific_score_uses_external_attention: false
+sources:
+  - id: nih_reporter
+    name: NIH RePORTER
+    decision: accept_now
+    data: US federal research project titles, abstracts, dates, awards, organizations and investigators.
+    temporal_coverage: Historical and current project records; award updates can revise current metadata.
+    regional_coverage: Strongest for NIH and participating US federal agencies; not global funding coverage.
+    access: Official REST API v2 with bounded POST search.
+    credentials: None for the bounded project search used by SAIA.
+    cost: Free official API; responsible rate limit approximately one request per second.
+    license_status: Official public US government research-award metadata; downstream text rights are not broadened.
+    reproducibility: Pin request body, interval, retrieval time, raw bytes hash and project/core-project identities.
+    retrotest_fit: Limited; current records can contain later corrections and annual project records require family control.
+    role: research_funding_only
+    reason: Funding can precede publication growth and adds a genuinely different evidence channel.
+    evidence_urls:
+      - https://api.reporter.nih.gov/
+  - id: deps_dev
+    name: deps.dev Open Source Insights
+    decision: accept_now
+    data: Exact package identities and version publication history across major package ecosystems.
+    temporal_coverage: Current inventory with historical release timestamps; deletions and later corrections are not reconstructed.
+    regional_coverage: Global public package registries with ecosystem and open-source participation bias.
+    access: Official JSON REST API v3.
+    credentials: None for the exact package endpoint used by SAIA.
+    cost: Free API subject to Google API terms.
+    license_status: Generated deps.dev data is CC-BY 4.0; upstream package and repository data retain source terms.
+    reproducibility: Pin ecosystem, exact package name, interval, retrieval time and raw bytes hash.
+    retrotest_fit: Not strict as-of evidence because the endpoint exposes current inventory; post-as-of releases are filtered and disclosed.
+    role: software_diffusion_only
+    reason: Provides implementation activity distinct from papers, but cannot discover packages from a technology phrase by itself.
+    evidence_urls:
+      - https://docs.deps.dev/api/v3/
+  - id: semantic_scholar
+    name: Semantic Scholar Academic Graph
+    decision: adapt
+    data: Papers, identifiers, authors, references, current citation counts and fields of study.
+    temporal_coverage: Broad scholarly graph; current citation counts and metadata updates are not historical snapshots.
+    regional_coverage: Global with source, discipline, language and matching bias.
+    access: Official Academic Graph REST API; optional API key improves practical limits.
+    credentials: Anonymous access exists but can be heavily rate-limited; optional SEMANTIC_SCHOLAR_API_KEY.
+    cost: Free API within current service limits.
+    license_status: API and dataset use are subject to Semantic Scholar terms; no full text is copied by this connector.
+    reproducibility: Pin query, year filter, interval, retrieval time, authentication state and raw bytes hash.
+    retrotest_fit: Current citations are future-leaking for historical evaluation; use identifiers and topology only under an explicit policy.
+    role: bibliographic_enrichment_only
+    reason: Useful for citation topology and ID cross-checks, but overlaps OpenAlex/arXiv and is not independent publication evidence.
+    evidence_urls:
+      - https://api.semanticscholar.org/api-docs

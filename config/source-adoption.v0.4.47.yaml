@@ -1,0 +1,76 @@
+version: source-adoption-registry-0.4.47
+extends: source-adoption.v0.4.46.yaml
+reviewed_at: '2026-09-28'
+scientific_score_uses_external_attention: false
+sources:
+  - id: nsf_awards
+    name: NSF Awards API
+    decision: adapt
+    data: Award identifiers, titles, award dates, planned project starts, recipient organisations and explicitly reported USD funding. No contacts, addresses, abstract bodies or images stored.
+    temporal_coverage: Award-date window; one bounded current API page, not a complete series or historical-as-of archive.
+    regional_coverage: NSF-supported projects, primarily United States; recipient location is not worldwide diffusion.
+    access: Public NSF Awards REST API, HTTPS GET, no key; bounded first page and local all-term metadata matching.
+    credentials: none
+    cost: No API fee or account required for the tested public endpoint.
+    license_status: Public grant metadata only with NSF attribution and original links. NSF reuse policy distinguishes government text from identified third-party copyrighted content; article bodies, abstract bodies and images are not redistributed.
+    reproducibility: Request, retrieval time, raw-response checksum, award dates, matching basis and rejected-record counts retained. Contacts are not retained.
+    retrotest_fit: Not safe as historical visibility without dated archived responses; future project start does not erase an already issued award.
+    role: research_funding_only
+    reason: Adds research-funding leads in AI, materials, energy, robotics and other fields. Grant award, project start and obligated funding have different meanings; none is a private investment deal.
+    evidence_urls:
+      - https://resources.research.gov/common/webapi/awardapisearch-v1.htm
+      - https://www.nsf.gov/policies/digital
+  - id: datacite
+    name: DataCite research datasets and software
+    decision: adapt
+    data: Findable DOI metadata restricted to datasets and software, with dates, publisher, creators, related DOIs and resource-level rights. No dataset files, code, full articles or model weights downloaded.
+    temporal_coverage: Issued date when available, otherwise explicitly year-only publication metadata. DOI creation and update dates are not treated as publication dates.
+    regional_coverage: International participating repositories; publisher is a repository, not automatically a research country or independent adopter.
+    access: Public DataCite REST API, HTTPS GET; first bounded page, resource-type and publication-year filters.
+    credentials: none
+    cost: Free public metadata API subject to rate limits; no bulk dump or member-only service requested.
+    license_status: DataCite metadata is CC0. Underlying dataset/software licences are recorded separately and do not inherit the metadata licence.
+    reproducibility: DOI, original issue dates, publication-year precision, request, raw-response checksum and retrieval time retained.
+    retrotest_fit: Current metadata can be corrected later; no claim that a current record was visible historically. Year-only boundary records are excluded when the date window does not cover the whole year.
+    role: research_artifact_only
+    reason: Provides leads to reproducible research outputs across technology domains, not a ready-labelled weak-signal corpus or proof of industrial use. Versions and concept DOIs are not counted as independent adoption.
+    evidence_urls:
+      - https://support.datacite.org/docs/rest-api
+      - https://support.datacite.org/docs/api-queries
+      - https://support.datacite.org/docs/harvesting-datacite-doi-metadata
+  - id: openaire_projects
+    name: OpenAIRE Graph research projects
+    decision: adapt
+    data: Project and grant IDs, titles, start/end dates, funders, participant organisations and countries, reported funding with currency, source links. No personal contacts or full summaries stored.
+    temporal_coverage: Requested project-start interval from a bounded current API page; not a historical grant-announcement archive.
+    regional_coverage: International research graph with strong European funding coverage; countries refer to participants, not validated global adoption.
+    access: Public OpenAIRE Graph V3 projects endpoint; documented date filters and fixed HTTPS host. V3 schema is pinned; migration to V4 requires separate validation.
+    credentials: none
+    cost: Tested public endpoint works without registration or payment; API rate limits apply.
+    license_status: Graph API terms specify CC-BY reuse with OpenAIRE attribution. Do not silently assume all graph records are CC0; retain upstream funders and grant IDs.
+    reproducibility: Request, V3 schema, retrieval time, raw checksum, project IDs, reported amounts/currency and eligibility-filter counts retained.
+    retrotest_fit: Current aggregated metadata is not proof of historical visibility. Future starts and records outside the selected start interval are excluded.
+    role: research_funding_only
+    reason: Adds funded research programmes and participants. May duplicate grants in NIH, NSF, UKRI or CORDIS, so no independent-confirmation or score bonus is inferred.
+    evidence_urls:
+      - https://graph.openaire.eu/docs/apis/graph-api/projects/filtering/
+      - https://graph.openaire.eu/docs/11.1.1/apis/graph-api/projects/examples/
+      - https://graph.openaire.eu/docs/10.1.0/apis/terms/
+  - id: riken_press_rss
+    name: RIKEN English press-release feed
+    decision: defer
+    data: Potential institutional research-news metadata; no live ingestion implemented.
+    temporal_coverage: Recent RSS feed, not a historical archive.
+    regional_coverage: Japan institutional announcements; not all Asian research.
+    access: Official public feed discovered on the English homepage; automated reuse not approved.
+    credentials: Permission to use or reproduce site materials must be clarified with RIKEN.
+    cost: Public reading is possible; a licence for system reuse has not been established.
+    license_status: RIKEN Terms of Use prohibit unpermitted use/reproduction and restrict some commercial linking. Public RSS availability is not inferred to override those terms.
+    reproducibility: Homepage and terms URLs recorded; no article or feed corpus ingested.
+    retrotest_fit: Not eligible for retrotests or runtime ingestion.
+    role: description_only
+    reason: Useful Japanese research lead, but keep out of execution until reuse and linking permission is established.
+    evidence_urls:
+      - https://www.riken.jp/en/
+      - https://www.riken.jp/en/feed/press_feed/
+      - https://www.riken.jp/en/terms/

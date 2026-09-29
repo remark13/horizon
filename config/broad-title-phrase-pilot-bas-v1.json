@@ -1,0 +1,24 @@
+{
+  "version": "broad-title-phrase-pilot-v1",
+  "purpose": "Propose narrow research phrases from a broad BAS corpus without seeding known narrow-line names; not weak-signal classification",
+  "index_manifest_sha256": "0a1f8f7801bdbd8d1db19400628cb7f32b02ca90b1ed9848096a915ec6684178",
+  "date_from": "2016-09-01",
+  "as_of_date_exclusive": "2026-09-01",
+  "parent_terms": ["uav", "uavs", "drone", "drones", "unmanned aerial vehicle", "unmanned aerial vehicles", "unmanned aerial system", "unmanned aerial systems", "quadrotor", "quadrotors", "quadcopter", "quadcopters"],
+  "coarse_substrings": ["uav", "drone", "unmanned aerial", "quadrotor", "quadcopter"],
+  "max_parent_works": 25000,
+  "phrase_ngram_lengths": [2, 3, 4],
+  "min_distinct_title_works": 5,
+  "max_phrase_parent_share": 0.05,
+  "top_limit": 200,
+  "recent_complete_windows": 2,
+  "baseline_complete_windows": 3,
+  "stopwords": ["a", "an", "and", "as", "at", "based", "by", "for", "from", "in", "into", "of", "on", "or", "the", "through", "to", "toward", "towards", "under", "using", "via", "with"],
+  "generic_tokens": ["aerial", "aircraft", "drone", "drones", "flight", "multi", "uav", "uavs", "unmanned", "vehicle", "vehicles"],
+  "controls": {
+    "no_client_signal_names_or_narrow_line_names_in_parent_terms": true,
+    "titles_only_for_phrase_proposals": true,
+    "current_metadata_not_historical_original_version": true,
+    "known_lines_used_only_for_posthoc_developer_diagnostic": true
+  }
+}

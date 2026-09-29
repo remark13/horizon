@@ -1,0 +1,73 @@
+version: source-adoption-registry-0.4.42
+extends: source-adoption.v0.4.41.yaml
+reviewed_at: '2026-09-23'
+scientific_score_uses_external_attention: false
+sources:
+  - id: sitra_weak_signals_2025
+    name: Sitra Weak Signals 2025
+    decision: defer
+    data: Curated weak-signal examples and PESTEC-based interpretation.
+    temporal_coverage: Signals collected in 2024-2025; article published in 2025.
+    regional_coverage: Finland-led international examples with editorial selection.
+    access: Public HTML page and links to underlying stories; link-only in SAIA.
+    credentials: none for reading
+    cost: Free to view; reuse permission is a separate question.
+    license_status: Website terms allow linking but do not permit copying or embedding content without permission.
+    reproducibility: Record source URL and access date; do not mirror titles/descriptions into SAIA.
+    retrotest_fit: Editorial retrospective selection is not a dated gold set for model evaluation.
+    role: description_only
+    reason: Valuable comparative foresight source, but item-level ingestion is not licensed under general website terms.
+    evidence_urls:
+      - https://www.sitra.fi/en/articles/weak-signals-2025-a-magazine-from-the-year-2046/
+      - https://www.sitra.fi/tietosuoja/
+  - id: epo_linked_open_ep_data
+    name: EPO Linked Open EP Data
+    decision: defer
+    data: Bibliographic records for European patent publications identified by EPO URIs.
+    temporal_coverage: Current reference data for EP publications; availability history not pinned.
+    regional_coverage: European patent publications.
+    access: Public linked-data API and SPARQL endpoint for occasional reference lookups.
+    credentials: none for occasional use
+    cost: Free under fair-use limits.
+    license_status: CC BY 4.0 stated by EPO.
+    reproducibility: Pin exact EPO URI, retrieval time and response hash if adopted for ID lookup.
+    retrotest_fit: No historical source-state reconstruction established.
+    role: future_patent_corpus
+    reason: Good for verification of known EP IDs, but official fair-use framing is not a broad automated thematic search license.
+    evidence_urls:
+      - https://www.epo.org/en/searching-for-patents/data/linked-open-data
+      - https://data.epo.org/linked-data/documentation/api-reference
+  - id: uspto_odp_patentsview
+    name: USPTO Open Data Portal and PatentsView
+    decision: defer
+    data: US patent and pre-grant publication datasets and search services.
+    temporal_coverage: Historical US patent records; current ODP portal and API state.
+    regional_coverage: United States.
+    access: ODP account registration and API key required; PatentsView migration is ongoing.
+    credentials: USPTO.gov account and API key
+    cost: Public access after registration; operational terms and quotas require review.
+    license_status: PatentsView metadata was labelled CC BY 4.0; ODP current reuse terms need source-specific confirmation.
+    reproducibility: Pin ODP product/release, API version, query and downloaded file hashes.
+    retrotest_fit: Potentially useful if bulk releases are pinned; not yet available as a running anonymous connector.
+    role: future_patent_corpus
+    reason: Not a keyless source for the current MVP; new PatentsView API keys were suspended in the reviewed documentation.
+    evidence_urls:
+      - https://search.patentsview.org/docs/docs/Search%20API/SearchAPIReference/
+      - https://data.uspto.gov/apis/getting-started
+      - https://www.uspto.gov/subscription-center/2026/patentsview-migrating-uspto-open-data-portal-march-20
+  - id: nasa_ntrs_bulk_metadata
+    name: NASA NTRS public metadata annual NDJSON files
+    decision: defer
+    data: Annual public NASA STI record metadata for offline topic baselines.
+    temporal_coverage: Per-publication-year files; update and release history require pinning.
+    regional_coverage: NASA-created or NASA-funded research.
+    access: Official bulk NDJSON downloads described by NASA STI.
+    credentials: none stated for public metadata download
+    cost: Free public downloads; local storage and processing required.
+    license_status: Metadata is public; record-level full-text copyright is mixed and full texts must be excluded unless licensed.
+    reproducibility: Pin annual file URLs, retrieval dates, byte sizes and SHA-256 before use.
+    retrotest_fit: Could improve denominators, but a current annual file still does not prove historical index availability.
+    role: scientific_corpus
+    reason: More complete NASA domain sample than a relevance-ranked API page; defer bulk import until space and quality checks are ready.
+    evidence_urls:
+      - https://www.sti.nasa.gov/harvesting-data-from-ntrs/

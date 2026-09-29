@@ -1,0 +1,25 @@
+{
+  "version": "title-anchor-expansion-pilot-v1",
+  "source": "outputs/scout-composition-review-bas-full-arxiv-2026-09-26-v1.json",
+  "source_sha256": "5eadfb9154deac9d69dedbafa6ff29540bb885e9e045caf551b51807201d6fe3",
+  "source_scope": "all_24_saved_bas_cards_not_only_top15",
+  "index": "data/processed/arxiv-trigram-index-full-v4",
+  "index_manifest_sha256": "0a1f8f7801bdbd8d1db19400628cb7f32b02ca90b1ed9848096a915ec6684178",
+  "token_policy": "contiguous_title_bigrams_and_trigrams_without_stopwords; no known_line_names",
+  "stopwords_source": "config/broad-title-phrase-pilot-bas-v1.json",
+  "context_terms": ["uav", "drone", "unmanned aerial vehicle"],
+  "date_from": "2016-09-01",
+  "as_of_date": "2026-09-01",
+  "min_full_index_matches": 5,
+  "max_full_index_matches": 500,
+  "max_candidate_phrases": 2500,
+  "max_run_seconds": 600,
+  "production_use": false,
+  "limitations": [
+    "A title phrase need not describe a paper's own research result.",
+    "The source comprises saved topic-card memberships, not every article retrieved for BAS.",
+    "One publication may support many overlapping phrases and is not double counted across them.",
+    "Expanded lexical matches are not reviewed for topical relevance or primary results.",
+    "No weak-signal status or user-facing score is assigned."
+  ]
+}

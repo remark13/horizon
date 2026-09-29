@@ -1,0 +1,742 @@
+# SAIA — паспорт методики
+# Версионируемая конфигурация: всё, что в документах названо "стартовым" или
+# "подлежащим калибровке", живёт здесь, а не в коде.
+#
+# Правило: ни один порог и ни один вес не хардкодится в Python. Если число
+# влияет на результат — оно в этом файле и попадает в provenance прогона.
+
+version: "0.4"
+status: draft
+note: >
+  Стартовая конфигурация, подлежащая калибровке на ретроспективных срезах.
+  Числа не являются научно доказанными: они взяты из документов пакета как
+  гипотезы и разводятся ретротестом на восьми AI-кейсах.
+
+provenance:
+  derived_from:
+    - project_baseline_v1_0        # канонический источник весов score
+    - system_methodology           # рецепты признаков, пороги статусов, антишум
+    - service_analysis             # три даты, возрастной шлюз, MMR, наивные базы
+    - ai_benchmark_8_cases         # формулы признаков, метрики качества
+    - asian_weak_signal_research   # воронка, независимость подтверждений
+  conflicts_resolved_by: project_baseline_v1_0
+
+# ---------------------------------------------------------------------------
+# Временные окна
+# ---------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
+# Жизненный цикл темы
+# ---------------------------------------------------------------------------
+# Механика взята у BERTrend (RTE, ACL FuturED 2024, MPL-2.0) — открытой
+# реализации той же задачи. Заимствуется способ измерения, не определение
+# сигнала: у них слабый сигнал это средняя популярность плюс рост, без
+# проверки независимости команд и новизны. Воронка и раздельные оценки
+# остаются наши.
+topic_lifecycle:
+  popularity:
+    on_appearance: "p(t) = |D(t)|"
+    on_update: "p(t) = decay(p(t-1), elapsed_days) + |D(t)|"
+    # Тема, переставшая пополняться, теряет популярность. Это вычислимое
+    # выражение статуса fading, который в методике описан только словами.
+    #
+    # ИСПРАВЛЕНО ПОСЛЕ ВНЕШНЕЙ РЕВИЗИИ (дефект P0-1). Здесь стояло
+    # "exp(-lambda * dt^2)" с lambda 0.01, а код подставлял dt в ДНЯХ.
+    # Квартал молчания давал множитель exp(-0.01 * 90^2) = 6.6e-36, год —
+    # ноль в машинной арифметике: любая тема, пропустившая одно окно,
+    # стиралась. Документация объясняла ту же формулу на шкале кварталов,
+    # где она даёт 0.85 за год. Две интерпретации одной строки разошлись
+    # на тридцать пять порядков, и ни одна проверка этого не ловила.
+    #
+    # Непрозрачная lambda удалена, а не переведена в другие единицы:
+    # величину, смысл которой нельзя назвать вслух, невозможно ни
+    # обсудить, ни проверить. Период полураспада проверяется прямо.
+    decay:
+      time_unit: days              # единственная допустимая единица, читается кодом
+      shape: exponential           # exponential | gaussian
+      half_life_days: 365
+      formula: "p(t) = p(t-1) * 0.5 ** (silent_days / half_life_days)"
+      shape_note: >
+        Ревизия: квадрат в показателе (gaussian) означает возрастающую
+        скорость забывания и прикладного обоснования для SAIA не имеет.
+        Взят линейный показатель. Форма — предмет сравнения на бенчмарке,
+        а не вопрос вкуса.
+      alternatives_to_compare: [gaussian, none]
+    # Тема, молчавшая столько окон подряд, перестаёт быть кандидатом для
+    # связывания. Без этого старые якоря живут вечно и новая тема может
+    # приклеиться к линии, угасшей несколько лет назад (дефект P1-5).
+    death_after_silent_windows: 8
+
+  # Ответ на проблему, в которую упёрся первый прогон: пороги G2 и G4
+  # заданы перцентилями, а перцентиль требует выборки соседних тем.
+  # Перцентили считаются по распределению ВСЕХ тем внутри скользящего окна.
+  dynamic_thresholds:
+    low_percentile: 10
+    high_percentile: 50
+    window_size: 4                 # окон в скользящем окне для перцентилей и наклона
+    slope_method: linear_regression
+    classification:
+      noise: "p < P10, либо P10 <= p <= P50 при отрицательном наклоне"
+      weak: "P10 <= p <= P50 при положительном наклоне"
+      strong: "p > P50"
+    note: >
+      Это диагностическая классификация по накопленной популярности,
+      не статусы SAIA. В v0.4 G4 использует наклон доли новых публикаций
+      в сопоставимом корпусе, не этот накопленный ряд.
+
+  linking:
+    similarity_threshold: 0.70
+    adaptive_quantile: 0.99
+    anisotropy_trigger_median: 0.80
+    adaptive_note: >
+      У SPECTER2 абсолютные косинусные сходства кластерных центроидов
+      анизотропны: даже несвязанные темы могут иметь similarity выше 0.95.
+      Если медиана матрицы выше trigger, порог связи поднимается до Q99
+      фактического фонового распределения текущего перехода. Реализованный
+      порог сохраняется в provenance; это не настройка по известному GCN.
+    # Эмбеддинг первого появления темы сохраняется и не пересчитывается по
+    # текущему составу. Иначе тема незаметно уплывает: через десяток окон
+    # под тем же идентификатором оказывается другой смысл, и непрерывность
+    # истории становится фикцией.
+    anchor_embedding: first_occurrence
+
+windows:
+  step: quarter                    # quarter | year — параметр миссии
+  step_rationale: >
+    Методика: для быстрых областей квартал, для узких научных направлений год.
+    Пилот — ИИ, поэтому квартал.
+  min_history_windows: 4           # минимум окон истории для расчёта momentum
+  lineage:
+    # ИСПРАВЛЕНО ПОСЛЕ РЕВИЗИИ. Здесь стоял similarity_threshold: 0.60,
+    # который не читался никаким кодом, тогда как cluster.py использовал
+    # topic_lifecycle.linking.similarity_threshold: 0.70. Паспорт объявлен
+    # единственным источником истины и при этом содержал ключ, противоречащий
+    # действующему. Порог остался ровно один, и валидатор падает, если этот
+    # ключ вернут сюда.
+    threshold_defined_in: topic_lifecycle.linking.similarity_threshold
+    # continuation убран из списка событий намеренно. Продолжение темы —
+    # это отсутствие смены личности, и выражается оно двумя последовательными
+    # снимками одного topic_id. Прежний код писал его ребром parent = child,
+    # которое не несёт информации. В родословной остаются только события,
+    # меняющие личность темы.
+    events: [split, merge, new_core]
+    continuation_representation: consecutive_snapshots_of_same_topic
+    primary_candidate_source: new_core
+
+# ---------------------------------------------------------------------------
+# Дисциплина среза (as-of) — нарушение любого пункта считается багом, не настройкой
+# ---------------------------------------------------------------------------
+as_of_discipline:
+  exclude_after_cutoff:
+    - publications
+    - versions
+    - citations
+    - retractions
+  comparison: strict_less_than      # работа, датированная днём среза, относится к будущему
+  forbid_modern_terminology: true   # ретротест не подсказывает себе современными названиями
+  missing_is_not_zero: true         # пропуск снижает confidence, не score
+
+  # Найдено на данных, а не выведено из документов: в корпусе GNN 27% работ
+  # имеют publication_date ровно 1 января — это заглушка OpenAlex для случаев,
+  # когда известен только год. За ней стоят статьи NeurIPS и EMNLP, вышедшие
+  # в сентябре и декабре. Принятая за настоящую дату, заглушка протаскивает
+  # в срез 14 работ из будущего и создаёт ложный всплеск в первом квартале.
+  # ИСПРАВЛЕНО ПОСЛЕ РЕВИЗИИ (дефект P1-6). Правило "1 января = заглушка"
+  # применялось ко всем источникам без разбора. Для arXiv поле created —
+  # настоящая дата подачи, и работа, поданная 1 января, сдвигалась на 364
+  # дня вперёд, то есть выбрасывалась из своего собственного окна. В корпусе
+  # миссии ml-area-2017 arXiv единственный источник, так что правило било
+  # ровно по тем данным, ради которых писалось.
+  #
+  # Признак заглушки теперь свойство источника, а не строки.
+  imprecise_dates:
+    detect: source_declared_precision
+    by_source:
+      openalex:
+        january_first_is_placeholder: true
+        _why: >
+          OpenAlex подставляет 1 января, когда известен только год публикации.
+          Проверено на корпусе GNN: 27% работ с такой датой, за ними статьи
+          NeurIPS и EMNLP, вышедшие в сентябре и декабре.
+      arxiv:
+        january_first_is_placeholder: false
+        _why: >
+          Поле created протокола OAI-PMH — настоящая дата подачи препринта
+          с точностью до дня. Подачи 1 января существуют и их нельзя двигать.
+    policy: shift_to_year_end       # при неизвестном дне считаем работу более поздней
+    exclude_from_subyear_windows: true
+    count_in_coverage_confidence: true
+
+# ---------------------------------------------------------------------------
+# Нормализация признаков
+# ---------------------------------------------------------------------------
+normalization:
+  method: percentile
+  peer_group: [parent_field, size_bucket, window]
+  size_buckets: [[3, 10], [11, 30], [31, 100], [101, 500], [501, null]]
+  entropy_smoothing:
+    enabled: true                  # без сглаживания 2 работы из 2 стран дают "максимум разнообразия"
+    prior_weight: 1.0
+    min_objects_for_full_credit: 5
+  store_with_each_value: [n_objects, confidence_interval]
+
+# ---------------------------------------------------------------------------
+# Три (четыре) даты
+# ---------------------------------------------------------------------------
+dates:
+  first_found:
+    definition: самая ранняя запись в доступном корпусе
+    always_flag_as_possible_outlier: true
+  research_birth:
+    definition: первый период, когда кластер превысил минимальный порог
+    min_docs: 5
+    min_independent_orgs: 3
+    or_min_source_types: 2
+  signal_detected:
+    definition: дата статистически значимого ускорения либо начала burst-интервала
+    method: burst_detection
+  re_emergence_point:
+    definition: >
+      Новый перелом у давно существующей линии из-за внешнего enabler.
+      Исходная линия сохраняется. Без этого поля диффузионные модели выглядят
+      как тема 2015 года с провалом, а не как накопление и взрыв 2020-го.
+    enabled: true
+
+# ---------------------------------------------------------------------------
+# Признаки
+# ---------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
+# Эмбеддинги
+# ---------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
+# Кластеризация
+# ---------------------------------------------------------------------------
+# ДОБАВЛЕНО ПОСЛЕ РЕВИЗИИ (дефект P0-5). Эти параметры были зашиты в
+# cluster.py и embed.py, при том что паспорт объявлен единственным источником
+# истины. Одинаковый YAML не гарантировал одинаковый результат.
+clustering:
+  algorithm: hdbscan
+  seed: 42                         # фиксирует UMAP; без него разбиение плавает
+  prototype_backend: graph
+  graph:
+    similarity_threshold: 0.35
+    note: >
+      Детерминированный baseline по hashing-ngram эмбеддингам. Нужен для
+      воспроизводимого CPU-прогона без скачивания моделей; результаты
+      сравниваются с BERTopic/SPECTER и не объявляются эквивалентными им.
+
+  # Два масштаба вместо одного. Ревизия, пункт 7.1: единственное значение 15
+  # было продуктовым запретом на раннее обнаружение — тема из четырёх работ
+  # не могла стать кластером в принципе, а искали мы именно такие. Микромасштаб
+  # порождает кандидатов, established отмечает тех, кто дорос до размера,
+  # при котором методика вообще готова говорить о теме.
+  scales:
+    seed:
+      min_topic_size: 2
+      role: diagnostic_candidate_generation
+      warning: >
+        Пара документов может породить только наблюдаемый микрокандидат.
+        В TOP он попадёт лишь после шлюзов общего объёма, устойчивости,
+        независимости и роста; сам размер два доказательством не является.
+    micro:
+      min_topic_size: 5
+      role: candidate_generation
+    established:
+      min_topic_size: 15
+      role: confirmation
+  active_scale: micro
+  _two_stage_status: >
+    Порождение микрокандидатов реализовано. Второй этап — подтверждение
+    устойчивостью, ростом и независимостью — относится к гейтам G3/G4 и
+    на бенчмарке ещё не проверен. Микрокандидат не показывается как тренд.
+
+  umap:
+    n_neighbors: 15
+    n_components: 5
+    min_dist: 0.0
+    metric: cosine
+  hdbscan:
+    metric: euclidean
+    cluster_selection_method: eom
+  # В текущем полно-периодном поиске EOM сливал тематически разные работы
+  # в один гигантский кластер. Leaf сохраняет более узкие линии и оставляет
+  # неоднозначные статьи шумом; оконный ретротест продолжает использовать EOM.
+  global_hdbscan_selection_method: leaf
+
+  # Минимум работ в окне, ниже которого окно не участвует в расчёте новизны.
+  min_works_per_window: 3
+  # Отношение средних расстояний, выше которого неполнота метаданных
+  # признаётся артефактом. Проверено на корпусе GNN: фактическое 1.09.
+  title_only_artifact_ratio: 1.15
+
+embeddings:
+  provider: sentence_transformers  # ollama | sentence_transformers
+  model: allenai-specter
+  dim: 768
+  note: >
+    SPECTER обучен на графе цитирования: похожими он считает работы,
+    которые цитируют друг друга или цитируются вместе. Это и есть научная
+    близость, ради которой реестр моделей ставит его первым. Универсальные
+    модели вроде BGE-M3 меряют сходство слов, а не научную связь, и на
+    задаче новизны это разные вещи.
+  alternatives:
+    ollama/bge-m3: >
+      Локальная модель через Ollama, без torch в образе. Мультиязычная,
+      пригодится для азиатского контура. Для англоязычного научного
+      корпуса — запасной вариант, не основной.
+    specter2: >
+      Следующая версия SPECTER, требует пакета adapters и отдельной
+      загрузки адаптера. Не взята сразу сознательно: v1 уже даёт нужное
+      свойство обучения на цитировании, а лишняя зависимость с жёсткими
+      требованиями к версиям transformers удорожает отладку. Кандидат на
+      A/B вместе с SciNCL.
+  ab_test_required: >
+    Реестр предписывает сравнение моделей на 300-500 парах. Мерой служит
+    lead time на восьми кейсах бенчмарка, а не ощущение качества.
+
+  # Реестр моделей ставит в P0 три модели, а не одну. Две из них ещё не
+  # подключены, и обе нужны не «когда-нибудь»:
+  required_p0_not_yet_wired:
+    multilingual-e5-base: >
+      Слой русскоязычного запроса. Пользовательский сценарий предполагает
+      ввод направления по-русски, корпус при этом англоязычный. Без этой
+      модели запрос на русском работать не будет вовсе — это пробел в
+      функциональности, а не в документации. Префиксы query:/passage:
+      обязательны. Реестр: P0, загрузить сейчас.
+    all-MiniLM-L6-v2: >
+      Дешёвый CPU-baseline, 22.7M параметров против 110M у SPECTER.
+      Нужен как точка отсчёта: без него нельзя утверждать, что научная
+      модель вообще даёт выигрыш, оправдывающий её стоимость.
+      Реестр: P0, baseline.
+  comparability: >
+    Векторы разных моделей несопоставимы. Имя модели входит в первичный
+    ключ work_embedding, и новизна считается только внутри одной модели.
+  # Флаг сохраняется: работа без аннотации описана беднее, и это входит в
+  # coverage confidence. Но ПРОВЕРЕНО и НЕ подтвердилось предположение, что
+  # такой вектор систематически дальше от центроида: отношение средних
+  # расстояний 1.09 при 61 полной работе против 16 неполных. Скидку в
+  # новизну за отсутствие аннотации вводить не на чем.
+  weak_vector_flag: title_only
+
+features:
+  novelty_semantic:
+    formula: "1 - max(cos(centroid_new, centroids_mature[t-1]))"
+    normalize: percentile_within_field
+    mvp_simplification: >
+      На малом корпусе роль кластера играет временное окно целиком:
+      кластеризация на сотне работ не сходится. На широком корпусе окно
+      заменяется кластерами, как и требует методика.
+  novelty_lexical:
+    formula: доля новых устойчивых терминов относительно предыдущих окон
+    two_key_rule: true             # засчитывается только при согласии с семантической
+    citation_overlap_check: true   # третий ключ: ребрендинг массово цитирует предшественников
+  relative_volume:
+    formula: "p(t) = N_cluster(t) / N_parent_field(t)"
+  momentum:
+    formula: "ln((p(t) + eps) / (p(t-k) + eps))"
+    eps: 1.0e-6
+    k_windows: 1
+    robust_slope: true
+    ewma_alpha: 0.4
+    compare_against: bootstrap_field_baseline
+  acceleration:
+    formula: изменение устойчивого наклона между соседними окнами
+    robust: true
+  persistence:
+    formula: число последовательных окон выше собственного базового уровня
+    single_spike_penalty: true
+  coherence:
+    components: [mean_intra_similarity, topic_coherence, term_jaccard, core_stability, internal_citation_share]
+  independent_diffusion:
+    effective_orgs: "1 / sum(share^2)"      # обратный Симпсон
+    collapse_by: [shared_authors, shared_orgs]
+    entropy_over: [countries, categories]
+    max_single_org_share: 0.80
+  bridge_score:
+    formula: betweenness и разнообразие связей между темами
+    arxiv_crosslisting_counts_only_with_new_authors: true
+  citation_velocity:
+    windows_days: [90, 180]
+    normalize_by: [age, field]
+    mandatory: false               # KISTI: задержка цитирования в годы
+    excluded_from_gates: true
+  early_stage_fit:
+    components: [low_absolute_volume, preprint_to_peer_reviewed_ratio, player_concentration, result_contradiction]
+    direction: positive            # ранняя стадия — плюс, а не штраф
+  hype_gap:
+    mvp_formula: рост обзоров и позиционных статей против роста первичных результатов
+    media_channel: null            # слот под GDELT, в MVP пуст
+  coverage_confidence:
+    components: [abstract_completeness, affiliation_completeness, language_coverage,
+                 ingestion_break_flags, duplicate_share, window_model_stability, entity_resolution_quality]
+    role: warning_not_filter
+
+# ---------------------------------------------------------------------------
+# Воронка шлюзов — именованные конфигурации порогов
+# ---------------------------------------------------------------------------
+gates:
+  active: publication_v4
+
+  # Уточнено после ревизии: порог объёма относится к КАНДИДАТУ ЦЕЛИКОМ на
+  # дату среза, а не к отдельному окну. Аналитический отчёт: «Перед
+  # ранжированием кандидат проходит hard gates: не менее 8 релевантных
+  # документов». Методика: «не менее 3 работ, 2 организаций и 2 периодов» —
+  # периоды названы отдельно от работ. Применение порога к медиане по окну
+  # даёт ложноотрицательные результаты на ранних периодах.
+  volume_scope: candidate_total
+
+  # Документы дают ДВА несовпадающих определения устойчивости:
+  #   baseline — «присутствие и устойчивость минимум в двух последовательных
+  #     временных окнах» (считаются окна присутствия);
+  #   методика 4.1 — «число последовательных периодов роста» (требуется
+  #     неубывающая доля).
+  # Расхождение не разрешено документами. По умолчанию берётся мягкое
+  # определение baseline, строгое считается рядом и показывается.
+  persistence_definition: presence   # presence | growth_streak
+
+  configurations:
+
+    publication_v4:
+      note: Публикационный кандидат; численные пороги экспериментальны, не вероятность и не прогноз рынка.
+      g0_min_canonical_works: 5
+      g0_min_independent_orgs: 3
+      g0_max_single_org_share: 0.80
+      g1_maturity_percentile_max: 80
+      g2_novelty_percentile_min: 65
+      g3_min_windows: 2
+      g3_min_independent_teams: 2
+      g4_momentum_percentile_min: 65
+      g4_min_share_slope: 0.0
+      g4_min_share_change: 0.0
+      require_consecutive_windows: true
+      require_comparable_coverage: true
+      min_embedding_coverage: 0.90
+      require_coherence_calibration: true
+      g_coherence_min: 0.50
+      g5_age_years_max: 8
+      g5_mode: warn
+      g6_min_primary_sources: 2
+
+    methodology:
+      note: приоритет необычности
+      g0_min_canonical_works: 3
+      g0_max_single_org_share: 0.80
+      g1_maturity_percentile_max: 80
+      g2_novelty_percentile_min: 70
+      g3_min_windows: 2
+      g3_min_independent_teams: 2
+      g4_momentum_percentile_min: 60
+      g5_age_years_max: null       # возрастного шлюза нет
+      g6_min_primary_sources: 2
+
+    analytical_report:
+      note: приоритет скорости
+      g0_min_canonical_works: 8
+      g0_min_docs_with_second_channel: 5
+      g0_min_independent_orgs: 3
+      g0_max_single_org_share: 0.80
+      g1_maturity_percentile_max: 80
+      g2_novelty_percentile_min: 60
+      g3_min_windows: 2
+      g3_min_independent_teams: 3
+      g4_momentum_percentile_min: 75
+      g5_age_years_max: 8
+      g5_age_years_max_since_break: 4
+      g6_min_primary_sources: 2
+
+    blend:
+      note: >
+        Предложение по умолчанию: промежуточный порог объёма, возрастной шлюз
+        как предупреждение, а не отсечение. Разводится ретротестом на капсульных
+        сетях (высокая новизна, слабый рост) и COVID-диагностике (низкая новизна,
+        взрывной рост) — это ровно те кейсы, где конфигурации спорят.
+      g0_min_canonical_works: 5
+      g0_min_independent_orgs: 3
+      g0_max_single_org_share: 0.80
+      g1_maturity_percentile_max: 80
+      g2_novelty_percentile_min: 65
+      g3_min_windows: 2
+      g3_min_independent_teams: 2
+      g4_momentum_percentile_min: 65
+      g5_age_years_max: 8
+      g5_age_years_max_since_break: 4
+      g5_mode: warn                # warn | block
+      g6_min_primary_sources: 2
+
+  failure_semantics: >
+    Непрохождение шлюза даёт статус candidate/watch с названной причиной.
+    Это указание на нехватку данных, а не прогноз неуспеха.
+
+# ---------------------------------------------------------------------------
+# Score — только для прошедших воронку
+# ---------------------------------------------------------------------------
+scoring:
+  active: publication_v4
+  configurations:
+
+    publication_v4:
+      source: SAIA_internal_audit_2026_09_16
+      note: Отдельная базовая шкала без цитат и неподтверждённого bridge; не сравнивать численно с baseline_v1.
+      weights:
+        novelty: 0.25
+        momentum: 0.25
+        persistence: 0.20
+        independent_diffusion: 0.20
+        coherence: 0.10
+
+    baseline_v1:
+      source: project_baseline_v1_0
+      weights:
+        novelty: 0.22
+        momentum: 0.20
+        persistence: 0.16
+        independent_diffusion: 0.18
+        bridge: 0.10
+        citation_velocity: 0.08
+        coherence: 0.06
+
+    west_emergence:
+      source: service_analysis
+      note: выносит CrossSource и EarlyStageFit в явные слагаемые
+      weights:
+        growth: 0.25
+        novelty: 0.20
+        coherence: 0.15
+        cross_source: 0.20
+        potential_impact: 0.10
+        early_stage_fit: 0.10
+
+    methodology_wss:
+      source: system_methodology
+      weights:
+        novelty: 0.18
+        growth: 0.16
+        acceleration: 0.10
+        persistence: 0.12
+        diffusion: 0.12
+        coherence: 0.10
+        citation_dynamics: 0.10
+        independence: 0.07
+        relevance: 0.05
+
+  penalties:
+    single_origin_source: 0.10
+    missing_abstract: 0.05
+    suspicious_ingestion_change: 0.10
+    duplicates: 0.10
+    language_errors: 0.05
+    single_org_dominance: 0.15
+    hype_gap: 0.10
+
+# ---------------------------------------------------------------------------
+# Уверенность — считается отдельно, никогда не складывается со score
+# ---------------------------------------------------------------------------
+confidence:
+  # ИСПРАВЛЕНО ПОСЛЕ РЕВИЗИИ (дефект P1-8). Единственный набор весов включал
+  # expert_agreement, который до экспертной проверки неизвестен. Уверенность,
+  # показанная эксперту ДО его вердикта, частично состояла из его же вердикта.
+  # Наборов теперь два, и каждый суммируется в единицу самостоятельно.
+  stage: pre_review                        # pre_review | post_review
+  weights_pre_review:
+    data_completeness: 0.34
+    source_quality: 0.33
+    confirmation_independence: 0.33
+  weights_post_review:
+    data_completeness: 0.25
+    source_quality: 0.25
+    confirmation_independence: 0.25
+    expert_agreement: 0.25
+  low_confidence_action: move_to_watch     # не понижать силу сигнала
+  confirmed_signal_min: 55
+
+# ---------------------------------------------------------------------------
+# Формирование TOP-15
+# ---------------------------------------------------------------------------
+output:
+  top_n: 15
+  diversification:
+    enabled: true
+    method: mmr
+    lambda: 0.7
+    max_subtopics_per_parent: 3
+    horizon_buckets_years: [[0, 2], [2, 5], [5, 10]]
+    require_each_horizon: true
+    effect_types: [revenue_growth, cost_reduction, risk_security, infrastructure]
+    moonshot_quota: 2              # высокая неопределённость + высокий потенциал
+  semantics: >
+    TOP-15 — портфель для обсуждения, а не утверждение, что №1 объективно
+    лучше №2. Эксперту карточка показывается без позиции в рейтинге.
+
+# ---------------------------------------------------------------------------
+# Статусы
+# ---------------------------------------------------------------------------
+statuses:
+  values: [noise, candidate, watch, forming, mature, widespread, fading, expert_rejected]
+  transitions:
+    noise:
+      max_canonical_works: 2
+      or_single_org_share_above: 0.80
+      or_breaks_on_query_perturbation: true
+    candidate:
+      novelty_percentile_min: 70
+      momentum_percentile_min: 60
+      min_works: 3
+      min_orgs: 2
+      min_windows: 2
+    confirmed_signal:
+      min_consecutive_windows: 3
+      min_independent_orgs: 4
+      or_min_author_communities: 3
+      coherence_above_median: true
+      diffusion_above_median: true
+      min_confidence: 55
+      requires_expert_decision: true
+    forming:
+      min_consecutive_windows: 4
+      max_consecutive_windows: 6
+    fading:
+      declining_windows: 2
+  management_view:               # проекция для радара, из ITONICS
+    watch: наблюдать
+    candidate: проверить
+    forming: инициировать пилот
+    expert_rejected: отклонить
+
+# ---------------------------------------------------------------------------
+# Экспертный контур
+# ---------------------------------------------------------------------------
+expert:
+  min_experts_per_domain: 3
+  round_1_blind: true
+  hide_rank_position: true       # снижение anchoring
+  aggregation: [median, mad, confirm_share]
+  round_2_shows_anonymized_distribution: true
+  max_mad_for_promotion: 25      # выше — статус не повышается
+  can_edit: [bank_relevance, status, cluster_merge_split, add_source]
+  cannot_edit: [emergence_score, feature_values]
+  audit_trail_required: true
+
+# ---------------------------------------------------------------------------
+# Антишумовые детекторы
+# ---------------------------------------------------------------------------
+noise_detectors:
+  - id: conference_batch
+    signature: много работ в одной неделе из одного источника
+    defense: [quarterly_smoothing, source_contribution_cap, next_window_check]
+  - id: single_lab
+    signature: объём при общих авторах и аффилиациях
+    defense: [effective_org_count, author_community_graph, concentration_penalty]
+  - id: rebranding
+    signature: высокая лексическая новизна при низкой семантической дистанции
+    defense: [two_key_rule, semantic_lineage, citation_overlap]
+  - id: field_wide_growth
+    signature: тема растёт не быстрее своей области
+    defense: [share_of_field, field_normalization]
+  - id: review_hype
+    signature: растут обзоры, не первичные результаты
+    defense: [publication_type_split, review_weight_cap, hype_gap]
+  - id: popular_means_new
+    signature: внимание принимается за раннюю стадию
+    defense: [novelty_gate_independent_of_growth]
+  - id: preprint_versions
+    signature: одна работа появляется несколько раз
+    defense: [canonical_version_family]
+  - id: old_signal_new_enabler
+    signature: давняя тема резко ускорилась из-за внешнего условия
+    defense: [preserve_original_lineage, re_emergence_point]
+  - id: index_shift
+    signature: изменилось покрытие или таксономия источника
+    defense: [source_snapshot, taxonomy_version, control_queries, ingestion_break_flag]
+  - id: future_information
+    signature: ретротест использует поздние цитаты, версии или современные названия
+    defense: [hard_cutoff, forbid_modern_terminology, leakage_test]
+  - id: leakage_through_model
+    signature: >
+      LLM расширяет запрос на ретроспективном срезе и предлагает термины,
+      которых на эту дату ещё не существовало, — потому что обучена на
+      данных, включающих будущее. Жёсткая дата среза этого не ловит:
+      утечка приходит не через корпус, а через веса модели.
+    defense:
+      - на ретроспективных срезах словарь синонимов строится вручную либо
+        только по корпусу до даты среза
+      - версия словаря фиксируется вместе с миссией
+      - LLM-расширение допустимо на текущих запусках, но не в backtest
+    found_in: внешняя литература, сентябрь 2026
+  - id: imprecise_date_leakage
+    signature: >
+      дата-заглушка 1 января принимается за настоящую и протаскивает в срез
+      работы, вышедшие через месяцы после него; побочно даёт ложный всплеск
+      в первом окне года
+    defense: [shift_to_year_end, exclude_from_subyear_windows]
+  - id: llm_hallucination
+    signature: утверждение без подтверждающего фрагмента
+    defense: [retrieval_only_generation, claim_level_citations, forbid_unsupported_numbers]
+
+# ---------------------------------------------------------------------------
+# Проверка качества
+# ---------------------------------------------------------------------------
+validation:
+  naive_baselines:               # без этого остальные метрики ничего не доказывают
+    - keyword_frequency
+    - simple_cagr
+    - citation_count
+    - random_from_new_topics
+  metrics:
+    detection: [precision_at_15, recall_at_k, median_lead_time, rebranding_share,
+                mature_share, rank_stability, intercluster_diversity]
+    evidence: [two_channel_card_share, broken_link_rate, unsupported_claim_rate, provenance_completeness]
+    calibration: [confidence_vs_expert_agreement, brier_score, ece]
+  # Методика построения отрицательных примеров, взятая из эксперимента E02
+  # реестра датасетов. Это недостающая половина ответа о порогах: кейс GNN
+  # показывает, что настройка находит настоящий сигнал, но не показывает,
+  # не тащит ли она заодно шум.
+  noise_class_construction:
+    source: реестр датасетов, эксперимент E02
+    groups:
+      - разовый всплеск
+      - один коллектив
+      - зрелая тема
+      - новый термин без устойчивости
+      - кандидат без дальнейшей диффузии
+    size_per_group: 100-200
+    split_by: [время, родительская тема, организация, семейство терминов]
+    acceptance: не более 20% ложных срабатываний на каждой критической группе
+    note: >
+      Похожие работы не должны попадать в разные части разбиения, иначе
+      оценка завышается за счёт утечки между train и test.
+
+  reference_sets:
+    backtrend: >
+      66 экспертно отобранных слабых сигналов AI/ML и 832 публикации,
+      CC BY 4.0. Положительные кейсы для расширения бенчмарка с восьми до
+      почти семидесяти. Класса «шум» в наборе нет — он строится отдельно.
+    ogbn-arxiv: >
+      Граф цитирования 169 тыс. работ arXiv CS с готовым временным
+      разбиением: train до 2017, validation 2018, test с 2019. Совпадает с
+      горизонтом наших ретроспективных срезов.
+
+# Реально используемые экспериментальные измерения, не дополнительные обещания.
+publication_measurement:
+  percentile_rank: midrank
+  prevalence_peer_scope: active_in_last_full_window
+  min_percentile_peers: 5
+  persistence_full_credit_windows: 3
+  independent_team_full_credit: 5
+  team_overlap_jaccard_min: 0.50
+  min_author_identity_coverage: 0.80
+  min_affiliation_coverage: 0.80
+  missing_abstract_threshold: 0.70
+  evidence_max_items: 5
+  primary_review_patterns: ['survey', 'systematic review', 'literature review', 'bibliometric']
+  coherence_calibrated_models: []
+  denominator_scope: normalized_mission_corpus
+  historical_mode: modern_model_reconstruction
+
+publication_quality:
+  relevance_mode: publication
+  title_conflict_jaccard_max: 0.20
+  repository_index_delay_years: 3
+  early_citation_years: 2
+  note: >
+    Оценка source_quality отражает полноту/согласованность метаданных,
+    а не научную достоверность. Поздняя индексация, совпадение названий и
+    экспертный словарь годов терминов сами по себе не исключают работу.

@@ -1,0 +1,35 @@
+{
+  "version": "diffusion-alias-ranking-controls-v1",
+  "role": "evaluation_only_not_passed_to_generator",
+  "new_families": [
+    {
+      "id": "generative-adversarial",
+      "control_arxiv_ids": ["1406.2661", "1411.1784", "1511.06434"],
+      "source_urls": ["https://arxiv.org/abs/1406.2661", "https://arxiv.org/abs/1411.1784", "https://arxiv.org/abs/1511.06434"],
+      "technical_phrases": ["generative adversarial network", "generative adversarial net"],
+      "interpretation": "Candidate compositions must retain their technical name; a broad generative-model phrase is not recovery of this method."
+    },
+    {
+      "id": "knowledge-distillation",
+      "control_arxiv_ids": ["1503.02531", "1412.6550"],
+      "source_urls": ["https://arxiv.org/abs/1503.02531", "https://arxiv.org/abs/1412.6550"],
+      "technical_phrases": ["knowledge distillation", "teacher student"],
+      "interpretation": "These are historical comparison papers, not a claim of first-ever model compression; shared compression does not prove one narrow mechanism."
+    },
+    {
+      "id": "attention-translation",
+      "control_arxiv_ids": ["1409.0473", "1508.04025"],
+      "source_urls": ["https://arxiv.org/abs/1409.0473", "https://arxiv.org/abs/1508.04025"],
+      "technical_phrases": ["attention mechanism", "attention based", "attention model"],
+      "interpretation": "Broad translation or recurrent-network matches do not count as attention recovery; attention is still a family requiring mechanism review."
+    }
+  ],
+  "known_regression": {
+    "id": "gcn-known",
+    "control_arxiv_ids": ["1312.6203", "1603.00856", "1611.07308", "1612.07659"],
+    "technical_phrases": ["graph convolutional", "graph convolution"]
+  },
+  "mature_bare_phrase_controls": ["support vector machine", "logistic regression", "stochastic gradient descent", "convolutional neural network", "recurrent neural network"],
+  "mature_control_interpretation": "Generic bare names are diagnostic ranking controls, not negative labels for all research extending these technologies.",
+  "independent_gold": false
+}

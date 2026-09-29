@@ -1,0 +1,242 @@
+version: query-themes-0.4.47
+status: internal_suggestions_informed_by_customer_examples_not_ui_categories
+policy:
+  automatic_execution: false
+  original_query_preserved: true
+  customer_examples_informed_vocabulary: true
+  source_scope: [openalex, arxiv]
+themes:
+  - id: artificial-intelligence
+    name_ru: Искусственный интеллект
+    aliases: [ИИ, технологии в ИИ, artificial intelligence, AI]
+    subareas:
+      - id: foundation-models
+        name_ru: Базовые и языковые модели
+        query_en: foundation models and language models
+        phrases_en: [foundation model, large language model, language model pretraining]
+      - id: ai-agents
+        name_ru: ИИ-агенты и многоагентные системы
+        query_en: artificial intelligence agents
+        phrases_en: [AI agent, multi-agent system, agentic AI]
+      - id: multimodal-ai
+        name_ru: Мультимодальное обучение
+        query_en: multimodal artificial intelligence
+        phrases_en: [multimodal learning, vision language model, multimodal artificial intelligence]
+      - id: edge-ai
+        name_ru: Периферийный и встроенный ИИ
+        query_en: edge artificial intelligence
+        phrases_en: [edge AI, embedded machine learning, tinyML]
+      - id: trustworthy-ai
+        name_ru: Надёжность и объяснимость ИИ
+        query_en: trustworthy and explainable AI
+        phrases_en: [trustworthy AI, explainable artificial intelligence, AI safety]
+      - id: privacy-preserving-ai
+        name_ru: Конфиденциальное совместное обучение
+        query_en: privacy preserving machine learning
+        phrases_en: [federated learning, privacy preserving machine learning, private machine learning]
+      - id: neuro-symbolic-ai
+        name_ru: Нейросимволические методы
+        query_en: neuro symbolic artificial intelligence
+        phrases_en: [neuro-symbolic AI, neural symbolic reasoning, neuro symbolic learning]
+      - id: ai-compute
+        name_ru: Вычисления для ИИ
+        query_en: AI accelerators and neuromorphic computing
+        phrases_en: [AI accelerator, neuromorphic computing, photonic neural network]
+
+  - id: industrial-ai
+    name_ru: Индустриальный ИИ
+    aliases: [industrial AI, industrial artificial intelligence]
+    subareas:
+      - id: manufacturing-foundation-models
+        name_ru: Базовые модели для производства
+        query_en: industrial foundation models
+        phrases_en: [industrial foundation model, manufacturing foundation model, industrial time series foundation model, industrial time-series, industrial time series]
+      - id: ai-engineering-design
+        name_ru: ИИ в инженерном проектировании
+        query_en: machine learning for engineering design
+        phrases_en: [machine learning for engineering design, generative design for manufacturing, machine learning for CAD]
+      - id: industrial-agents
+        name_ru: ИИ-агенты для производственных процессов
+        query_en: AI agents for manufacturing
+        phrases_en: [AI agents for manufacturing, industrial AI agents, agentic manufacturing]
+      - id: industrial-vision
+        name_ru: Машинное зрение и контроль качества
+        query_en: vision foundation models for manufacturing
+        phrases_en: [vision foundation model for manufacturing, visual inspection for manufacturing, industrial defect detection]
+      - id: industrial-control
+        name_ru: ИИ в промышленном управлении
+        query_en: artificial intelligence for industrial control
+        phrases_en: [reinforcement learning for industrial control, AI for industrial control, industrial energy systems, industrial control systems]
+      - id: industrial-maintenance
+        name_ru: Диагностика и обслуживание оборудования
+        query_en: machine learning for predictive maintenance
+        phrases_en: [machine learning for predictive maintenance, industrial acoustic monitoring, machine fault diagnosis]
+      - id: industrial-programming
+        name_ru: Генерация программ для промышленной автоматизации
+        query_en: large language models for PLC programming
+        phrases_en: [IEC 61131-3, PLC programming, programmable logic controllers]
+      - id: industrial-process-documents
+        name_ru: Генерация технологических схем и документации
+        query_en: generative AI for process engineering diagrams
+        phrases_en: [P&ID diagrams, piping and instrumentation diagrams, process engineering diagrams]
+      - id: industrial-federated-learning
+        name_ru: Совместное обучение на данных предприятий
+        query_en: federated learning for industrial processes
+        phrases_en: [federated learning for industrial, federated learning for manufacturing, industrial chemical plants]
+
+  - id: ai-infrastructure
+    name_ru: Инфраструктура ИИ
+    aliases: [AI infrastructure, artificial intelligence infrastructure]
+    subareas:
+      - id: ai-interconnect
+        name_ru: Межсоединения для ИИ-вычислений
+        query_en: optical interconnect for AI data centers
+        phrases_en: [optical interconnect for AI, optical circuit switching for AI, AI data center interconnect]
+      - id: ai-memory
+        name_ru: Память и кэш для больших моделей
+        query_en: memory management for large language model inference
+        phrases_en: [KV cache offloading, memory management for LLM inference, LLM inference memory hierarchy]
+      - id: ai-accelerators
+        name_ru: Специализированные ИИ-ускорители
+        query_en: AI accelerator architecture
+        phrases_en: [AI accelerator architecture, wafer scale AI accelerator, neuromorphic AI chip]
+      - id: ai-data-centers
+        name_ru: Энергетика и охлаждение ИИ-ЦОД
+        query_en: AI data center cooling
+        phrases_en: [AI data center cooling, data center thermal management, energy efficient AI data center]
+      - id: model-serving
+        name_ru: Инфраструктура исполнения моделей
+        query_en: large language model serving systems
+        phrases_en: [large language model serving, distributed LLM inference, AI inference scheduling]
+
+  - id: robotics
+    name_ru: Роботы
+    aliases: [робототехника, robotics]
+    subareas:
+      - id: robot-foundation-models
+        name_ru: Базовые модели и VLA для роботов
+        query_en: robot foundation models
+        phrases_en: [robot foundation model, vision language action, vision language action model, generalist robot policy]
+      - id: robot-learning-data
+        name_ru: Данные и перенос обучения роботов
+        query_en: robot learning from human video
+        phrases_en: [robot learning from human video, human to robot transfer, robot teleoperation data]
+      - id: robot-safety
+        name_ru: Безопасность физических ИИ-систем
+        query_en: robot safety verification
+        phrases_en: [robot safety verification, safety of embodied AI, physical AI safety]
+      - id: robot-manipulation
+        name_ru: Манипуляция и управление движением
+        query_en: dexterous robot manipulation
+        phrases_en: [dexterous robot manipulation, humanoid robot manipulation, robot skill learning]
+      - id: field-robots
+        name_ru: Роботы для работы вне лаборатории
+        query_en: autonomous robot inspection
+        phrases_en: [autonomous robot inspection, quadruped robot inspection, field robot deployment]
+      - id: robot-compute
+        name_ru: Бортовые вычисления для роботов
+        query_en: edge computing for robot inference
+        phrases_en: [onboard robot inference, edge computing for robots, robot VLA inference]
+
+  - id: fintech
+    name_ru: Финтех
+    aliases: [финансовые технологии, fintech, financial technology]
+    subareas:
+      - id: financial-agents
+        name_ru: ИИ-агенты в финансовых услугах
+        query_en: AI agents in financial services
+        phrases_en: [AI agents in financial services, banking AI agents, financial LLM agents, voice agents for banking, conversational AI for debt collection]
+      - id: identity-fraud
+        name_ru: Идентификация и противодействие мошенничеству
+        query_en: deepfake detection for identity verification
+        phrases_en: [deepfake detection for identity verification, AI fraud detection in banking, synthetic identity detection]
+      - id: credit-scoring
+        name_ru: Новые методы кредитного скоринга
+        query_en: machine learning credit scoring
+        phrases_en: [machine learning credit scoring, alternative data credit scoring, on-chain credit scoring]
+      - id: payment-ai
+        name_ru: ИИ в платёжных системах
+        query_en: AI for payment systems
+        phrases_en: [AI for payment systems, payment fraud machine learning, autonomous payments]
+      - id: trading-agents
+        name_ru: Торговые агенты и оценка их рисков
+        query_en: large language model trading agents
+        phrases_en: [LLM trading agents, financial trading agent benchmark, multi-agent financial trading, trading agents, trading agent benchmark]
+      - id: federated-banking
+        name_ru: Совместное обучение банков без обмена исходными данными
+        query_en: federated learning for banking fraud detection
+        phrases_en: [federated learning for banking, federated fraud detection, federated anti money laundering]
+      - id: digital-money
+        name_ru: Цифровые деньги и трансграничные расчёты
+        query_en: stablecoins and programmable money
+        phrases_en: [stablecoin payments, cross-border stablecoin, programmable money, purpose-bound money]
+      - id: tokenized-deposits
+        name_ru: Токенизированные банковские инструменты
+        query_en: tokenized deposits and money market funds
+        phrases_en: [tokenized deposits, deposit tokens, tokenized money market funds]
+      - id: verifiable-identity
+        name_ru: Криптографическое подтверждение личности
+        query_en: zero knowledge identity verification for banking
+        phrases_en: [zero knowledge KYC, verifiable credentials for KYC, privacy preserving KYC]
+      - id: agent-payments
+        name_ru: Платежи и полномочия ИИ-агентов
+        query_en: payments and authorization for AI agents
+        phrases_en: [agentic payments, AI agent payments, delegated payment authorization, machine-to-machine payments]
+      - id: postquantum-finance
+        name_ru: Постквантовая защита финансовой инфраструктуры
+        query_en: post quantum cryptography for financial systems
+        phrases_en: [post-quantum banking, post quantum financial cryptography, quantum safe payments]
+
+  - id: ai-security
+    name_ru: Защита ИИ
+    aliases: [безопасность ИИ, AI security, artificial intelligence security]
+    subareas:
+      - id: prompt-injection
+        name_ru: Защита от инъекций в ИИ-системы
+        query_en: prompt injection defense
+        phrases_en: [prompt injection defense, tool poisoning, indirect prompt injection]
+      - id: agent-security
+        name_ru: Безопасность ИИ-агентов и инструментов
+        query_en: AI agent security
+        phrases_en: [AI agent security, agent identity management, model context protocol security]
+      - id: model-red-teaming
+        name_ru: Тестирование безопасности моделей
+        query_en: automated red teaming of language models
+        phrases_en: [automated red teaming of language models, LLM red teaming, adversarial testing of AI models]
+      - id: data-poisoning
+        name_ru: Защита памяти и данных ИИ
+        query_en: retrieval augmented generation poisoning defense
+        phrases_en: [RAG poisoning defense, agent memory poisoning, training data poisoning defense]
+      - id: runtime-guardrails
+        name_ru: Контроль безопасности во время работы ИИ
+        query_en: LLM runtime security
+        phrases_en: [LLM runtime security, LLM firewall, AI model guardrails]
+
+  - id: edge-ai
+    name_ru: Edge
+    aliases: [edge AI, периферийный ИИ, встроенный ИИ]
+    subareas:
+      - id: on-device-llm
+        name_ru: Большие модели на устройствах
+        query_en: on-device large language model inference
+        phrases_en: [on-device LLM inference, mobile LLM inference, edge language model]
+      - id: tinyml-hardware
+        name_ru: Микроэлектроника для встроенного ИИ
+        query_en: tinyML neural processing unit
+        phrases_en: [tinyML neural processing unit, microcontroller NPU, low-power edge AI accelerator]
+      - id: on-device-learning
+        name_ru: Обучение и персонализация на устройстве
+        query_en: on-device language model fine-tuning
+        phrases_en: [on-device LLM fine-tuning, mobile LoRA adaptation, on-device model personalization]
+      - id: edge-privacy
+        name_ru: Конфиденциальные вычисления на краю сети
+        query_en: confidential computing at the edge
+        phrases_en: [confidential edge computing, trusted execution environment on microcontrollers, edge remote attestation]
+      - id: edge-decoding
+        name_ru: Ускорение локального инференса
+        query_en: speculative decoding for mobile language models
+        phrases_en: [speculative decoding on mobile devices, flash memory LLM inference, efficient edge LLM decoding]
+      - id: event-vision
+        name_ru: Событийные сенсоры и локальное зрение
+        query_en: event-based vision at the edge
+        phrases_en: [event-based vision edge AI, neuromorphic vision sensor, on-device event camera inference]

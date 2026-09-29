@@ -1,0 +1,21 @@
+{
+  "version": "bas-pairwise-contribution-ids-v2",
+  "pair_protocol": "config/bas-task-pair-similarity.v1.json",
+  "pair_protocol_sha256": "bf70fb8c3d837dada043ad08f3a7f105f19c9738c805addbfc98636156d1ed6a",
+  "model": "qwen3.5:9b",
+  "model_role": "development_diagnostic_only",
+  "gate": {
+    "valid_source_ids_min": 18,
+    "development_correct_min": 8,
+    "holdout_correct_min": 8,
+    "holdout_false_same_max": 1
+  },
+  "production_use": false,
+  "limitations": [
+    "The 20 pairs and labels were already opened in prior diagnostics; this is not independent evaluation.",
+    "One developer labelled shared task, not a shared technical mechanism or weak signal.",
+    "Contribution-sentence detection is an English heuristic and can miss unstated contributions.",
+    "Cited source sentence IDs prove provenance, not semantic support or article primacy.",
+    "No result changes production grouping, scoring or expert validation."
+  ]
+}

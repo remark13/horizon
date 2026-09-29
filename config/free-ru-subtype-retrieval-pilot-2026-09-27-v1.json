@@ -1,0 +1,11 @@
+{
+  "version": "free-ru-subtype-retrieval-pilot-v1",
+  "purpose": "Frozen RU-only input to a retrieval-hypothesis model; output is not a translation approval, research finding, or weak-signal label",
+  "cases": [
+    {"case_id": "boundary-polymer-enzyme", "role": "cross_domain_boundary", "query_ru": "Ферменты для переработки полиэтилена из упаковок"},
+    {"case_id": "outside-quantum-archaeology", "role": "outside_priority_map", "query_ru": "Квантовые сенсоры для археологических исследований"},
+    {"case_id": "outside-hydrogen-pipeline-fiber", "role": "outside_priority_map", "query_ru": "Оптические волокна для обнаружения утечек водорода в трубопроводах"},
+    {"case_id": "negative-graphene-perpetual-motion", "role": "negative_control", "query_ru": "Вечный двигатель на основе графена"}
+  ],
+  "limits": {"model_sees_only_original_query": true, "no_known_paper_titles_or_dois_in_prompt": true, "not_independent_retrieval_accuracy": true, "not_executed_in_user_route": true}
+}

@@ -1,0 +1,21 @@
+version: source-adoption-registry-0.4.39
+extends: source-adoption.v0.4.38.yaml
+reviewed_at: '2026-09-23'
+scientific_score_uses_external_attention: false
+sources:
+  - id: clinicaltrials_gov
+    name: ClinicalTrials.gov v2
+    decision: adapt
+    data: Registered clinical studies, interventions, sponsors and status metadata.
+    temporal_coverage: Historical study dates in a mutable current registry snapshot.
+    regional_coverage: US registry with international studies; not worldwide clinical-trial coverage.
+    access: Official public REST API, bounded anonymous requests.
+    credentials: none
+    cost: Free API access subject to service availability and fair use.
+    license_status: Official public-use policy; SAIA stores bounded study metadata, IDs and links.
+    reproducibility: Pin query, interval, retrieval time, raw response hash and NCT identifiers.
+    retrotest_fit: Not safe without archived snapshots and registration/update lag handling.
+    role: clinical_translation_only
+    reason: Independent evidence that a medical concept reached registered research, not proof of efficacy.
+    evidence_urls:
+      - https://clinicaltrials.gov/data-about-studies/learn-about-api

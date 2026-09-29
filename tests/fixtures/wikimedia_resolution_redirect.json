@@ -1,0 +1,18 @@
+{
+  "batchcomplete": true,
+  "query": {
+    "redirects": [
+      {
+        "from": "AI",
+        "to": "Artificial intelligence"
+      }
+    ],
+    "pages": [
+      {
+        "pageid": 1164,
+        "ns": 0,
+        "title": "Artificial intelligence"
+      }
+    ]
+  }
+}

@@ -1,0 +1,56 @@
+version: source-adoption-registry-0.4.46
+extends: source-adoption.v0.4.45.yaml
+reviewed_at: '2026-09-28'
+scientific_score_uses_external_attention: false
+sources:
+  - id: mit_news_rss
+    name: MIT News RSS
+    decision: adapt
+    data: Recent institutional press-office headlines, links, dates and bylines; no article body or images.
+    temporal_coverage: Current bounded RSS feed; not a complete historical archive.
+    regional_coverage: MIT institutional coverage, primarily United States; not the country of every research team.
+    access: Official public RSS; fixed URL, bounded response and local headline matching.
+    credentials: none
+    cost: Public feed, no account or paid subscription.
+    license_status: Official syndication policy checked; attribution and original links retained. Images have separate non-commercial restrictions and are not copied. Full-story redistribution not enabled.
+    reproducibility: Record feed URL, response checksum, retrieval time, publication dates and exact matching terms.
+    retrotest_fit: Not safe for historical-as-of evaluation without archived feed snapshots.
+    role: news_attention_only
+    reason: Institutional announcements are contextual leads, not peer review, market proof or independent confirmation of an emerging signal.
+    evidence_urls:
+      - https://news.mit.edu/rss
+      - https://news.mit.edu/terms-of-use
+  - id: nasa_news_rss
+    name: NASA Technology RSS
+    decision: adapt
+    data: Technology news headlines, dates, bylines and original links. No full text, images or logos copied.
+    temporal_coverage: Recent bounded feed; not a complete archive.
+    regional_coverage: NASA announcements, United States institutional origin; topic coverage may be global.
+    access: Official public RSS endpoint with bounded local matching.
+    credentials: none
+    cost: Public feed, no API fee documented.
+    license_status: Official feed and NASA use guidelines checked. Only metadata and links; third-party material and endorsement rights are not inferred.
+    reproducibility: Preserve request, retrieval time, checksum and dated metadata.
+    retrotest_fit: Current feed is not evidence of historical visibility.
+    role: news_attention_only
+    reason: Adds technology deployment leads while keeping NASA and JPL in one publisher-organisation family.
+    evidence_urls:
+      - https://www.nasa.gov/rss-feeds/
+      - https://www.nasa.gov/nasa-brand-center/images-and-media/
+  - id: jpl_news_rss
+    name: NASA JPL News RSS
+    decision: adapt
+    data: Headlines, original links, dates and authors; no article bodies or media.
+    temporal_coverage: Current recent feed only.
+    regional_coverage: NASA JPL institutional announcements, United States.
+    access: Official public RSS; bounded connector. Initial direct probe returned HTTP 403; live availability is not presumed.
+    credentials: none
+    cost: Public feed, no subscription documented.
+    license_status: Metadata-and-link use only; no inference of unrestricted rights to Caltech or third-party article text or images.
+    reproducibility: Preserve response status, query, feed URL, checksum and retrieval time.
+    retrotest_fit: Not a historical-as-of source without archived dated snapshots.
+    role: news_attention_only
+    reason: Useful aerospace/robotics lead when accessible; never an extra independent confirmation of a NASA item.
+    evidence_urls:
+      - https://www.jpl.nasa.gov/rss/
+      - https://www.jpl.nasa.gov/jpl-image-use-policy/

@@ -1,0 +1,18 @@
+{
+  "version": "openalex-russian-search-modes-probe-v1",
+  "purpose": "Compare first bounded OpenAlex lexical and semantic result pages for free Russian queries; discovery only, not signal scoring or growth measurement",
+  "date_from": "2021-09-01",
+  "as_of_date": "2026-09-01",
+  "per_page": 25,
+  "cases": [
+    {"case_id": "boundary-polymer-enzyme", "role": "cross_domain_boundary", "query_ru": "Ферменты для переработки полиэтилена из упаковок"},
+    {"case_id": "outside-quantum-archaeology", "role": "outside_priority_map", "query_ru": "Квантовые сенсоры для археологических исследований"}
+  ],
+  "interpretation": {
+    "terms_and_cases_fixed_before_this_bounded_comparison": true,
+    "manual_title_and_abstract_review_needed": true,
+    "year_filter_and_exact_local_date_postfilter_are_not_complete_temporal_coverage": true,
+    "semantic_search_may_ignore_essential_qualifiers": true,
+    "no_automatic_user_route_change": true
+  }
+}

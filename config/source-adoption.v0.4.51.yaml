@@ -1,0 +1,6 @@
+version: source-adoption-registry-0.4.51
+extends: source-adoption.v0.4.50.yaml
+reviewed_at: '2026-09-29'
+scientific_score_uses_external_attention: false
+news_publisher_manifest: news-publishers.v1.json
+sources: []

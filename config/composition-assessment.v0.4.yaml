@@ -1,0 +1,16 @@
+version: composition-assessment-0.4.2-experimental
+reject_author_identity_conflicts: true
+min_last_full_window_share_for_widespread: 0.01
+peer_scope: exact_channel_set
+novelty_basis: first_calendar_window_centroid_vs_earlier_candidate_seeds
+primary_sources_basis: unknown_without_verified_content_labels
+coherence_basis: exact_mean_pairwise_cosine_of_all_available_vectors
+data_completeness_weights:
+  abstract: 0.70
+  affiliation: 0.30
+interpretation: >
+  Оценка конкретного состава внутри замороженного корпуса. Пороги и
+  процентильная новизна экспериментальны, не подтверждают истинность
+  слабого сигнала, первичный результат, независимость лабораторий или рынок.
+  Порог 1% для распространённости — некалиброванная гипотеза: высокий
+  процентиль среди редких фраз сам по себе не означает массовую тему.

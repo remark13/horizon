@@ -3054,8 +3054,8 @@
     },
     {
       "path": "VALIDATION.md",
-      "bytes": 10743,
-      "sha256": "7109703d982e91f724277d340ad1e84913097f656d0d46074ae04d337c0ca570"
+      "bytes": 12070,
+      "sha256": "0607a89e4ebcb8d091e5af9a5870ca98c0733c6b5124d486151dabc21787c77b"
     },
     {
       "path": "compose.yaml",
@@ -3724,8 +3724,8 @@
     },
     {
       "path": "docs/repository/VALIDATION.md",
-      "bytes": 10743,
-      "sha256": "7109703d982e91f724277d340ad1e84913097f656d0d46074ae04d337c0ca570"
+      "bytes": 12070,
+      "sha256": "0607a89e4ebcb8d091e5af9a5870ca98c0733c6b5124d486151dabc21787c77b"
     },
     {
       "path": "infra/Dockerfile",
